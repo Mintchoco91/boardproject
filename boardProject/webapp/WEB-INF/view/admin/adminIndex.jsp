@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"%> 
+<!-- 
+/*
+ * 파일명 : adminIndex.jsp
+ * 용도    : 관리자 메인
+ * 작성자 : mintchoco91
+ * 변경일 : 2019/07/22
+ */
+ -->   
 <!DOCTYPE html>
 <html>
 <head>

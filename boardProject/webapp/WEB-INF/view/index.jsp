@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 
+/*
+ * 파일명 : Index.jsp
+ * 용도    : 사용자 메인
+ * 작성자 : mintchoco91
+ * 변경일 : 2019/07/22
+ */
+ -->  
+ 
+<!DOCTYPE html>   
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
