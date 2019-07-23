@@ -15,7 +15,9 @@ public class adminController {
 
 	@RequestMapping("adminIndex")
 	public String adminIndex() {
+		System.out.println("##");
 		return "admin/adminIndex";
+		
 	}
 	
 }
