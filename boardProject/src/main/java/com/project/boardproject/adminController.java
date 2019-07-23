@@ -15,6 +15,7 @@ public class adminController {
 
 	@RequestMapping("adminIndex")
 	public String adminIndex() {
+		dd;
 		return "admin/adminIndex";
 		
 	}
