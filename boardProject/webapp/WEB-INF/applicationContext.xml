@@ -14,7 +14,7 @@
 	<mvc:annotation-driven />
 
 	<context:component-scan
-		base-package="com.project.boardproject" />
+		base-package="com" />
 		
 
 	<bean id="viewResolver"
