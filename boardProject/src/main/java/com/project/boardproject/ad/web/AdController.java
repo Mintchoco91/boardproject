@@ -1,4 +1,4 @@
-package com.project.boardproject;
+package com.project.boardproject.ad.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class adminController {
-
+public class AdController {
 	@RequestMapping("adminIndex")
 	public String adminIndex() {
 		return "admin/adminIndex";
-		
 	}
+	
 	
 }

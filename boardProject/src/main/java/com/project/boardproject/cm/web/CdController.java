@@ -1,4 +1,4 @@
-package com.project.boardproject;
+package com.project.boardproject.cm.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class customController {
+public class CdController {
 	@RequestMapping("index")
 	public String index() {
 		return "index";
