@@ -1,7 +1,12 @@
 package com.project.boardproject.ad.web;
 
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.project.boardproject.ad.service.AdService;
 
 /*
  * 파일명 : adminController.java
@@ -12,7 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdController {
-	@RequestMapping("adminIndex")
+ 
+	//private static final Logger logger = LoggerFactory.getLogger(AdController.class);
+	
+	@Autowired
+	private AdService adService;
+	
+	@RequestMapping("/")
+	public String getIndex() {
+		return "/adminIndex";
+	}
+	@RequestMapping("/adminIndex")
 	public String adminIndex() {
 		return "admin/adminIndex";
 	}
