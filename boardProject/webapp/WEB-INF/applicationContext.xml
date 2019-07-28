@@ -23,4 +23,22 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+<!-- DB -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mariadb://localhost:3306/boardproject"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="o9o9o9o9"></property>
+    </bean>
+ 
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="/WEB-INF/mybatis-config.xml"></property>
+        <property name="mapperLocations" value="/resources/sql/ad/*.xml"></property>
+    </bean>
+ 
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+
 </beans>

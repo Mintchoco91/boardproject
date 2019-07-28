@@ -16,6 +16,7 @@
 <title>Index Page</title>
 </head>
 <body>
-	메인페이지입니다.
+	메인페이지입니다.<br/>
+	DB값 출력 : ${result}
 </body>
 </html>

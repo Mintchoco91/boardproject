@@ -1,7 +1,11 @@
 package com.project.boardproject.cm.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.project.boardproject.cm.service.CmService;
 
 /*
  * 파일명 : customController.java
@@ -12,8 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CmController {
+	
+	@Autowired
+	CmService cmservice;
+	
 	@RequestMapping("index")
-	public String index() {
+	public String index(Model model) {
+		String sampleResult="";
+		sampleResult = cmservice.sampleData();
+		model.addAttribute("result",sampleResult);
+		
+		
 		return "index";
 	}
 

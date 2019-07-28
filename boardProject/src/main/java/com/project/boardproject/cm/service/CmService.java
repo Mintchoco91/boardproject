@@ -7,6 +7,7 @@ package com.project.boardproject.cm.service;
  * 변경일 : 2019/07/26
  */
 
-public class CmService {
+public interface CmService {
+	public String sampleData();
 
 }

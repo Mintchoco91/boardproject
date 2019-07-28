@@ -7,6 +7,6 @@ package com.project.boardproject.cm.service.impl;
  * 변경일 : 2019/07/26
  */
 
-public class CmDAO {
-
+public interface CmDAO  {
+	public String sampleData();
 }
