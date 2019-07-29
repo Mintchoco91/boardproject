@@ -22,7 +22,7 @@ public class CmServiceimpl implements CmService {
 	public String sampleData() {
 		String sampleResult = "";
 		sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
-		
+		System.out.println("!!");
 		//DB연결 후 주석제거할것
 		//sampleResult = cmDAO.sampleData();
 		return sampleResult;
