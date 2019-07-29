@@ -18,16 +18,14 @@ import com.project.boardproject.cm.service.CmService;
 public class CmController {
 	
 	@Autowired
-	CmService cmservice;
+	private CmService cmservice;
 	
 	@RequestMapping("index")
 	public String index(Model model) {
 		String sampleResult="";
 		sampleResult = cmservice.sampleData();
-		model.addAttribute("result",sampleResult);
-		
+		model.addAttribute("result",sampleResult);		
 		
 		return "index";
 	}
-
 }
