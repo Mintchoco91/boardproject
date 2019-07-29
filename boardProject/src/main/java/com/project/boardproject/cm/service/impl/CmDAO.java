@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CmDAO  {
-	public String sampleData();
+	public String tempsql_001();
 }
