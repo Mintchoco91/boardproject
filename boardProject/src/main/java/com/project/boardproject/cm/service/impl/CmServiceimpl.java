@@ -16,15 +16,14 @@ import com.project.boardproject.cm.service.CmService;
 public class CmServiceimpl implements CmService {
 	
 	//주석풀면 안됨
-	//@Autowired
-	//private CmDAO cmDAO;
+	@Autowired
+	private CmDAO cmDAO;
 	
 	public String sampleData() {
 		String sampleResult = "";
-		sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
-		//System.out.println("mintchoco91");
+		//sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
 		//DB연결 후 주석제거할것
-		//sampleResult = cmDAO.sampleData();
+		sampleResult = cmDAO.tempsql_001();
 		return sampleResult;
 	}
 }
