@@ -24,10 +24,15 @@
                   SELECT * FROM TableName WHERE ColumnName = #{parameter}
              </select>
       -->
-      
+      <!-- 
+      <properties>
+        <property name="name" value="name" />
+      </properties>
+      -->
       <typeAliases>
             <typeAlias alias="CmVO" type="com.project.boardproject.cm.service.CmVO"></typeAlias>
       </typeAliases>
- 
+
+
  
 </configuration>

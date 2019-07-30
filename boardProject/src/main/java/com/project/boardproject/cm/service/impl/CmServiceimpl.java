@@ -20,8 +20,8 @@ import com.project.boardproject.cm.service.CmService;
 public class CmServiceimpl implements CmService {
 	
 	//주석풀면 안됨
-	//@Autowired
-	//private CmDAO cmDAO;
+	@Autowired
+	private CmDAO cmDAO;
 	
 	@Inject
 	CmDAO cmDAO;
@@ -29,11 +29,9 @@ public class CmServiceimpl implements CmService {
 	@Override
 	public String sampleData() {
 		String sampleResult = "";
-		List<String> sampleList = new ArrayList<>();
-		sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
-		//System.out.println("mintchoco91");
+		//sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
 		//DB연결 후 주석제거할것
-		sampleList = cmDAO.sampleData();
+		sampleResult = cmDAO.tempsql_001();
 		return sampleResult;
 	}
 }

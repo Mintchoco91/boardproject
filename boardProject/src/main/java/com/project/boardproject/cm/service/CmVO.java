@@ -14,6 +14,15 @@ public class CmVO implements Serializable{
 	
 	
 	public String name;
+	public int a;
+	
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
 
 	public String getName() {
 		return name;

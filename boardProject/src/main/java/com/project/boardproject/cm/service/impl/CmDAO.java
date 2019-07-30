@@ -14,15 +14,9 @@ import org.springframework.stereotype.Repository;
  * 변경일 : 2019/07/26
  */
 
-//@Mapper
-@Repository
-public class CmDAO  {
-	
-	@Autowired
-	SqlSession sqlSession;
-	
 
-	public List<String> sampleData() {
-		return sqlSession.selectList("sample");
-	}
+@Mapper
+public interface CmDAO  {
+	public String tempsql_001();
+
 }
