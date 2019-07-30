@@ -1,6 +1,10 @@
 package com.project.boardproject.cm.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import com.project.boardproject.cm.service.CmService;
@@ -19,6 +23,10 @@ public class CmServiceimpl implements CmService {
 	@Autowired
 	private CmDAO cmDAO;
 	
+	@Inject
+	CmDAO cmDAO;
+	
+	@Override
 	public String sampleData() {
 		String sampleResult = "";
 		//sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";

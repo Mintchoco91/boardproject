@@ -1,5 +1,7 @@
 package com.project.boardproject.cm.web;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,7 @@ import com.project.boardproject.cm.service.CmService;
 @Controller
 public class CmController {
 	
-	@Autowired
+	@Inject
 	private CmService cmservice;
 	
 	@RequestMapping("index")
