@@ -1,10 +1,6 @@
 package com.project.boardproject.cm.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.boardproject.cm.service.CmService;
