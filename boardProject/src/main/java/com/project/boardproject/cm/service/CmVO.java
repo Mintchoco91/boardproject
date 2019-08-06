@@ -12,7 +12,17 @@ import java.io.Serializable;
 public class CmVO implements Serializable{
 	private static final long serialVersionUID = 1L; 
 	
+	
 	public String name;
+	public int a;
+	
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
 
 	public String getName() {
 		return name;
