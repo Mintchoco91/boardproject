@@ -46,4 +46,17 @@ public class CmController {
 	public String test() throws Exception {
 		return "test";
 	}
+	
+	@RequestMapping(value="/board/boardList")
+	public String board(Model model) throws Exception {
+		return "board/boardList";
+	}
+	
+	@RequestMapping(value="/board/boardRegister")
+	public String boardRegister(Model model) throws Exception {
+		
+		return "board/boardRegister";
+	}
+	
+	
 }
