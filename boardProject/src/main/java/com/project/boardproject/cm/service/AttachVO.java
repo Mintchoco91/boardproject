@@ -2,7 +2,7 @@ package com.project.boardproject.cm.service;
 
 import java.io.Serializable;
 
-public class attachVO implements Serializable {
+public class AttachVO implements Serializable {
 
 	//첨부파일번호, 글번호, 첨부파일명
 	private static final long serialVersionUID = 1L;
