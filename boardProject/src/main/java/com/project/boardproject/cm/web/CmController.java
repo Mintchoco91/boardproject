@@ -2,7 +2,6 @@ package com.project.boardproject.cm.web;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +28,27 @@ public class CmController {
 		model.addAttribute("result",sampleResult);		
 		
 		return "index";
+	}
+
+	@RequestMapping("kwboardInq")
+	public String kw_boardInq(Model model) {		
+		return "kwboard/kwboardList";
+	}
+	
+	@RequestMapping("kwboardRegister")
+	public String kwboardRegister(Model model) throws Exception {
+		
+		return "kwboard/kwboardRegister";
+	}	
+	
+	@RequestMapping(value="/board/boardList")
+	public String board(Model model) throws Exception {
+		return "board/boardList";
+	}
+	
+	@RequestMapping(value="/board/boardRegister")
+	public String boardRegister(Model model) throws Exception {
+		
+		return "board/boardRegister";
 	}
 }
