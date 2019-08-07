@@ -30,8 +30,25 @@ public class CmController {
 		return "index";
 	}
 
-	@RequestMapping("kw_boardInq")
+	@RequestMapping("kwboardInq")
 	public String kw_boardInq(Model model) {		
-		return "kwboard";
+		return "kwboard/kwboardList";
+	}
+	
+	@RequestMapping("kwboardRegister")
+	public String kwboardRegister(Model model) throws Exception {
+		
+		return "kwboard/kwboardRegister";
+	}	
+	
+	@RequestMapping(value="/board/boardList")
+	public String board(Model model) throws Exception {
+		return "board/boardList";
+	}
+	
+	@RequestMapping(value="/board/boardRegister")
+	public String boardRegister(Model model) throws Exception {
+		
+		return "board/boardRegister";
 	}
 }
