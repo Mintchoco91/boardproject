@@ -20,12 +20,6 @@
 			<tr>
 				
 			</tr>
-			
-			
-			
-			
-			
-			
-		</table>
 	</body>
-</html>
+</table>
+			
