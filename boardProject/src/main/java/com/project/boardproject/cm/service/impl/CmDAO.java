@@ -19,4 +19,5 @@ import org.springframework.stereotype.Repository;
 public interface CmDAO  {
 	public String tempsql_001();
 
+	public String kwboardInq_001();
 }

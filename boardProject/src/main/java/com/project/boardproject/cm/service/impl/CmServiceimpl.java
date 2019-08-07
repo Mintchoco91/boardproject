@@ -21,9 +21,13 @@ public class CmServiceimpl implements CmService {
 	@Override
 	public String sampleData() {
 		String sampleResult = "";
-		//sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
-		//DB연결 후 주석제거할것
 		sampleResult = cmDAO.tempsql_001();
+		return sampleResult;
+	}
+
+	@Override
+	public String kwboardInq() {
+		String sampleResult = cmDAO.kwboardInq_001();
 		return sampleResult;
 	}
 }

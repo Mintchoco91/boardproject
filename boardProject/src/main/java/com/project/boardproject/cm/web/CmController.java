@@ -31,7 +31,7 @@ public class CmController {
 	}
 
 	@RequestMapping("kwboardInq")
-	public String kw_boardInq(Model model) {		
+	public String kwboardInq(Model model) {		
 		return "kwboard/kwboardList";
 	}
 	

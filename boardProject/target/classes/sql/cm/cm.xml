@@ -4,4 +4,11 @@
 	<select id="tempsql_001" resultType="java.lang.String">
 		SELECT name FROM boardproject.temptbl
 	</select>
+	
+	<select id="kwboardInq_001" resultType="java.lang.String">
+		SELECT name FROM boardproject.temptbl
+	</select>
+	
+	
+	
 </mapper>
