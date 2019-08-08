@@ -9,7 +9,7 @@ import com.project.boardproject.cm.service.CmService;
 
 /*
  * 파일명 : customController.java
- * 용도    :  사용자 관련 컨트롤러
+ * 용도    : 사용자 관련 컨트롤러
  * 작성자 : mintchoco91
  * 변경일 : 2019/07/22
  */
@@ -28,17 +28,6 @@ public class CmController {
 		
 		return "index";
 	}
-
-	@RequestMapping("kwboardInq")
-	public String kwboardInq(Model model) {		
-		return "kwboard/kwboardList";
-	}
-	
-	@RequestMapping("kwboardWrite")
-	public String kwboardRegister(Model model) throws Exception {
-		
-		return "kwboard/kwboardRegister";
-	}	
 	
 	@RequestMapping(value="/board/boardList")
 	public String board(Model model) throws Exception {
@@ -47,7 +36,17 @@ public class CmController {
 	
 	@RequestMapping(value="/board/boardRegister")
 	public String boardRegister(Model model) throws Exception {
-		
 		return "board/boardRegister";
 	}
+	
+	@RequestMapping("kwboardInq")
+	public String kwboardInq(Model model) {		
+		return "kwboard/kwboardList";
+	}
+	
+	@RequestMapping("kwboardWrite")
+	public String kwboardWrite(Model model) throws Exception {
+		return "kwboard/kwboardRegister";
+	}	
+	
 }
