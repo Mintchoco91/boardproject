@@ -34,7 +34,7 @@ public class CmController {
 		return "kwboard/kwboardList";
 	}
 	
-	@RequestMapping("kwboardRegister")
+	@RequestMapping("kwboardWrite")
 	public String kwboardRegister(Model model) throws Exception {
 		
 		return "kwboard/kwboardRegister";
