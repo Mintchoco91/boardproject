@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CmService {
 	public String kwboardInq();
+
+	public String kwboardWrite();
 	
 	public String sampleData();
 }

@@ -30,4 +30,10 @@ public class CmServiceimpl implements CmService {
 		String sampleResult = cmDAO.kwboardInq_001();
 		return sampleResult;
 	}
+
+	@Override
+	public String kwboardWrite() {
+		String sampleResult = cmDAO.kwboardWrite_001();
+		return sampleResult;
+	}
 }
