@@ -9,6 +9,30 @@
 		SELECT name FROM boardproject.temptbl
 	</select>
 	
+	<insert id="kwboardWrite_001" parameterType="boardVO">
+		INSERT INTO boardproject.Board (
+		boardId
+		,title
+		,contents
+		,delYn
+		,atchYn
+		,readCnt
+		,rgtId
+		,rgtDtm)
+		VALUES (
+		'1'
+		,#{title}
+		,#{contents}
+		,'N'
+		,'N'
+		,0
+		,#{rgtId}
+		,DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+		)
+	</insert>
+	
+	
+	
 	
 	
 </mapper>

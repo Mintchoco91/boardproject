@@ -3,6 +3,7 @@ package com.project.boardproject.cm.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
 
 /*
@@ -32,8 +33,7 @@ public class CmServiceimpl implements CmService {
 	}
 
 	@Override
-	public String kwboardWrite() {
-		String sampleResult = cmDAO.kwboardWrite_001();
-		return sampleResult;
+	public void kwboardWrite(BoardVO boardVO) {
+		cmDAO.kwboardWrite_001(boardVO);
 	}
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public interface CmService {
 	public String kwboardInq();
 
-	public String kwboardWrite();
+	public void kwboardWrite(BoardVO boardVO);
 	
 	public String sampleData();
 }
