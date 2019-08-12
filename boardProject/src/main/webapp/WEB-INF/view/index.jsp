@@ -18,7 +18,7 @@
 <body>
 	메인페이지입니다.<br/>
 	DB값 출력 : ${result}<br/>
-	<a href="./kwboardList.do">[임시]kw_board 이동</a><br/><br/>
+	<a href="./kwboardInq.do">[임시]kw_board 이동</a><br/><br/>
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판B 이동</a><br/><br/>
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판C 이동</a><br/><br/>
 	

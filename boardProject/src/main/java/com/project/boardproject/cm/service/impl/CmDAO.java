@@ -1,5 +1,7 @@
 package com.project.boardproject.cm.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.boardproject.cm.service.BoardVO;
@@ -16,7 +18,7 @@ import com.project.boardproject.cm.service.BoardVO;
 public interface CmDAO  {
 	public String tempsql_001();
 
-	public String kwboardInq_001();
+	public List<BoardVO> kwboardInq_001(BoardVO boardVO);
 	
 	public void kwboardWrite_001(BoardVO boardVO);	
 }

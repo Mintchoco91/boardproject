@@ -1,5 +1,7 @@
 package com.project.boardproject.cm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +29,8 @@ public class CmServiceimpl implements CmService {
 	}
 
 	@Override
-	public String kwboardInq() {
-		String sampleResult = cmDAO.kwboardInq_001();
-		return sampleResult;
+	public List<BoardVO> kwboardInq(BoardVO boardVO) {
+		return cmDAO.kwboardInq_001(boardVO);
 	}
 
 	@Override

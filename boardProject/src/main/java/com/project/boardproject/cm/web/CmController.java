@@ -1,5 +1,8 @@
 package com.project.boardproject.cm.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +57,12 @@ public class CmController {
 	@RequestMapping("kwboardInq")
 	public String kwboardInq(Model model,BoardVO boardVO) {
 		//리스트로 구현
+		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
+		boardVOArr = cmservice.kwboardInq(boardVO);
+		
+		//출력값 확인해볼것
+		//System.out.println("###"+boardVOArr().toString());
+		
 		return "kwboard/kwboardList";
 	}
 	
@@ -61,5 +70,5 @@ public class CmController {
 	public String kwboardWrite(Model model,BoardVO boardVO) throws Exception {
 		cmservice.kwboardWrite(boardVO);
 		return "kwboard/kwboardList";
-	}	
+	}
 }
