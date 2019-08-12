@@ -56,11 +56,7 @@ public class CmController {
 	
 	@RequestMapping("kwboardInq")
 	public String kwboardInq(Model model,BoardVO boardVO) {
-<<<<<<< HEAD
-		//리스트로 구현1
-=======
 		//리스트로 구현
->>>>>>> refs/remotes/origin/mintchoco91
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		boardVOArr = cmservice.kwboardInq(boardVO);
 		
