@@ -22,4 +22,6 @@ public interface CmService {
 	public String sampleData();
 
 	public void chboardInsert(BoardVO boardVO);
+
+	public List<BoardVO> chboardGetList(BoardVO boardVO);
 }

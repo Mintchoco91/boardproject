@@ -87,7 +87,10 @@ public class CmController {
 			currentPage =Integer.parseInt(request.getParameter("currentPage"));
 		} catch (Exception e) {	}
 		
-		
+		List<BoardVO> boardList = new ArrayList<>();
+		boardList =cmservice.chboardGetList(boardVO);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("currentPage", currentPage);
 		return "chboard/chboardList";
 	}
 	
@@ -111,7 +114,7 @@ public class CmController {
 		cmservice.chboardInsert(boardVO);
 		
 		model.addAttribute("boardVO", boardVO);
-		return "chboard/chboardList";
+		return "redirect:chboard/chboardList";
 	}
 
 	

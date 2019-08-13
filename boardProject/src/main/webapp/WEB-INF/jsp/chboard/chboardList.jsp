@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +64,7 @@ function fn_Register() {
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	<form id="listform" name="listform" method="get">
+	<form:form commandName="BoardVO" id="listform" name="listform" method="get">
 	<table width="700px" class="listTable" id="" name="" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<thead>
 		<tr >
@@ -111,7 +109,7 @@ function fn_Register() {
 	</tbody>
 	
 	</table>
-	</form>
+	</form:form>
 	</div>
 	<!-- //Container -->
 	

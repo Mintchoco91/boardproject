@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +7,7 @@
 <title>글 등록</title>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <script type="text/javascript">
 
 function fn_Register() {
@@ -54,6 +49,7 @@ function fn_Register() {
 	<div class="Container">
 	<!-- contents -->
 	<div class="contents">
+	
 	<form:form commandName="BoardVO" id="listform" name="listform" method="get" >
 	<input type="hidden" id="idx" name="" value=""/>
 	<input type="hidden" id="boardId" name="boardId" value="free"/>

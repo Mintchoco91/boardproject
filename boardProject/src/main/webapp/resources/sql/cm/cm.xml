@@ -60,7 +60,7 @@
 	</insert>
 	
 	
-	<insert id="chboardInsert" parameterType="BoardVO">
+	<insert id="chboardInsert_001" parameterType="BoardVO">
 		INSERT INTO /* chboardInsert*/
 		boardproject.board (
 		boardId
@@ -80,5 +80,9 @@
 		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
 		</insert>
 	
+	<select id="chboardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
+	
+	
+	</select>
 	
 </mapper>
