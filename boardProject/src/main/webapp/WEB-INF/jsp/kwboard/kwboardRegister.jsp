@@ -43,7 +43,7 @@
 			<td><input type="button" value="등록"
 				onclick="fn_movePage('kwboardWrite.do','Y');"></td>
 			<td><input type="button" value="취소"
-				onclick="fn_movePage('kwboardList.do');"></td>
+				onclick="fn_movePage('kwboardInq.do');"></td>
 		</tr>
 	</table>
 	

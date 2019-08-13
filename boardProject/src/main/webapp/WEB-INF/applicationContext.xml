@@ -42,7 +42,7 @@
     </bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.project.boardproject.cm.service.impl.**" />
+		<property name="basePackage" value="com.project.boardproject.**.service.impl.**" />
 <!-- 		<property name="annotationClass" value="com.project.boardproject.cm.service.impl.CmDAO" /> -->
 <!-- 		<property name="sqlSessionFactoryBeanName" value="sqlSession" /> -->
 	</bean>
