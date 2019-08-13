@@ -20,12 +20,9 @@ import com.project.boardproject.cm.service.BoardVO;
 public interface CmDAO  {
 	public String tempsql_001();
 
-<<<<<<< HEAD
 	public void chboardInsert(BoardVO boardVO);
 
-=======
 	public List<BoardVO> kwboardInq_001(BoardVO boardVO);
 	
 	public void kwboardWrite_001(BoardVO boardVO);	
->>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 }

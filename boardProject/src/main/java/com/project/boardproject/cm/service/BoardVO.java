@@ -100,14 +100,9 @@ public class BoardVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "BoardVO [idx=" + idx + ", title=" + title + ", contents=" + contents + ", rgtId=" + rgtId + ", rgtDtm="
-				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", boardId=" + boardId + ", name=" + name + "]";
-=======
 		return "BoardVO [idx=" + idx + ", boardId=" + boardId + ", title=" + title + ", contents=" + contents
 				+ ", delYn=" + delYn + ", atchYn=" + atchYn + ", readCnt=" + readCnt + ", rgtId=" + rgtId + ", rgtDtm="
 				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", name=" + name + "]";
->>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 	}
 
 	

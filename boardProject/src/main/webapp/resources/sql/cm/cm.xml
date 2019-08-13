@@ -21,29 +21,6 @@
 		SELECT name FROM boardproject.temptbl
 	</select>
 	
-<<<<<<< HEAD
-	<insert id="chboardInsert" parameterType="BoardVO">
-		 INSERT INTO /* chboardInsert*/
-		boardproject.board ( 
-		boardId
-		, title
-		, contents
-		, delYn
-		, atchYn
-		, rgtId
-		, rgtDtm
-		 ) values  ( 
-		 #{boardId}
-		, #{title}
-		, #{contents}
-		, 'N'
-		, 'N'
-		, #{rgtId}
-		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')
-		)
-	
-	</insert>
-=======
 	<select id="kwboardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
 		SELECT 
 			idx
@@ -83,8 +60,25 @@
 	</insert>
 	
 	
+	<insert id="chboardInsert" parameterType="BoardVO">
+		INSERT INTO /* chboardInsert*/
+		boardproject.board (
+		boardId
+		, title
+		, contents
+		, delYn
+		, atchYn
+		, rgtId
+		, rgtDtm) 
+		values (
+		#{boardId}
+		, #{title}
+		, #{contents}
+		, 'N'
+		, 'N'
+		, #{rgtId}
+		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
+		</insert>
 	
 	
-	
->>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 </mapper>

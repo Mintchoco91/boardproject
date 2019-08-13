@@ -3,6 +3,8 @@ package com.project.boardproject.cm.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +47,6 @@ public class CmController {
 		return "board/boardRegister";
 	}
 	
-<<<<<<< HEAD
-	
-=======
 	@RequestMapping("kwboardList")
 	public String kwboardList(Model model) {		
 		return "kwboard/kwboardList";
@@ -80,5 +79,40 @@ public class CmController {
 		cmservice.kwboardWrite(boardVO);
 		return "redirect:kwboardInq.do";
 	}
->>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
+	
+	@RequestMapping(value="chboard/chboardList")
+	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,HttpServletRequest request) throws Exception {
+		int currentPage = 1;
+		try {
+			currentPage =Integer.parseInt(request.getParameter("currentPage"));
+		} catch (Exception e) {	}
+		
+		
+		return "chboard/chboardList";
+	}
+	
+	@RequestMapping(value="chboard/chboardRegister")
+	public String chboardRegister(Model model) throws Exception {
+		
+		return "chboard/chboardRegister";
+	}
+	
+	
+	
+	@RequestMapping(value="chboard/chboardInsert")
+	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,HttpServletRequest request) throws Exception {
+		
+		int currentPage = 1;
+		try {
+			currentPage =Integer.parseInt(request.getParameter("currentPage"));
+		} catch (Exception e) {	}
+		
+//		System.out.println(boardVO.toString());
+		cmservice.chboardInsert(boardVO);
+		
+		model.addAttribute("boardVO", boardVO);
+		return "chboard/chboardList";
+	}
+
+	
 }

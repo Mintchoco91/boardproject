@@ -29,13 +29,12 @@ public class CmServiceimpl implements CmService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public void chboardInsert(BoardVO boardVO) {
 		System.out.println(boardVO.toString());
 			cmDAO.chboardInsert(boardVO);
 			
 	}
-=======
+	@Override
 	public List<BoardVO> kwboardInq(BoardVO boardVO) {
 		return cmDAO.kwboardInq_001(boardVO);
 	}
@@ -45,5 +44,4 @@ public class CmServiceimpl implements CmService {
 		cmDAO.kwboardWrite_001(boardVO);
 	}
 	
->>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 }
