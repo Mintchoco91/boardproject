@@ -4,4 +4,26 @@
 	<select id="tempsql_001" resultType="java.lang.String">
 		SELECT name FROM boardproject.temptbl
 	</select>
+	
+	<insert id="chboardInsert" parameterType="BoardVO">
+		 INSERT INTO /* chboardInsert*/
+		boardproject.board ( 
+		boardId
+		, title
+		, contents
+		, delYn
+		, atchYn
+		, rgtId
+		, rgtDtm
+		 ) values  ( 
+		 #{boardId}
+		, #{title}
+		, #{contents}
+		, 'N'
+		, 'N'
+		, #{rgtId}
+		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')
+		)
+	
+	</insert>
 </mapper>

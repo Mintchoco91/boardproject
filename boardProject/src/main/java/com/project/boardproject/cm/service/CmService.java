@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
  * 변경일 : 2019/07/26
  */
 
+
+
 @Service
 public interface CmService {
 	public String sampleData();
+
+	public void chboardInsert(BoardVO boardVO);
 }

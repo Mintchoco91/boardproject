@@ -77,13 +77,13 @@ public class BoardVO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "CmVO [idx=" + idx + ", title=" + title + ", contents=" + contents + ", rgtId=" + rgtId + ", rgtDtm="
+		return "BoardVO [idx=" + idx + ", title=" + title + ", contents=" + contents + ", rgtId=" + rgtId + ", rgtDtm="
 				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", boardId=" + boardId + ", name=" + name + "]";
 	}
+	
+	
 	
 	
 }

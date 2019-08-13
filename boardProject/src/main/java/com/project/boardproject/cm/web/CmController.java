@@ -51,4 +51,6 @@ public class CmController {
 		
 		return "board/boardRegister";
 	}
+	
+	
 }

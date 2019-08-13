@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.boardproject.cm.service.BoardVO;
+
 /*
  * 파일명 : CmDAO.java
  * 용도    : 
@@ -18,5 +20,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface CmDAO  {
 	public String tempsql_001();
+
+	public void chboardInsert(BoardVO boardVO);
 
 }

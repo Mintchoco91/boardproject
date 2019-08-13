@@ -14,12 +14,33 @@
 	.Container {
 		margin: 0 auto;
 		padding :0;
+		overflow: hidden;
 		
 	}
 
 	.listTable {
 	text-align: center;
 	}
+	.wrapper {
+	 width: 800px;
+  margin: 0 auto;
+  border: 1px solid #aaa;
+  
+}
+  .header {
+  padding:40px 10px;
+  text-align: center;
+  background: #eee;
+  margin-bottom: 20px;
+}
+.footer {
+  text-align: center;
+  border-top: 1px solid #aaa;
+  margin: 20px 20px 0;
+  font-size: 12px;
+}
+
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -27,8 +48,9 @@
 
 function fn_Register() {
 	var f = document.listform;
-	f.action="/board/boardRegister.do";
-	f.submit();
+	location.href="chboardRegister.do";
+/* 	f.action="chboardRegister.do";
+	f.submit(); */
 }
 
 </script>
@@ -36,10 +58,12 @@ function fn_Register() {
 
 
 <!-- wrapper -->
-
+	<div class="wrapper">
 
 	<!-- header -->
+	<div class="header">
 	
+	</div>
 	<!-- Container -->
 	<div class="Container">
 	<form id="listform" name="listform" method="get">
@@ -48,7 +72,7 @@ function fn_Register() {
 		<tr >
 				<td colspan="7">
 				<fieldset style="border:none; text-align: right;">
-				<select id="" name="">
+				<select id="" name="" onchange="">
 					<option value="제목">제목</option>
 					<option value="내용">내용</option>
 				</select>
@@ -94,6 +118,12 @@ function fn_Register() {
 	<!-- // header -->
 	
 	
+	<!-- footer -->
+	<div class="footer">
+	
+	
+	</div>
+	</div>
 <!-- //wrapper -->
 	
 </body>
