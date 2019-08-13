@@ -4,9 +4,12 @@
 
 <html>
 <head>
-<title>kwboardRegister</title>
+<title>boardproject</title>
 </head>
 <script src="//code.jquery.com/jquery.min.js"></script>
+<%@ include file="/WEB-INF/js/cm/cm.js" %>
+	
+<!-- 이 위로 header -->
 
 <body>
 	<br />
@@ -46,14 +49,3 @@
 	
 </body>
 </html>
-
-<script>
-	function fn_movePage(actionUrl,submitYn ="N") {
-		if(submitYn == "N"){
-			location.replace(actionUrl);
-		}else{
-			$("#frm").attr("action", actionUrl);
-			$("#frm").submit();
-		}
-	}
-</script>

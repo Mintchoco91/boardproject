@@ -36,6 +36,7 @@ public class CmController {
 	
 	@RequestMapping(value="/board/boardList")
 	public String board(Model model) throws Exception {
+		System.out.println("List");
 		return "board/boardList";
 	}
 	
@@ -60,8 +61,12 @@ public class CmController {
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		boardVOArr = cmservice.kwboardInq(boardVO);
 		
-		//출력값 확인해볼것
-		//System.out.println("###"+boardVOArr().toString());
+		/*
+		for(int i=0;i<boardVOArr.size();i++) {
+			System.out.println("######"+boardVOArr.get(i).toString());
+		}*/
+		
+		model.addAttribute("boardVOArr",boardVOArr);
 		
 		return "kwboard/kwboardList";
 	}
@@ -69,6 +74,6 @@ public class CmController {
 	@RequestMapping("kwboardWrite")
 	public String kwboardWrite(Model model,BoardVO boardVO) throws Exception {
 		cmservice.kwboardWrite(boardVO);
-		return "kwboard/kwboardList";
+		return "redirect:kwboardInq.do";
 	}
 }

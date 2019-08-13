@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <html>
 <head>
@@ -20,19 +22,22 @@
 			<td>제목</td>
 			<td>내용</td>
 			<td>조회수</td>
-			<td>첨부파일</td>
+			<!-- <td>첨부파일</td>-->
+			<td>등록자</td>
 			<td>등록시간</td>
 		</tr>
-
-		<tr>
-			<td>선택</td>
-			<td>글번호</td>
-			<td>제목</td>
-			<td>내용</td>
-			<td>조회수</td>
-			<td>첨부파일</td>
-			<td>등록시간</td>
-		</tr>
+		<c:forEach var="boardVOArr" items="${boardVOArr}">
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>글번호</td>
+				<td>${boardVOArr.title}</td>
+				<td>${boardVOArr.contents}</td>
+				<td>${boardVOArr.readCnt}</td>
+				<!-- <td>첨부파일</td> -->
+				<td>${boardVOArr.rgtId}</td>
+				<td>${boardVOArr.rgtDtm}</td>
+			</tr>
+		</c:forEach>
 	</table>
 	<br/><br/>
 	

@@ -98,6 +98,12 @@ public class BoardVO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public String toString() {
+		return "BoardVO [idx=" + idx + ", boardId=" + boardId + ", title=" + title + ", contents=" + contents
+				+ ", delYn=" + delYn + ", atchYn=" + atchYn + ", readCnt=" + readCnt + ", rgtId=" + rgtId + ", rgtDtm="
+				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", name=" + name + "]";
+	}
 
 	
 }
