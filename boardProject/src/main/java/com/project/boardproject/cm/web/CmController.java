@@ -52,6 +52,7 @@ public class CmController {
 	
 	@RequestMapping("kwboardRegister")
 	public String kwboardRegister(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
+		
 		return "kwboard/kwboardRegister";
 	}
 	

@@ -37,4 +37,5 @@ public class CmServiceimpl implements CmService {
 	public void kwboardWrite(BoardVO boardVO) {
 		cmDAO.kwboardWrite_001(boardVO);
 	}
+	
 }
