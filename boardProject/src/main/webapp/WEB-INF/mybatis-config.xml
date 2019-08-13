@@ -29,8 +29,9 @@
         <property name="name" value="name" />
       </properties>
       -->
+      <!--  VO추가시 아래에 추가할것 ! --> 
       <typeAliases>
-            <typeAlias alias="CmVO" type="com.project.boardproject.cm.service.CmVO"></typeAlias>
+            <typeAlias alias="BoardVO" type="com.project.boardproject.cm.service.BoardVO"></typeAlias>
       </typeAliases>
 
 

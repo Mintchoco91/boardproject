@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.boardproject.cm.service.impl.CmDAO">
+ 
+<!-- property : vo에서 변수명.  column : DB상 컬럼명  -->
+ <resultMap id="BoardVOarr" type="BoardVO">
+ 	<result property="idx" column="idx"/>
+ 	<result property="boardId" column="boardId"/>
+ 	<result property="title" column="title"/>
+ 	<result property="contents" column="contents"/> 	
+ 	<result property="delYn" column="delYn"/>
+ 	<result property="atchYn" column="atchYn"/>
+ 	<result property="readCnt" column="readCnt"/> 	
+ 	<result property="rgtId" column="rgtId"/>
+ 	<result property="rgtDtm" column="rgtDtm"/>
+ 	<result property="updId" column="updId"/>
+ 	<result property="updDtm" column="updDtm"/>
+ </resultMap>
+
 	<select id="tempsql_001" resultType="java.lang.String">
 		SELECT name FROM boardproject.temptbl
 	</select>
 	
+<<<<<<< HEAD
 	<insert id="chboardInsert" parameterType="BoardVO">
 		 INSERT INTO /* chboardInsert*/
 		boardproject.board ( 
@@ -26,4 +43,48 @@
 		)
 	
 	</insert>
+=======
+	<select id="kwboardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
+		SELECT 
+			idx
+			,boardId
+			,title
+			,contents
+			,delYn
+			,atchYn
+			,readCnt
+			,rgtId
+			,rgtDtm
+			,updId
+			,updDtm
+		FROM boardproject.board
+	</select>
+	
+	<insert id="kwboardWrite_001" parameterType="boardVO">
+		INSERT INTO boardproject.Board (
+		boardId
+		,title
+		,contents
+		,delYn
+		,atchYn
+		,readCnt
+		,rgtId
+		,rgtDtm)
+		VALUES (
+		'1'
+		,#{title}
+		,#{contents}
+		,'N'
+		,'N'
+		,0
+		,#{rgtId}
+		,DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+		)
+	</insert>
+	
+	
+	
+	
+	
+>>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 </mapper>

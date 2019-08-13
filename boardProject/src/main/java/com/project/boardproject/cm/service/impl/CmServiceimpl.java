@@ -1,5 +1,7 @@
 package com.project.boardproject.cm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +24,26 @@ public class CmServiceimpl implements CmService {
 	@Override
 	public String sampleData() {
 		String sampleResult = "";
-		//sampleResult = "impl에서 가져온값임. DB에서 가져오도록 수정할것";
-		//DB연결 후 주석제거할것
 		sampleResult = cmDAO.tempsql_001();
 		return sampleResult;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void chboardInsert(BoardVO boardVO) {
 		System.out.println(boardVO.toString());
 			cmDAO.chboardInsert(boardVO);
 			
 	}
+=======
+	public List<BoardVO> kwboardInq(BoardVO boardVO) {
+		return cmDAO.kwboardInq_001(boardVO);
+	}
+
+	@Override
+	public void kwboardWrite(BoardVO boardVO) {
+		cmDAO.kwboardWrite_001(boardVO);
+	}
+	
+>>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 }

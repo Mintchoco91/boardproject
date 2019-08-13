@@ -1,5 +1,7 @@
 package com.project.boardproject.cm.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /*
@@ -13,6 +15,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface CmService {
+	public List<BoardVO> kwboardInq(BoardVO boardVO);
+
+	public void kwboardWrite(BoardVO boardVO);
+	
 	public String sampleData();
 
 	public void chboardInsert(BoardVO boardVO);

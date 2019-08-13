@@ -1,16 +1,20 @@
 package com.project.boardproject.cm.web;
 
-import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
 
 /*
  * 파일명 : customController.java
- * 용도    :  사용자 관련 컨트롤러
+ * 용도    : 사용자 관련 컨트롤러
  * 작성자 : mintchoco91
  * 변경일 : 2019/07/22
  */
@@ -18,7 +22,7 @@ import com.project.boardproject.cm.service.CmService;
 @Controller
 public class CmController {
 	
-	@Inject
+	@Autowired
 	private CmService cmservice;
 	
 	@RequestMapping("index")
@@ -29,28 +33,52 @@ public class CmController {
 		
 		return "index";
 	}
-
-	@RequestMapping("kwboardInq")
-	public String kw_boardInq(Model model) {		
-		return "kwboard/kwboardList";
-	}
-	
-	@RequestMapping("kwboardRegister")
-	public String kwboardRegister(Model model) throws Exception {
-		
-		return "kwboard/kwboardRegister";
-	}	
 	
 	@RequestMapping(value="/board/boardList")
 	public String board(Model model) throws Exception {
+		System.out.println("List");
 		return "board/boardList";
 	}
 	
 	@RequestMapping(value="/board/boardRegister")
 	public String boardRegister(Model model) throws Exception {
-		
 		return "board/boardRegister";
 	}
 	
+<<<<<<< HEAD
 	
+=======
+	@RequestMapping("kwboardList")
+	public String kwboardList(Model model) {		
+		return "kwboard/kwboardList";
+	}
+	
+	@RequestMapping("kwboardRegister")
+	public String kwboardRegister(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
+		
+		return "kwboard/kwboardRegister";
+	}
+	
+	@RequestMapping("kwboardInq")
+	public String kwboardInq(Model model,BoardVO boardVO) {
+		//리스트로 구현
+		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
+		boardVOArr = cmservice.kwboardInq(boardVO);
+		
+		/*
+		for(int i=0;i<boardVOArr.size();i++) {
+			System.out.println("######"+boardVOArr.get(i).toString());
+		}*/
+		
+		model.addAttribute("boardVOArr",boardVOArr);
+		
+		return "kwboard/kwboardList";
+	}
+	
+	@RequestMapping("kwboardWrite")
+	public String kwboardWrite(Model model,BoardVO boardVO) throws Exception {
+		cmservice.kwboardWrite(boardVO);
+		return "redirect:kwboardInq.do";
+	}
+>>>>>>> 8d3d61a0ad5f443deebc57c91f4f91d25f493885
 }
