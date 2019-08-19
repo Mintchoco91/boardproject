@@ -18,12 +18,7 @@ function fn_Register() {
 	    $('#title').focus();
 	    return;
 	}
-	if($('#title').val().length <5 || $('#title').val().length >15) {
-	    alert("제목은 5이상 15이하로 입력하셔야 합니다.");
-	    $('#title').focus();
-	    return;
-	}
-	if($('#rgtId').val() == '') {
+		if($('#rgtId').val() == '') {
 	    alert("글쓴이를 입력하세요");
 	    $('#rgtId').focus();
 	    return;
@@ -54,8 +49,9 @@ function fn_Register() {
 	<input type="hidden" id="idx" name="" value=""/>
 	<input type="hidden" id="boardId" name="boardId" value="free"/>
 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
-	<div class="" >
+	<div class="" style="width : 650px;" >
 	<!-- form:input path= "" id랑 name을 맞춰준다 -->
+	
 	<table width="100%" id="insertTable" name="insertTable" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 		<thead>
 		<colgroup>

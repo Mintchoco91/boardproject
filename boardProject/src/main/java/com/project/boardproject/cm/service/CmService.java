@@ -1,6 +1,7 @@
 package com.project.boardproject.cm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,7 @@ public interface CmService {
 
 	public void chboardInsert(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList(BoardVO boardVO);
+	public List<BoardVO> chboardGetList(Map<String, Integer> hmap);
+
+	public int chboardgetBoardCnt(BoardVO boardVO);
 }

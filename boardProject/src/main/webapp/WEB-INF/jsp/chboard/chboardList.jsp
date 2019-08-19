@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<%--  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	 --%>      <!-- jstl 제어,대입문 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,6 +70,7 @@ function fn_Register() {
 	<thead>
 		<tr >
 				<td colspan="7">
+				${totalCount }
 				<fieldset style="border:none; text-align: right;">
 				<select id="" name="" onchange="">
 					<option value="제목">제목</option>
@@ -91,11 +93,29 @@ function fn_Register() {
 			<td>등록일시</td>
 		</tr>
 		
-		
+		<c:set var="list" value="${boardList.boardList }"/>
 		<!-- list.size !=0 -->
-		<tr>
-			<td colspan="7"></td>
+		<c:if test="${list.size() !=0 }" >
+		<c:forEach var="vo" items="${list}">
+				<tr>
+				<td><input type="checkbox" id="all" name="" value=""/></td>
+				<td>${vo.idx }</td>
+				<td>${vo.title }</td>
+				<td>${vo.contents }</td>
+				<td>${vo.readCnt }</td>
+				<td></td>
+				<td>${vo.rgtDtm }</td>
+				</tr>
+		</c:forEach>
+		</c:if>
+		<c:if test="${list.size() == 0 }">
+			<tr>
+			<td colspan="7">
+				게시물이 없습니다.
+			</td>
 		</tr>
+			
+		</c:if>
 		<tr>
 			<td colspan="7" style="text-align: right">
 				<input type="button" id="" name="" value="등록"  onclick="fn_Register()"/>

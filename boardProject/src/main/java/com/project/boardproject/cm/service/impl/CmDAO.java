@@ -1,6 +1,7 @@
 package com.project.boardproject.cm.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -26,5 +27,7 @@ public interface CmDAO  {
 	
 	public void kwboardWrite_001(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList_001(BoardVO boardVO);	
+	public List<BoardVO> chboardGetList_001(Map<String, Integer> hmap);
+
+	public int chboardgetBoardCnt_001(BoardVO boardVO);	
 }

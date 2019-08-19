@@ -68,6 +68,7 @@
 		, contents
 		, delYn
 		, atchYn
+		, readCnt
 		, rgtId
 		, rgtDtm) 
 		values (
@@ -76,13 +77,21 @@
 		, #{contents}
 		, 'N'
 		, 'N'
+		, 0
 		, #{rgtId}
 		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
 		</insert>
-	
-	<select id="chboardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
-	
-	
+	 
+	<select id="chboardGetList_001" parameterType="HashMap" resultMap="BoardVOarr" >
+	<![CDATA[
+				SELECT * FROM BOARDPROJECT.BOARD ORDER BY IDX DESC
+		LIMIT #{startNo}, #{endNo}	
+		]]>
 	</select>
 	
+	<select id="chboardgetBoardCnt_001" parameterType="BoardVO" resultType="int">
+		SELECT /*chboardgetBoardCnt_001*/
+		COUNT(*) 
+		FROM BOARDPROJECT.BOARD
+	</select>
 </mapper>

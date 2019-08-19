@@ -1,6 +1,7 @@
 package com.project.boardproject.cm.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,8 +46,13 @@ public class CmServiceimpl implements CmService {
 	}
 
 	@Override
-	public List<BoardVO> chboardGetList(BoardVO boardVO) {
-		return cmDAO.chboardGetList_001(boardVO);
+	public List<BoardVO> chboardGetList(Map<String, Integer> hmap) {
+		return cmDAO.chboardGetList_001(hmap);
+	}
+
+	@Override
+	public int chboardgetBoardCnt(BoardVO boardVO) {
+		return cmDAO.chboardgetBoardCnt_001(boardVO);
 	}
 	
 }

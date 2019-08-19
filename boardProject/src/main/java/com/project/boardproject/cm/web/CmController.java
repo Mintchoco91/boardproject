@@ -1,16 +1,20 @@
 package com.project.boardproject.cm.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.Literal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.boardproject.cm.service.BoardList;
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
 
@@ -80,16 +84,33 @@ public class CmController {
 		return "redirect:kwboardInq.do";
 	}
 	
-	@RequestMapping(value="chboard/chboardList")
+	@RequestMapping(value="chboard/chboardList.do")
 	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,HttpServletRequest request) throws Exception {
 		int currentPage = 1;
 		try {
 			currentPage =Integer.parseInt(request.getParameter("currentPage"));
 		} catch (Exception e) {	}
+	      int totalCount = cmservice.chboardgetBoardCnt(boardVO);
+	      int pageSize = 10;
+	      BoardList list =new BoardList();
+	      list.initBoardList(pageSize, totalCount, currentPage);
+	      Map<String, Integer> hmap = new HashMap<String, Integer>();
+	      hmap.put("startNo",0);
+	      hmap.put("endNo", 10);
+	      list.setBoardList(cmservice.chboardGetList(hmap));
+	      for(int i=0; i<list.getBoardList().size(); i++) {
+	    	String year=  list.getBoardList().get(i).getRgtDtm().substring(0,4);
+	    	String month=  list.getBoardList().get(i).getRgtDtm().substring(4,6);
+	    	 String date= list.getBoardList().get(i).getRgtDtm().substring(6,8);
+	    	 list.getBoardList().get(i).setRgtDtm(year+"년" +month + "월" + date +"일");
+	      }
+		//List<BoardVO> boardList = new ArrayList<>();
 		
-		List<BoardVO> boardList = new ArrayList<>();
-		boardList =cmservice.chboardGetList(boardVO);
-		model.addAttribute("boardList", boardList);
+		
+		System.out.println(list.toString());
+		//boardList =cmservice.chboardGetList(boardVO);
+		model.addAttribute("boardList", list);
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPage", currentPage);
 		return "chboard/chboardList";
 	}
@@ -114,7 +135,7 @@ public class CmController {
 		cmservice.chboardInsert(boardVO);
 		
 		model.addAttribute("boardVO", boardVO);
-		return "redirect:chboard/chboardList";
+		return "redirect:chboardList.do";
 	}
 
 	
