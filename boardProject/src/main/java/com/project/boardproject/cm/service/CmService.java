@@ -27,4 +27,13 @@ public interface CmService {
 	public List<BoardVO> chboardGetList(Map<String, Integer> hmap);
 
 	public int chboardgetBoardCnt(BoardVO boardVO);
+
+	public void chboardDelete(BoardVO vo);
+
+	public int chboardUpdateReadCnt(int idx);
+
+	public BoardVO chboardDetail(BoardVO boardVO);
+
+
+
 }

@@ -54,5 +54,21 @@ public class CmServiceimpl implements CmService {
 	public int chboardgetBoardCnt(BoardVO boardVO) {
 		return cmDAO.chboardgetBoardCnt_001(boardVO);
 	}
-	
+
+	@Override
+	public void chboardDelete(BoardVO vo) {
+		System.out.println(vo + "this isserviceImpi");
+		 cmDAO.chboardDelete_001(vo);
+	}
+
+	@Override
+	public int chboardUpdateReadCnt(int idx) {
+		return cmDAO.chboardUpdateReadCnt_001(idx);
+	}
+
+	@Override
+	public BoardVO chboardDetail(BoardVO boardVO) {
+		return cmDAO.chboardDetail_001(boardVO);
+	}
+
 }

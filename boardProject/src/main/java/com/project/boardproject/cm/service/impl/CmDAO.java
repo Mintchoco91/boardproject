@@ -29,5 +29,11 @@ public interface CmDAO  {
 
 	public List<BoardVO> chboardGetList_001(Map<String, Integer> hmap);
 
-	public int chboardgetBoardCnt_001(BoardVO boardVO);	
+	public int chboardgetBoardCnt_001(BoardVO boardVO);
+
+	public void chboardDelete_001(BoardVO boardVO);
+
+	public int chboardUpdateReadCnt_001(int idx);
+
+	public BoardVO chboardDetail_001(BoardVO vo);	
 }
