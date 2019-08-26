@@ -18,7 +18,7 @@
 	</table>
 	<br/>
 	<table align="center" border=1px>
-		<tr>
+		<tr style="background-color:#E0E6F8">
 			<td>선택</td>
 			<td>글번호</td>
 			<td>제목</td>
@@ -29,7 +29,7 @@
 			<td>등록시간</td>
 		</tr>
 		<c:forEach var="boardVOArr" items="${boardVOArr}">
-			<tr>
+			<tr style="cursor:hand" onmouseover="this.style.background='#E0ECF8'" onmouseout="this.style.background='white'" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">
 				<td><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
 				<td>${boardVOArr.idx}</td>
 				<td>${boardVOArr.title}</td>
@@ -74,8 +74,6 @@
 			idxArray.push(idx);
 		});
 
-		console.log(idxArray);
-
         var objParams = {
                 "idxArray" : idxArray
             };
@@ -83,15 +81,19 @@
 		$.ajax({
 		    type: "POST",
 		    url: "./kwboardDelete.do",
-            dataType : "json",
-            //contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType : "TEXT",            
 		    data: "idxArray=" + idxArray,
 		    success: function(data){
-			    console.log("성공");
+			    if(data == "success"){
+				    alert("게시물이 삭제 되었습니다.");
+			    	location.reload();
+			    }else{
+			    	alert("삭제 실패하였습니다. 로그를 확인해보세요.");
+				}
 		    },
 
 		    error: function (request, status, error){    
-			    console.log("실패");
+			    alert("ajax 실패");
 		    }
 		  });
 	}

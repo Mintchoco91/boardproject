@@ -40,8 +40,28 @@ public class CmServiceimpl implements CmService {
 	
 
 	@Override
-	public void kwboardDelete(BoardVO boardVO) {
-		cmDAO.kwboardDelete_001(boardVO);
+	public String kwboardDelete(String[] idxArray) {
+		String[] convIdxArray = idxArray[0].split(",");
+		Integer resultval = 0;
+		String result = "error";
+		
+		BoardVO boardVO = new BoardVO();
+		for(int i=0; i<convIdxArray.length ; i++) {
+			boardVO.setIdx(Integer.parseInt(convIdxArray[i]));
+			resultval =+ cmDAO.kwboardDelete_001(boardVO);
+		}
+		
+		if(resultval == convIdxArray.length-1) {
+			result = "success";
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public BoardVO kwboardDetail(BoardVO boardVO) {
+		System.out.println("####dao : "+ boardVO.toString());
+		return cmDAO.kwboardDetail_001(boardVO);
 	}
 	
 	

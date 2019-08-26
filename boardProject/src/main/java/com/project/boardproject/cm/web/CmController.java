@@ -1,9 +1,7 @@
 package com.project.boardproject.cm.web;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
@@ -27,68 +25,76 @@ import com.project.boardproject.cm.service.CmService;
 
 @Controller
 public class CmController {
-	
+
 	@Autowired
 	private CmService cmservice;
-	
-	@RequestMapping("index")
+
+	@RequestMapping(value = "index")
 	public String index(Model model) {
-		String sampleResult="";
+		String sampleResult = "";
 		sampleResult = cmservice.sampleData();
-		model.addAttribute("result",sampleResult);		
-		
+		model.addAttribute("result", sampleResult);
+
 		return "index";
 	}
-	
-	@RequestMapping(value="/board/boardList")
+
+	@RequestMapping(value = "/board/boardList")
 	public String board(Model model) throws Exception {
 		System.out.println("List");
 		return "board/boardList";
 	}
-	
-	@RequestMapping(value="/board/boardRegister")
+
+	@RequestMapping(value = "/board/boardRegister")
 	public String boardRegister(Model model) throws Exception {
 		return "board/boardRegister";
 	}
-	
-	@RequestMapping("kwboardList")
-	public String kwboardList(Model model) {		
+
+	@RequestMapping(value = "kwboardList")
+	public String kwboardList(Model model) {
 		return "kwboard/kwboardList";
 	}
-	
-	@RequestMapping("kwboardRegister")
+
+	@RequestMapping(value = "kwboardRegister")
 	public String kwboardRegister(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
-		
+
 		return "kwboard/kwboardRegister";
 	}
-	
-	@RequestMapping("kwboardInq")
-	public String kwboardInq(Model model,BoardVO boardVO) {
-		//리스트로 구현
+
+	@RequestMapping(value = "kwboardInq")
+	public String kwboardInq(Model model, BoardVO boardVO) {
+		// 리스트로 구현
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		boardVOArr = cmservice.kwboardInq(boardVO);
-		
-		/*
-		for(int i=0;i<boardVOArr.size();i++) {
-			System.out.println("######"+boardVOArr.get(i).toString());
-		}*/
-		
-		model.addAttribute("boardVOArr",boardVOArr);
-		
+		model.addAttribute("boardVOArr", boardVOArr);
+
 		return "kwboard/kwboardList";
 	}
-	
-	@RequestMapping("kwboardWrite")
-	public String kwboardWrite(Model model,BoardVO boardVO) throws Exception {
+
+	@RequestMapping(value = "kwboardWrite")
+	public String kwboardWrite(Model model, BoardVO boardVO) throws Exception {
 		cmservice.kwboardWrite(boardVO);
 		return "redirect:kwboardInq.do";
 	}
 
 
-	@RequestMapping("kwboardDelete")
-	public String kwboardDelete(@RequestParam(required=false) String idxArray,Model model) throws Exception {
-
-		System.out.println("###########"+idxArray);
-		return "redirect:kwboardInq.do";
-	}
+	  @RequestMapping(value="kwboardDelete", method = RequestMethod.POST)
+	  public @ResponseBody String kwboardDelete(HttpServletRequest request
+			  ,String[] idxArray, Model model) throws Exception {
+		  
+		  String result = "error";
+		  result = cmservice.kwboardDelete(idxArray);
+		  return result; 
+	  }
+	 
+		@RequestMapping(value = "kwboardDetail")
+		public String kwboardDetail(Model model, BoardVO boardVO) throws Exception {
+			
+			BoardVO resultBoardVO = new BoardVO();
+			resultBoardVO = cmservice.kwboardDetail(boardVO);
+			
+			System.out.println("#######"+boardVO.toString());
+			System.out.println("@@@@@@"+resultBoardVO.toString());
+			return "kwboard/kwboardDetail";
+		}
+		
 }
