@@ -64,6 +64,29 @@
 		WHERE idx = #{idx}		
 	</delete>	
 	
+	<select id="kwboardDetail_001" resultMap="BoardVOarr" parameterType="BoardVO">
+		SELECT 
+			idx
+			,boardId
+			,title
+			,contents
+			,delYn
+			,atchYn
+			,readCnt
+			,rgtId
+			,rgtDtm
+			,updId
+			,updDtm
+		FROM boardproject.board
+		WHERE idx = #{idx}	
+	</select>
 	
+	<update id="kwboardModify_001" parameterType="boardVO">
+		UPDATE boardproject.Board 
+		SET	title = #{title}
+		,contents = #{contents}
+		,rgtId = #{rgtId}
+		WHERE idx = #{idx}
+	</update>	
 	
 </mapper>

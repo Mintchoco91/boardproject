@@ -8,8 +8,10 @@
 <title>kwboardList</title>
 </head>
 <script src="//code.jquery.com/jquery.min.js"></script>
+<%@ include file="/WEB-INF/js/cm/cm.js" %>
 
 <body>
+	<h1 align="center">리스트페이지</h1>
 	<br/>
 	<table align="center">
 		<tr>
@@ -29,15 +31,15 @@
 			<td>등록시간</td>
 		</tr>
 		<c:forEach var="boardVOArr" items="${boardVOArr}">
-			<tr style="cursor:hand" onmouseover="this.style.background='#E0ECF8'" onmouseout="this.style.background='white'" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">
+			<tr onmouseover="this.style.background='#E0ECF8'" onmouseout="this.style.background='white'">
 				<td><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
-				<td>${boardVOArr.idx}</td>
-				<td>${boardVOArr.title}</td>
-				<td>${boardVOArr.contents}</td>
-				<td>${boardVOArr.readCnt}</td>
+				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.idx}</td>
+				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.title}</td>
+				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.contents}</td>
+				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.readCnt}</td>
 				<!-- <td>첨부파일</td> -->
-				<td>${boardVOArr.rgtId}</td>
-				<td>${boardVOArr.rgtDtm}</td>
+				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtId}</td>
+				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtDtm}</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -45,7 +47,7 @@
 	
 	<table align="center">
 		<tr>
-			<td><input type="button" value="등록" onclick="fn_movePage('kwboardRegister.do');"></td>
+			<td><input type="button" value="등록" onclick="fn_movePage('kwboardWritePage.do');"></td>
 			<td><input type="button" value="삭제" onclick="fn_delboard();"></td>
 			
 		</tr>
@@ -62,10 +64,6 @@
 </html>
 
 <script>
-	function fn_movePage(actionUrl){
-		location.replace(actionUrl);
-	}
-
 	function fn_delboard(){
 		var idx = "";
 		var idxArray = new Array();
@@ -74,9 +72,14 @@
 			idxArray.push(idx);
 		});
 
-        var objParams = {
-                "idxArray" : idxArray
-            };
+		if(idxArray.length == 0){
+			alert("삭제 할 게시물을 선택 해 주세요");
+			return false;
+		}else{			
+	        if(confirm("해당 게시물을 삭제 하시겠습니까?")) {}else{
+	            return false;
+	        }
+		}
 		
 		$.ajax({
 		    type: "POST",

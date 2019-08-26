@@ -38,13 +38,12 @@ public class CmController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/board/boardList")
+	@RequestMapping(value = "boardList")
 	public String board(Model model) throws Exception {
-		System.out.println("List");
 		return "board/boardList";
 	}
 
-	@RequestMapping(value = "/board/boardRegister")
+	@RequestMapping(value = "boardRegister")
 	public String boardRegister(Model model) throws Exception {
 		return "board/boardRegister";
 	}
@@ -54,9 +53,8 @@ public class CmController {
 		return "kwboard/kwboardList";
 	}
 
-	@RequestMapping(value = "kwboardRegister")
-	public String kwboardRegister(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
-
+	@RequestMapping(value = "kwboardWritePage")
+	public String kwboardWritePage(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
 		return "kwboard/kwboardRegister";
 	}
 
@@ -77,6 +75,7 @@ public class CmController {
 	}
 
 
+	  //Post AJAX
 	  @RequestMapping(value="kwboardDelete", method = RequestMethod.POST)
 	  public @ResponseBody String kwboardDelete(HttpServletRequest request
 			  ,String[] idxArray, Model model) throws Exception {
@@ -85,16 +84,29 @@ public class CmController {
 		  result = cmservice.kwboardDelete(idxArray);
 		  return result; 
 	  }
-	 
+
 		@RequestMapping(value = "kwboardDetail")
 		public String kwboardDetail(Model model, BoardVO boardVO) throws Exception {
 			
 			BoardVO resultBoardVO = new BoardVO();
 			resultBoardVO = cmservice.kwboardDetail(boardVO);
+						
+			model.addAttribute("boardVO",resultBoardVO);
 			
-			System.out.println("#######"+boardVO.toString());
-			System.out.println("@@@@@@"+resultBoardVO.toString());
 			return "kwboard/kwboardDetail";
 		}
 		
+		
+		//@ModelAttribute("boardVO") 용도 : submit이 아닌데 데이터를 전달하고 싶을 경우. ex) kwboardDetail -> kwboardModify 
+		@RequestMapping(value = "kwboardModifyPage")
+		public String kwboardModifyPage(Model model, BoardVO boardVO) throws Exception {			
+			model.addAttribute("boardVO",boardVO);
+			return "kwboard/kwboardRegister";
+		}
+
+		@RequestMapping(value = "kwboardModify")
+		public String kwboardModify(Model model, BoardVO boardVO) throws Exception {
+			cmservice.kwboardModify(boardVO);
+			return "redirect:kwboardInq.do";
+		}
 }

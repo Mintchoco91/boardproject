@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -13,15 +12,7 @@
 <!-- 이 위로 header -->
 
 <body>
-	<c:choose>
-		<c:when test="${boardVO.idx==''}">
-			<h1 align="center">등록페이지</h1>
-		</c:when>
-		<c:otherwise>
-			<h1 align="center">수정페이지</h1>
-		</c:otherwise>
-	</c:choose>
-		
+	<h1 align="center">상세페이지</h1>
 	<br />
 	<form:form id="frm" action="#" method="post" modelAttribute="boardVO">
 		<table align="center" border=1px>
@@ -29,16 +20,16 @@
 		<form:hidden path="boardId" style="width:300px" readonly = "true"/>
 			<tr>
 				<td>작성자</td>
-				<td><form:input path="rgtId" style="width:300px" /></td>
+				<td><form:input path="rgtId" style="width:300px" readonly = "true"/></td>
 			</tr>		
 			<tr>
 				<td>제목</td>
-				<td><form:input path="title" style="width:300px" /></td>
+				<td><form:input path="title" style="width:300px" readonly = "true"/></td>
 			</tr>	
 			<tr>
 				<td>내용</td>
 				<td><form:textarea path="contents"
-						style="width: 300px; height:300px" />
+						style="width: 300px; height:300px" readonly = "true"/>
 					</textarea></td>
 			</tr>
 			<!-- 
@@ -54,22 +45,8 @@
 
 	<table align="center">
 		<tr>
-			<td>
-			
-				<c:choose>
-					<c:when test="${boardVO.idx==''}">
-						<input type="button" value="등록"
-							onclick="fn_movePage('kwboardWrite.do','Y','해당 게시물을 등록 하시겠습니까?');">
-					</c:when>
-					<c:otherwise>
-						<input type="button" value="수정"
-							onclick="fn_movePage('kwboardModify.do','Y','해당 게시물을 수정 하시겠습니까?');">
-					</c:otherwise>
-				</c:choose>
-	
-
-				
-			</td>
+			<td><input type="button" value="수정"
+				onclick="fn_movePage('kwboardModifyPage.do','Y');"></td>
 			<td><input type="button" value="취소"
 				onclick="fn_movePage('kwboardInq.do');"></td>
 		</tr>
@@ -77,4 +54,3 @@
 	
 </body>
 </html>
-

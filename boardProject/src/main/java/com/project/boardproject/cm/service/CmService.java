@@ -20,6 +20,8 @@ public interface CmService {
 	public String kwboardDelete(String[] idxArray);
 
 	public BoardVO kwboardDetail(BoardVO boardVO);
+
+	public Integer kwboardModify(BoardVO boardVO);
 	
 	public String sampleData();
 }

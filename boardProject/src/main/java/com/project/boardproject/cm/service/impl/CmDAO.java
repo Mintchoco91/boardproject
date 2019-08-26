@@ -25,5 +25,7 @@ public interface CmDAO  {
 	public Integer kwboardDelete_001(BoardVO boardVO);	
 	
 	public BoardVO kwboardDetail_001(BoardVO boardVO);
+
+	public Integer kwboardModify_001(BoardVO boardVO);
 	
 }
