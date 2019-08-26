@@ -1,13 +1,19 @@
 package com.project.boardproject.cm.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
@@ -75,6 +81,14 @@ public class CmController {
 	@RequestMapping("kwboardWrite")
 	public String kwboardWrite(Model model,BoardVO boardVO) throws Exception {
 		cmservice.kwboardWrite(boardVO);
+		return "redirect:kwboardInq.do";
+	}
+
+
+	@RequestMapping("kwboardDelete")
+	public String kwboardDelete(@RequestParam(required=false) String idxArray,Model model) throws Exception {
+
+		System.out.println("###########"+idxArray);
 		return "redirect:kwboardInq.do";
 	}
 }

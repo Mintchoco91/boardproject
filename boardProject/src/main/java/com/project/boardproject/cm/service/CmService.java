@@ -17,5 +17,7 @@ public interface CmService {
 
 	public void kwboardWrite(BoardVO boardVO);
 	
+	public void kwboardDelete(BoardVO boardVO);
+	
 	public String sampleData();
 }

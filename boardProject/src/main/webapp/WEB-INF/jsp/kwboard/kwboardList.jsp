@@ -7,6 +7,8 @@
 <head>
 <title>kwboardList</title>
 </head>
+<script src="//code.jquery.com/jquery.min.js"></script>
+
 <body>
 	<br/>
 	<table align="center">
@@ -28,8 +30,8 @@
 		</tr>
 		<c:forEach var="boardVOArr" items="${boardVOArr}">
 			<tr>
-				<td><input type="checkbox"></td>
-				<td>글번호</td>
+				<td><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
+				<td>${boardVOArr.idx}</td>
 				<td>${boardVOArr.title}</td>
 				<td>${boardVOArr.contents}</td>
 				<td>${boardVOArr.readCnt}</td>
@@ -44,7 +46,7 @@
 	<table align="center">
 		<tr>
 			<td><input type="button" value="등록" onclick="fn_movePage('kwboardRegister.do');"></td>
-			<td><input type="button" value="삭제" onclick="./"></td>
+			<td><input type="button" value="삭제" onclick="fn_delboard();"></td>
 			
 		</tr>
 	</table>
@@ -63,4 +65,35 @@
 	function fn_movePage(actionUrl){
 		location.replace(actionUrl);
 	}
+
+	function fn_delboard(){
+		var idx = "";
+		var idxArray = new Array();
+		$("input[name=idx]:checked").each(function() { 
+			idx = $(this).val();
+			idxArray.push(idx);
+		});
+
+		console.log(idxArray);
+
+        var objParams = {
+                "idxArray" : idxArray
+            };
+		
+		$.ajax({
+		    type: "POST",
+		    url: "./kwboardDelete.do",
+            dataType : "json",
+            //contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		    data: "idxArray=" + idxArray,
+		    success: function(data){
+			    console.log("성공");
+		    },
+
+		    error: function (request, status, error){    
+			    console.log("실패");
+		    }
+		  });
+	}
+
 </script>

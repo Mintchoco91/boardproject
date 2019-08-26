@@ -59,7 +59,10 @@
 		)
 	</insert>
 	
-	
+	<delete id="kwboardDelete_001" parameterType="boardVO">
+		DELETE FROM boardproject.Board 
+		WHERE idx = #{idx}		
+	</delete>	
 	
 	
 	

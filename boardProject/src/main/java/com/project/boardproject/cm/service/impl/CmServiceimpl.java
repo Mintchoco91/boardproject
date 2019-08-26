@@ -38,4 +38,11 @@ public class CmServiceimpl implements CmService {
 		cmDAO.kwboardWrite_001(boardVO);
 	}
 	
+
+	@Override
+	public void kwboardDelete(BoardVO boardVO) {
+		cmDAO.kwboardDelete_001(boardVO);
+	}
+	
+	
 }
