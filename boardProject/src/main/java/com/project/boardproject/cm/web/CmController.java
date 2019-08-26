@@ -8,6 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +34,8 @@ import com.project.boardproject.cm.service.CmService;
 
 @Controller
 public class CmController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
 	
 	@Autowired
 	private CmService cmservice;
@@ -181,6 +186,7 @@ public class CmController {
 	
 	@RequestMapping(value="chboard/Detail", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String chboardDetail(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,  HttpServletRequest request) throws Exception {
+		logger.info("chboardDetail");
 		System.out.println(boardVO.toString());
 		BoardVO vo =new BoardVO();
 		vo =cmservice.chboardDetail(boardVO);

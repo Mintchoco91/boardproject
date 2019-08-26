@@ -3,11 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <meta charset="UTF-8">
 <title>글 등록</title>
 </head>
 <body>
-<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<style>
+
+	.Container {
+		margin: 0 auto;
+		padding :0;
+		overflow: hidden;
+		
+	}
+
+	.listTable {
+	text-align: center;
+	}
+	.wrapper {
+	 width: 800px;
+  margin: 0 auto;
+  border: 1px solid #aaa;
+  }
+
+}
+</style>
 <script type="text/javascript">
 
 function fn_Register() {
@@ -43,21 +63,19 @@ function fn_Register() {
 	<!-- Container -->
 	<div class="Container">
 	<!-- contents -->
-	<div class="contents">
 	
 	<form:form commandName="BoardVO" id="listform" name="listform" method="get" >
 	<input type="hidden" id="idx" name="" value=""/>
 	<input type="hidden" id="boardId" name="boardId" value="free"/>
 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
-	<div class="" style="width : 650px;" >
 	<!-- form:input path= "" id랑 name을 맞춰준다 -->
 	
-	<table width="100%" id="insertTable" name="insertTable" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<table width="700px;" id="insertTable" name="insertTable" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 		<thead>
 		<colgroup>
 			<col width="20%">
 			<col width="30%">
-			<col width="20%">
+			<col width="30%">
 			<col width="20%">
 		</colgroup>
 		</thead>
@@ -70,7 +88,7 @@ function fn_Register() {
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td colspan="3"><textarea cols="70" rows="20" id="contents" name="contents"></textarea></td>
+			<td colspan="3"><textarea cols="70" rows="20" id="contents" name="contents" style="overflow-y:scroll"></textarea></td>
 		</tr>
 		<tr>
 			<th scope="col">첨부파일</th>
@@ -87,9 +105,6 @@ function fn_Register() {
 	</table>
 	</div>
 	</form:form>
-	</div>
-	<!-- //contents -->
-	</div>
 	<!-- //Container -->
 	
 	<!-- // header -->
