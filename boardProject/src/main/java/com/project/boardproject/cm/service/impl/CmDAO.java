@@ -25,6 +25,16 @@ public interface CmDAO  {
 
 	public List<BoardVO> kwboardInq_001(BoardVO boardVO);
 	
+	public void kwboardWrite_001(BoardVO boardVO);	
+
+	public Integer kwboardDelete_001(BoardVO boardVO);	
+	
+	public BoardVO kwboardDetail_001(BoardVO boardVO);
+
+	public Integer kwboardModify_001(BoardVO boardVO);
+	
+	public Integer kwboardInqCnt_001(BoardVO boardVO);
+	
 	public void kwboardWrite_001(BoardVO boardVO);
 
 	public List<BoardVO> chboardGetList_001(Map<String, Integer> hmap);
