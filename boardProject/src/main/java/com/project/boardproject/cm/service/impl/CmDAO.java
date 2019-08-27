@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.boardproject.cm.service.BoardVO;
 
-import com.project.boardproject.cm.service.BoardVO;
-
 /*
  * 파일명 : CmDAO.java
  * 용도    : 
