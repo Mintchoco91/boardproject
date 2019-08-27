@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -23,9 +22,9 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-<!-- DB -->
-<!--  -->
-<!--dataSource 객체 설정 -->
+	<!-- DB -->
+	<!-- -->
+	<!--dataSource 객체 설정 -->
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
@@ -35,7 +34,7 @@
 		<property name="username" value="root"></property>
 		<property name="password" value="o9o9o9o9"></property>
 	</bean>
- 
+
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -44,7 +43,7 @@
 		<property name="mapperLocations"
 			value="/resources/sql/**/*.xml"></property>
 	</bean>
- 
+
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory"
