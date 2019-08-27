@@ -37,6 +37,12 @@ public class CmServiceimpl implements CmService {
 	public void kwboardWrite(BoardVO boardVO) {
 		cmDAO.kwboardWrite_001(boardVO);
 	}
+
+	@Override
+	public Integer kwboardInqCnt(BoardVO boardVO) {
+		return cmDAO.kwboardInqCnt_001(boardVO);
+	}
+	
 	
 
 	@Override

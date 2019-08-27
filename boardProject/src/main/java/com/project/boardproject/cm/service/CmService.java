@@ -22,6 +22,9 @@ public interface CmService {
 	public BoardVO kwboardDetail(BoardVO boardVO);
 
 	public Integer kwboardModify(BoardVO boardVO);
+
+	public Integer kwboardInqCnt(BoardVO boardVO);
+	
 	
 	public String sampleData();
 }

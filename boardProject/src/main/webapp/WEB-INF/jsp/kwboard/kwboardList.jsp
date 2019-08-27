@@ -29,6 +29,7 @@
 		 	<td style="width:40px;">조회</td>
 			<!-- <td>첨부파일</td>-->
 		</tr>
+		
 		<c:forEach var="boardVOArr" items="${boardVOArr}">
 			<tr onmouseover="this.style.background='#E0ECF8'" onmouseout="this.style.background='white'">
 				<td style="width:40px;text-align:center"><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
@@ -52,12 +53,11 @@
 	</table>
 	
 	<br/>
-	
-	<table align="center">
-		<tr>
-			<td>[미구현]페이징 구역</td>
-		</tr>
-	</table>
+    
+    <!-- paging 시작 -->
+	<%@ include file="/WEB-INF/jsp/board/boardPaging.jsp" %>
+	<!-- paging 끝 -->	
+                
 </body>
 </html>
 
@@ -98,5 +98,4 @@
 		    }
 		  });
 	}
-
 </script>

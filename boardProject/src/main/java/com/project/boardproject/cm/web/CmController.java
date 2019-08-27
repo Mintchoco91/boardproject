@@ -1,6 +1,5 @@
 package com.project.boardproject.cm.web;
 
-import java.net.Proxy.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.boardproject.cm.service.BoardVO;
@@ -62,9 +62,18 @@ public class CmController {
 	}
 
 	@RequestMapping(value = "kwboardInq")
-	public String kwboardInq(Model model, BoardVO boardVO) {
+	public String kwboardInq(Model model, BoardVO boardVO, @RequestParam(defaultValue="1") int curPage) {
 		// 리스트로 구현
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
+		// 전체리스트 개수
+        int listCnt = cmservice.kwboardInqCnt(boardVO);
+        
+		//int listCnt = 12;
+        Pagination pagination = new Pagination(listCnt, curPage);
+        
+        boardVO.setStartIndex(pagination.getStartIndex());
+        boardVO.setPageSize(pagination.getPageSize());
+        
 		boardVOArr = cmservice.kwboardInq(boardVO);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat ( "yyyyMMdd");
@@ -92,6 +101,7 @@ public class CmController {
 		}
 		
 		model.addAttribute("boardVOArr", boardVOArr);
+		model.addAttribute("pagination",pagination);
 
 		return "kwboard/kwboardList";
 	}

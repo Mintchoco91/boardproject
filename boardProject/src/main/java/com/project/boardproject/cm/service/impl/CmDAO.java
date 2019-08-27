@@ -28,4 +28,6 @@ public interface CmDAO  {
 
 	public Integer kwboardModify_001(BoardVO boardVO);
 	
+	public Integer kwboardInqCnt_001(BoardVO boardVO);
+	
 }

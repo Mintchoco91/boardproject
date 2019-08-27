@@ -36,7 +36,14 @@
 			,updDtm
 		FROM boardproject.board
 		ORDER BY rgtDtm DESC
+		LIMIT #{startIndex},#{pageSize}
 	</select>
+
+	<select id="kwboardInqCnt_001" resultType="Integer" parameterType="BoardVO">
+		SELECT count(*)
+		FROM boardproject.board
+	</select>
+		
 	
 	<insert id="kwboardWrite_001" parameterType="boardVO">
 		INSERT INTO boardproject.Board (
@@ -89,5 +96,6 @@
 		,rgtId = #{rgtId}
 		WHERE idx = #{idx}
 	</update>	
+	
 	
 </mapper>

@@ -29,7 +29,7 @@
 		<form:hidden path="boardId" style="width:300px" readonly = "true"/>
 			<tr>
 				<td>작성자</td>
-				<td><form:input path="rgtId" style="width:640px" readonly = "true"/></td>
+				<td><form:input path="rgtId" style="width:640px" value="master" readonly = "true"/></td>
 			</tr>		
 			<tr>
 				<td>제목</td>
