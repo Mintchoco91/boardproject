@@ -28,15 +28,15 @@
 		<form:hidden path="idx" style="width:300px" readonly = "true"/>
 		<form:hidden path="boardId" style="width:300px" readonly = "true"/>
 			<tr>
-				<td>작성자</td>
+				<td style="background-color:#E0E6F8">작성자</td>
 				<td><form:input path="rgtId" style="width:640px" value="master" readonly = "true"/></td>
 			</tr>		
 			<tr>
-				<td>제목</td>
+				<td style="background-color:#E0E6F8">제목</td>
 				<td><form:input path="title" style="width:640px"/></td>
 			</tr>	
 			<tr>
-				<td>내용</td>
+				<td style="background-color:#E0E6F8">내용</td>
 				<td colspan="3"><form:textarea path="contents"
 						style="width:640px; height:300px"/>
 					</textarea></td>
