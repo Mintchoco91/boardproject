@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!-- 
 /*
  * 파일명 : Index.jsp
@@ -7,8 +9,7 @@
  * 작성자 : mintchoco91
  * 변경일 : 2019/07/22
  */
- -->  
- 
+ -->
 <!DOCTYPE html>   
 <html>
 <head>
@@ -21,6 +22,13 @@
 	<a href="./kwboardInq.do">[임시]kw_board 이동</a><br/><br/>
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판B 이동</a><br/><br/>
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판C 이동</a><br/><br/>
+	<c:if test="${not empty memberVO.userId}">
+		<a href="pjsMember.do?userId=${memberVO.userId }">[임시]${memberVO.userId }</a>
+		<a href="logout.do">로그아웃</a>
+	</c:if>
+	<c:if test="${empty memberVO.userId}">
+		<a href="login.do">로그인</a>
+	</c:if>
 	
 </body>
 </html>

@@ -25,7 +25,7 @@ public class CmServiceimpl implements CmService {
 	@Override
 	public String sampleData() {
 		String sampleResult = "";
-		sampleResult = cmDAO.tempsql_001();
+		//sampleResult = cmDAO.tempsql_001();
 		return sampleResult;
 	}
 

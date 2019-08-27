@@ -1,3 +1,4 @@
+
 package com.project.boardproject.cm.web;
 
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class CmController {
 	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
 
 	@RequestMapping("index")
-	public String index(Model model) {
+	public String index(Model model, MemberVO memberVO) {
 		String sampleResult = "";
 		sampleResult = cmservice.sampleData();
 		model.addAttribute("result", sampleResult);
