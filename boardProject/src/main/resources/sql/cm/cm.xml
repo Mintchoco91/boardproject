@@ -35,6 +35,7 @@
 			,updId
 			,updDtm
 		FROM boardproject.board
+		ORDER BY rgtDtm DESC
 	</select>
 	
 	<insert id="kwboardWrite_001" parameterType="boardVO">

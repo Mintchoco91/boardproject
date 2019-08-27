@@ -1,6 +1,9 @@
 package com.project.boardproject.cm.web;
 
+import java.net.Proxy.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +66,31 @@ public class CmController {
 		// 리스트로 구현
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		boardVOArr = cmservice.kwboardInq(boardVO);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat ( "yyyyMMdd");
+		Date time = new Date();
+		
+		String dateNow = dateFormat.format(time);
+		
+		String fullRgtDtm = "";
+		String todayRgtDtm = "";
+		String convRgtDtm = "";
+		
+		for(int i=0;i<boardVOArr.size();i++) {
+			fullRgtDtm = boardVOArr.get(i).getRgtDtm();
+			todayRgtDtm = fullRgtDtm.substring(0,8);			
+			
+			//if(todayRgtDtm == dateNow)  - 틀림	
+			//작성일이 오늘일경우
+			if(todayRgtDtm.equals(dateNow)) {
+				convRgtDtm = fullRgtDtm.substring(8,10) + ":" + fullRgtDtm.substring(10,12);
+			}else {
+				convRgtDtm = fullRgtDtm.substring(2,4) + "." + fullRgtDtm.substring(4,6) + "." + fullRgtDtm.substring(6,8);
+			}			
+
+			boardVOArr.get(i).setRgtDtm(convRgtDtm);
+		}
+		
 		model.addAttribute("boardVOArr", boardVOArr);
 
 		return "kwboard/kwboardList";
@@ -90,14 +118,17 @@ public class CmController {
 			
 			BoardVO resultBoardVO = new BoardVO();
 			resultBoardVO = cmservice.kwboardDetail(boardVO);
-						
+			String fullRgtDtm = resultBoardVO.getRgtDtm();
+			String convRgtDtm = fullRgtDtm.substring(0,4) + "." + fullRgtDtm.substring(4,6) + "." + fullRgtDtm.substring(6,8) + ". " + fullRgtDtm.substring(8,10) + ":" + fullRgtDtm.substring(10,12);
+			
+			resultBoardVO.setRgtDtm(convRgtDtm);
+			
 			model.addAttribute("boardVO",resultBoardVO);
 			
 			return "kwboard/kwboardDetail";
 		}
 		
-		
-		//@ModelAttribute("boardVO") 용도 : submit이 아닌데 데이터를 전달하고 싶을 경우. ex) kwboardDetail -> kwboardModify 
+		 
 		@RequestMapping(value = "kwboardModifyPage")
 		public String kwboardModifyPage(Model model, BoardVO boardVO) throws Exception {			
 			model.addAttribute("boardVO",boardVO);

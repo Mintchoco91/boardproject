@@ -15,22 +15,30 @@
 	<h1 align="center">상세페이지</h1>
 	<br />
 	<form:form id="frm" action="#" method="post" modelAttribute="boardVO">
-		<table align="center" border=1px>
-		<form:hidden path="idx" style="width:300px" readonly = "true"/>
-		<form:hidden path="boardId" style="width:300px" readonly = "true"/>
+		<table align="center" border=1px style="width:700px">
+		<form:hidden path="idx" readonly = "true"/>		
+		<form:hidden path="boardId" readonly = "true"/>		
+		<form:hidden path="readCnt" readonly = "true"/>
+		<form:hidden path="title" readonly = "true"/>		
+		<form:hidden path="rgtId" readonly = "true"/>
+		<form:hidden path="rgtDtm" readonly = "true"/>
+		<form:hidden path="contents" readonly = "true"/>
+		
 			<tr>
 				<td>작성자</td>
-				<td><form:input path="rgtId" style="width:300px" readonly = "true"/></td>
+				<td style="width:420px">${boardVO.rgtId}</td>
+				<td>조회</td>
+				<td style="width:140px">${boardVO.readCnt}</td>
 			</tr>		
 			<tr>
 				<td>제목</td>
-				<td><form:input path="title" style="width:300px" readonly = "true"/></td>
+				<td style="width:420px">${boardVO.title}</td>
+				<td>등록시간</td>
+				<td style="width:140px">${boardVO.rgtDtm}</td>
 			</tr>	
 			<tr>
 				<td>내용</td>
-				<td><form:textarea path="contents"
-						style="width: 300px; height:300px" readonly = "true"/>
-					</textarea></td>
+				<td colspan="3" valign=top style="width:640px;height:300px;">${boardVO.contents}</td>
 			</tr>
 			<!-- 
 			<tr>

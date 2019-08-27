@@ -20,26 +20,24 @@
 	</table>
 	<br/>
 	<table align="center" border=1px>
-		<tr style="background-color:#E0E6F8">
-			<td>선택</td>
-			<td>글번호</td>
-			<td>제목</td>
-			<td>내용</td>
-			<td>조회수</td>
+		<tr style="background-color:#E0E6F8;text-align:center">
+			<td style="width:40px;">선택</td>
+			<td style="width:60px;">글번호</td>
+			<td style="width:600px;">제목</td>
+			<td style="width:60px;">글쓴이</td>
+			<td style="width:60px;">작성일</td>
+		 	<td style="width:40px;">조회</td>
 			<!-- <td>첨부파일</td>-->
-			<td>등록자</td>
-			<td>등록시간</td>
 		</tr>
 		<c:forEach var="boardVOArr" items="${boardVOArr}">
 			<tr onmouseover="this.style.background='#E0ECF8'" onmouseout="this.style.background='white'">
-				<td><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
-				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.idx}</td>
-				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.title}</td>
-				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.contents}</td>
-				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.readCnt}</td>
+				<td style="width:40px;text-align:center"><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
+				<td style="width:60px;text-align:center;cursor:hand;" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.idx}</td>
+				<td style="width:600px;cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.title}</td>
+				<td style="width:60px;text-align:center";cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtId}</td>
+				<td style="width:60px;text-align:center";cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtDtm}</td>
+				<td style="width:40px;text-align:center;cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.readCnt}</td>
 				<!-- <td>첨부파일</td> -->
-				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtId}</td>
-				<td style="cursor:hand" onclick="fn_movePage('kwboardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtDtm}</td>
 			</tr>
 		</c:forEach>
 	</table>

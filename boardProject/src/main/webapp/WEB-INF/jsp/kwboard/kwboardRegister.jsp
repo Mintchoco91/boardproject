@@ -29,16 +29,16 @@
 		<form:hidden path="boardId" style="width:300px" readonly = "true"/>
 			<tr>
 				<td>작성자</td>
-				<td><form:input path="rgtId" style="width:300px" /></td>
+				<td><form:input path="rgtId" style="width:640px" readonly = "true"/></td>
 			</tr>		
 			<tr>
 				<td>제목</td>
-				<td><form:input path="title" style="width:300px" /></td>
+				<td><form:input path="title" style="width:640px"/></td>
 			</tr>	
 			<tr>
 				<td>내용</td>
-				<td><form:textarea path="contents"
-						style="width: 300px; height:300px" />
+				<td colspan="3"><form:textarea path="contents"
+						style="width:640px; height:300px"/>
 					</textarea></td>
 			</tr>
 			<!-- 
