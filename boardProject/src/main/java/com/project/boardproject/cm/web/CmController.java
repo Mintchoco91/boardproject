@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
+import com.project.boardproject.mm.service.MemberVO;
 
 /*
  * 파일명 : customController.java
@@ -26,11 +27,10 @@ public class CmController {
 	private CmService cmservice;
 	
 	@RequestMapping("index")
-	public String index(Model model) {
+	public String index(Model model,MemberVO memberVO) {
 		String sampleResult="";
 		sampleResult = cmservice.sampleData();
 		model.addAttribute("result",sampleResult);		
-		
 		return "index";
 	}
 	
