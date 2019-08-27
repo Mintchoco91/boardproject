@@ -29,4 +29,23 @@
 	}
   
   //validate, paging, 그 외 공통함수들 필요함.
+  
+  function ajaxCallSr(method, url, request) {
+	  var returnData = new Object;
+	  $.ajax({
+		  method : method,
+		  url : url,
+		  dataType : 'json',
+		  data : JSON.stringify(request),
+		  async : false,
+		  contentType : 'application/json; charset=UTF-8',
+		  success : function(data) {
+			  returnData= data;
+		  },
+	  });
+	  return returnData;
+	  
+  }
+  
+  
 </script>

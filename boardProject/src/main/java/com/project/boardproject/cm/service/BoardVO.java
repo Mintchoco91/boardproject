@@ -1,6 +1,8 @@
 package com.project.boardproject.cm.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * 파일명 : CmVO.java
@@ -129,4 +131,7 @@ public class BoardVO implements Serializable{
 	
 
 	
+	
+	
 }
+

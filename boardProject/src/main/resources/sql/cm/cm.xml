@@ -96,6 +96,72 @@
 		,rgtId = #{rgtId}
 		WHERE idx = #{idx}
 	</update>	
+  
+	<insert id="chboardInsert_001" parameterType="BoardVO">
+		INSERT INTO /* chboardInsert*/
+		boardproject.board (
+		boardId
+		, title
+		, contents
+		, delYn
+		, atchYn
+		, readCnt
+		, rgtId
+		, rgtDtm) 
+		values (
+		#{boardId}
+		, #{title}
+		, #{contents}
+		, 'N'
+		, 'N'
+		, 0
+		, #{rgtId}
+		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
+		</insert>
+	 
+	<select id="chboardGetList_001" parameterType="HashMap" resultMap="BoardVOarr" >
+	<![CDATA[
+				SELECT * FROM BOARDPROJECT.BOARD ORDER BY IDX DESC
+		LIMIT #{startNo}, #{endNo}	
+		]]>
+	</select>
 	
+	<select id="chboardgetBoardCnt_001" parameterType="BoardVO" resultType="int">
+		SELECT /*chboardgetBoardCnt_001*/
+		COUNT(*) 
+		FROM BOARDPROJECT.BOARD
+	</select>
+	
+	<delete id="chboardDelete_001"  parameterType="BoardVO">
+		DELETE   /* chboardDelete_001*/
+		FROM BOARDPROJECT.BOARD
+		WHERE IDX=#{idx}
+	
+	</delete>
+	
+	<insert id="chboardUpdateReadCnt_001" parameterType="int">
+		UPDATE /*chboardUpdateReadCnt_001 */
+		BOARDPROJECT.BOARD
+		SET READCNT = READCNT+1
+		WHERE IDX=#{idx}
+	
+	</insert>
+	<select id="chboardDetail_001" parameterType="BoardVO" resultMap="BoardVO">
+			SELECT 
+			IDX
+			,BOARDID
+			,TITLE
+			,CONTENTS
+			,DELYN
+			,ATCHYN
+			,READCNT
+			,RGTID
+			,RGTDTM
+			,UPDID
+			,UPDDTM
+		FROM BOARDPROJECT.BOARD
+		WHERE IDX= #{idx}
+	
+	</select>
 	
 </mapper>
