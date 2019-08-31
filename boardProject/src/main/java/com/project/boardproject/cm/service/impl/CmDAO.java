@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.boardproject.cm.service.BoardVO;
 
-import com.project.boardproject.cm.service.BoardVO;
-
 /*
  * 파일명 : CmDAO.java
  * 용도    : 
@@ -24,6 +22,14 @@ public interface CmDAO  {
 	public void chboardInsert_001(BoardVO boardVO);
 
 	public List<BoardVO> kwboardInq_001(BoardVO boardVO);
+
+	public Integer kwboardDelete_001(BoardVO boardVO);	
+	
+	public BoardVO kwboardDetail_001(BoardVO boardVO);
+
+	public Integer kwboardModify_001(BoardVO boardVO);
+	
+	public Integer kwboardInqCnt_001(BoardVO boardVO);
 	
 	public void kwboardWrite_001(BoardVO boardVO);
 

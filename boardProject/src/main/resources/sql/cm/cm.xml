@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.boardproject.cm.service.impl.CmDAO">
  
-<!-- property : vo에서 변수명.  column : DB상 컬럼명  -->
- <resultMap id="BoardVOarr" type="BoardVO">
- 	<result property="idx" column="idx"/>
- 	<result property="boardId" column="boardId"/>
- 	<result property="title" column="title"/>
- 	<result property="contents" column="contents"/> 	
- 	<result property="delYn" column="delYn"/>
- 	<result property="atchYn" column="atchYn"/>
- 	<result property="readCnt" column="readCnt"/> 	
- 	<result property="rgtId" column="rgtId"/>
- 	<result property="rgtDtm" column="rgtDtm"/>
- 	<result property="updId" column="updId"/>
- 	<result property="updDtm" column="updDtm"/>
- </resultMap>
+	<!-- property : vo에서 변수명.  column : DB상 컬럼명  -->
+	 <resultMap id="BoardVOarr" type="BoardVO">
+	 	<result property="idx" column="idx"/>
+	 	<result property="boardId" column="boardId"/>
+	 	<result property="title" column="title"/>
+	 	<result property="contents" column="contents"/> 	
+	 	<result property="delYn" column="delYn"/>
+	 	<result property="atchYn" column="atchYn"/>
+	 	<result property="readCnt" column="readCnt"/> 	
+	 	<result property="rgtId" column="rgtId"/>
+	 	<result property="rgtDtm" column="rgtDtm"/>
+	 	<result property="updId" column="updId"/>
+	 	<result property="updDtm" column="updDtm"/>
+	 </resultMap>
 
 	<select id="tempsql_001" resultType="java.lang.String">
 		SELECT name FROM boardproject.temptbl
@@ -35,7 +35,15 @@
 			,updId
 			,updDtm
 		FROM boardproject.board
+		ORDER BY rgtDtm DESC
+		LIMIT #{startIndex},#{pageSize}
 	</select>
+
+	<select id="kwboardInqCnt_001" resultType="Integer" parameterType="BoardVO">
+		SELECT count(*)
+		FROM boardproject.board
+	</select>
+		
 	
 	<insert id="kwboardWrite_001" parameterType="boardVO">
 		INSERT INTO boardproject.Board (
@@ -59,7 +67,36 @@
 		)
 	</insert>
 	
+	<delete id="kwboardDelete_001" parameterType="boardVO">
+		DELETE FROM boardproject.Board 
+		WHERE idx = #{idx}		
+	</delete>	
 	
+	<select id="kwboardDetail_001" resultMap="BoardVOarr" parameterType="BoardVO">
+		SELECT 
+			idx
+			,boardId
+			,title
+			,contents
+			,delYn
+			,atchYn
+			,readCnt
+			,rgtId
+			,rgtDtm
+			,updId
+			,updDtm
+		FROM boardproject.board
+		WHERE idx = #{idx}	
+	</select>
+	
+	<update id="kwboardModify_001" parameterType="boardVO">
+		UPDATE boardproject.Board 
+		SET	title = #{title}
+		,contents = #{contents}
+		,rgtId = #{rgtId}
+		WHERE idx = #{idx}
+	</update>	
+  
 	<insert id="chboardInsert_001" parameterType="BoardVO">
 		INSERT INTO /* chboardInsert*/
 		boardproject.board (
@@ -109,7 +146,7 @@
 		WHERE IDX=#{idx}
 	
 	</insert>
-	<select id="chboardDetail_001" parameterType="BoardVO" resultMap="BoardVO">
+	<select id="chboardDetail_001" parameterType="BoardVO" resultMap="BoardVOarr">
 			SELECT 
 			IDX
 			,BOARDID
@@ -124,7 +161,6 @@
 			,UPDDTM
 		FROM BOARDPROJECT.BOARD
 		WHERE IDX= #{idx}
-	
 	</select>
 	
 </mapper>
