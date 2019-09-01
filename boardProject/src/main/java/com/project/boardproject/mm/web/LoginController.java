@@ -1,5 +1,7 @@
 package com.project.boardproject.mm.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,13 +17,14 @@ public class LoginController {
 	private MemberService memberService;
 	
 	@RequestMapping("loginCheck")
-	public String loginCheck(MemberVO memberVO) {
+	public String loginCheck(MemberVO memberVO, HttpSession session) {
 		int pwCheck=memberService.loginCheck(memberVO);
 		if(pwCheck==1) {
 			System.out.println("비밀번호 불일치");
 			return "member/login";
 		}
 		else if(pwCheck==0) {
+			session.setAttribute("userid",memberVO.getUserId());
 			System.out.println("로그인 성공");
 			return "index";
 		}else {
@@ -36,7 +39,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping("logout")
-	public String logout() {
+	public String logout(HttpSession session) {
+		session.invalidate();
 		return "index";
 	}
 	

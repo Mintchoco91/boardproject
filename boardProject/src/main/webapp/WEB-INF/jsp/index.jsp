@@ -16,19 +16,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>임시 메인페이지</title>
 </head>
+<jsp:include page="header.jsp"></jsp:include>
 <body>
 	메인페이지입니다.<br/>
 	DB값 출력 : ${result}<br/>
 	<a href="./kwboardInq.do">[임시]kw_board 이동</a><br/><br/>
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판B 이동</a><br/><br/>
-	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판C 이동</a><br/><br/>
-	<c:if test="${not empty memberVO.userId}">
-		<a href="pjsMember.do?userId=${memberVO.userId }">[임시]${memberVO.userId }</a>
-		<a href="logout.do">로그아웃</a>
-	</c:if>
-	<c:if test="${empty memberVO.userId}">
-		<a href="login.do">로그인</a>
-	</c:if>
-	
+	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판C 이동</a><br/><br/>	
 </body>
 </html>
