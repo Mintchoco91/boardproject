@@ -80,10 +80,10 @@ public class CmServiceimpl implements CmService {
 		return resultval;
 	}
 	
-	public List<BoardVO> chboardGetList(Map<String, Integer> hmap) {
-		return cmDAO.chboardGetList_001(hmap);
+	public List<BoardVO> chboardGetList(BoardVO boardVO) {
+		return cmDAO.chboardGetList_001(boardVO);
 	}
-
+	
 	@Override
 	public int chboardgetBoardCnt(BoardVO boardVO) {
 		return cmDAO.chboardgetBoardCnt_001(boardVO);

@@ -33,7 +33,7 @@ public interface CmDAO  {
 	
 	public void kwboardWrite_001(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList_001(Map<String, Integer> hmap);
+	public List<BoardVO> chboardGetList_001(BoardVO boardVO);
 
 	public int chboardgetBoardCnt_001(BoardVO boardVO);
 
