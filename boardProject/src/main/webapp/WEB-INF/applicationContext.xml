@@ -16,6 +16,8 @@
 		base-package="com.project.boardproject" />
 
 
+	
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
@@ -58,4 +60,7 @@
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSession" /> -->
 	</bean>
 
+
+	<!-- Annotation 활성화 -->	
+	<mvc:annotation-driven></mvc:annotation-driven> 
 </beans>
