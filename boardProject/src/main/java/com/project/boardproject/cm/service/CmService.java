@@ -33,7 +33,7 @@ public interface CmService {
 
 	public void chboardInsert(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList(Map<String, Integer> hmap);
+	public List<BoardVO> chboardGetList(BoardVO boardVO);
 
 	public int chboardgetBoardCnt(BoardVO boardVO);
 
