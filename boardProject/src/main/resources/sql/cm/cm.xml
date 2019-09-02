@@ -18,7 +18,7 @@
 	 </resultMap>
 
 	<select id="tempsql_001" resultType="java.lang.String">
-		SELECT name FROM boardproject.temptbl
+		SELECT name FROM temptbl
 	</select>
 	
 	<select id="kwboardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
@@ -34,19 +34,19 @@
 			,rgtDtm
 			,updId
 			,updDtm
-		FROM boardproject.board
+		FROM board
 		ORDER BY rgtDtm DESC
 		LIMIT #{startIndex},#{pageSize}
 	</select>
 
 	<select id="kwboardInqCnt_001" resultType="Integer" parameterType="BoardVO">
 		SELECT count(*)
-		FROM boardproject.board
+		FROM board
 	</select>
 		
 	
 	<insert id="kwboardWrite_001" parameterType="boardVO">
-		INSERT INTO boardproject.Board (
+		INSERT INTO board (
 		boardId
 		,title
 		,contents
@@ -68,7 +68,7 @@
 	</insert>
 	
 	<delete id="kwboardDelete_001" parameterType="boardVO">
-		DELETE FROM boardproject.Board 
+		DELETE FROM board 
 		WHERE idx = #{idx}		
 	</delete>	
 	
@@ -85,12 +85,12 @@
 			,rgtDtm
 			,updId
 			,updDtm
-		FROM boardproject.board
+		FROM board
 		WHERE idx = #{idx}	
 	</select>
 	
 	<update id="kwboardModify_001" parameterType="boardVO">
-		UPDATE boardproject.Board 
+		UPDATE board 
 		SET	title = #{title}
 		,contents = #{contents}
 		,rgtId = #{rgtId}
@@ -99,7 +99,7 @@
   
 	<insert id="chboardInsert_001" parameterType="BoardVO">
 		INSERT INTO /* chboardInsert*/
-		boardproject.board (
+		board (
 		boardId
 		, title
 		, contents
@@ -121,7 +121,7 @@
 	 
 	<select id="chboardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
 	<![CDATA[
-				SELECT * FROM BOARDPROJECT.BOARD ORDER BY IDX DESC
+				SELECT * FROM board ORDER BY IDX DESC
 		LIMIT #{startIndex},#{pageSize}
 		]]>
 	</select>
@@ -129,19 +129,19 @@
 	<select id="chboardgetBoardCnt_001" parameterType="BoardVO" resultType="int">
 		SELECT /*chboardgetBoardCnt_001*/
 		COUNT(*) 
-		FROM BOARDPROJECT.BOARD
+		FROM board
 	</select>
 	
 	<delete id="chboardDelete_001"  parameterType="BoardVO">
 		DELETE   /* chboardDelete_001*/
-		FROM BOARDPROJECT.BOARD
+		FROM board
 		WHERE IDX=#{idx}
 	
 	</delete>
 	
 	<insert id="chboardUpdateReadCnt_001" parameterType="int">
 		UPDATE /*chboardUpdateReadCnt_001 */
-		BOARDPROJECT.BOARD
+		board
 		SET READCNT = READCNT+1
 		WHERE IDX=#{idx}
 	
@@ -159,7 +159,7 @@
 			,RGTDTM
 			,UPDID
 			,UPDDTM
-		FROM BOARDPROJECT.BOARD
+		FROM board
 		WHERE IDX= #{idx}
 	</select>
 	
