@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
-<meta charset="UTF-8">
-<title>글 등록</title>
-</head>
+
 <body>
 <style>
 
@@ -52,14 +47,9 @@ function fn_Register() {
 	f.submit();
 }
 
-
-
 </script>
 <!-- wrapper -->
 
-
-	<!-- header -->
-	
 	<!-- Container -->
 	<div class="Container">
 	<!-- contents -->

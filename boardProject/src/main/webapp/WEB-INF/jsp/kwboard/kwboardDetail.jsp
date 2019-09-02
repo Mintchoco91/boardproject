@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<html>
-<head>
-<title>boardproject</title>
-</head>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<%@ include file="/WEB-INF/js/cm/cm.js" %>
-
-<!-- 이 위로 header -->
+    pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
 <body>
 	<h1 align="center">상세페이지</h1>
