@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-
-<html>
-<head>
-<title>boardproject</title>
-</head>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<%@ include file="/WEB-INF/js/cm/cm.js" %>
-
-<!-- 이 위로 header -->
+    pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
 <body>
 	<c:choose>
@@ -28,15 +18,15 @@
 		<form:hidden path="idx" style="width:300px" readonly = "true"/>
 		<form:hidden path="boardId" style="width:300px" readonly = "true"/>
 			<tr>
-				<td style="background-color:#E0E6F8">작성자</td>
+				<td style="background-color:#E0E6F8;text-align:center">작성자</td>
 				<td><form:input path="rgtId" style="width:640px" value="master" readonly = "true"/></td>
 			</tr>		
 			<tr>
-				<td style="background-color:#E0E6F8">제목</td>
+				<td style="background-color:#E0E6F8;text-align:center">제목</td>
 				<td><form:input path="title" style="width:640px"/></td>
 			</tr>	
 			<tr>
-				<td style="background-color:#E0E6F8">내용</td>
+				<td style="background-color:#E0E6F8;text-align:center">내용</td>
 				<td colspan="3"><form:textarea path="contents"
 						style="width:640px; height:300px"/>
 					</textarea></td>

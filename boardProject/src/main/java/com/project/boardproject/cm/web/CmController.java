@@ -40,7 +40,7 @@ public class CmController {
 	private CmService cmservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
-
+	
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
 		String sampleResult = "";
@@ -160,37 +160,29 @@ public class CmController {
 		}
 	
 	@RequestMapping(value="chboard/chboardList.do", method = RequestMethod.GET)
-	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,HttpServletRequest request) throws Exception {
-		int totalCount = cmservice.chboardgetBoardCnt(boardVO);
-		int pageSize = 10;
-		int currentPage =1;
+	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,@RequestParam(defaultValue="1") int curPage) throws Exception {
+
+		int listCnt = cmservice.chboardgetBoardCnt(boardVO);
+		Pagination pagination = new Pagination(listCnt, curPage);
+
+		boardVO.setStartIndex(pagination.getStartIndex());
+		boardVO.setPageSize(pagination.getPageSize());
 		
-		try {
-			currentPage =Integer.parseInt(request.getParameter("currentPage"));
-		}catch(NumberFormatException e) {
+		List<BoardVO> boardList= new ArrayList<>();
 		
-		}
-		BoardList list =new BoardList();
-		list.initBoardList(pageSize, totalCount, currentPage);
-		System.out.println(list.getCurrentPage() + "리스트속");
-		
-		Map<String, Integer> hmap = new HashMap<String, Integer>();
-		hmap.put("startNo",0);
-		hmap.put("endNo", 10);
+		boardList= cmservice.chboardGetList(boardVO);
 		//List<BoardVO> boardList = new ArrayList<>();
-		list.setBoardList(cmservice.chboardGetList(hmap));
 		
-		for(int i=0; i<list.getBoardList().size(); i++) {
-			String year=  list.getBoardList().get(i).getRgtDtm().substring(0,4);
-			String month=  list.getBoardList().get(i).getRgtDtm().substring(4,6);
-			String date= list.getBoardList().get(i).getRgtDtm().substring(6,8);
-			list.getBoardList().get(i).setRgtDtm(year+"년" +month + "월" + date +"일");
+	for(int i=0; i<boardList.size(); i++) {
+			String year=  boardList.get(i).getRgtDtm().substring(0,4);
+			String month=  boardList.get(i).getRgtDtm().substring(4,6);
+			String date= boardList.get(i).getRgtDtm().substring(6,8);
+			boardList.get(i).setRgtDtm(year+"년" +month + "월" + date +"일");
 		}
-		System.out.println(list.toString());
+		System.out.println(boardList.toString());
 		//boardList =cmservice.chboardGetList(boardVO);
-		model.addAttribute("boardList", list);
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pagination",pagination);
 		return "chboard/chboardList";
 	}
 	
@@ -231,6 +223,7 @@ public class CmController {
 		
 		 cmservice.chboardDelete(vo);
 		 result= 1;
+		 System.out.println(vo.getIdx());
 	}
 		/*boardVO.setIdx(Integer.parseInt(check));*/
 		//cmservice.chboardDelete(boardVO);
@@ -248,7 +241,6 @@ public class CmController {
 	@RequestMapping(value="chboard/Detail", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String chboardDetail(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,  HttpServletRequest request) throws Exception {
 		logger.info("chboardDetail");
-		System.out.println(boardVO.toString());
 		BoardVO vo =new BoardVO();
 		vo =cmservice.chboardDetail(boardVO);
 		model.addAttribute("vo", vo);

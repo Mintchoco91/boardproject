@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -23,19 +22,32 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-<!-- DB -->
+	<!-- DB -->
+	<!-- -->
+	<!--dataSource 객체 설정 -->
+
+<!-- 로컬용(cafe24 서버연결) -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mariadb://mintchoco91.cafe24.com:3306/mintchoco91"></property>
+		<property name="username" value="mintchoco91"></property>
+		<property name="password" value="rldnjs01!@"></property>
+	</bean>
 <!--  -->
-<!--dataSource 객체 설정 -->
+
+<!--  서버용
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
 		<property name="url"
-			value="jdbc:mariadb://localhost:3306/boardproject"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="o9o9o9o9"></property>
+			value="jdbc:mariadb://localhost:3306/mintchoco91"></property>
+		<property name="username" value="mintchoco91"></property>
+		<property name="password" value="rldnjs01!@"></property>
 	</bean>
- 
+-->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -44,7 +56,7 @@
 		<property name="mapperLocations"
 			value="/resources/sql/**/*.xml"></property>
 	</bean>
- 
+
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory"
@@ -59,4 +71,7 @@
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSession" /> -->
 	</bean>
 
+
+	<!-- Annotation 활성화 -->	
+	<mvc:annotation-driven></mvc:annotation-driven> 
 </beans>

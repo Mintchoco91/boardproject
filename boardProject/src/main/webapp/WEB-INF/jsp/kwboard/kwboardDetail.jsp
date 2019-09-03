@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<html>
-<head>
-<title>boardproject</title>
-</head>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<%@ include file="/WEB-INF/js/cm/cm.js" %>
-
-<!-- 이 위로 header -->
+    pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
 <body>
 	<h1 align="center">상세페이지</h1>
@@ -25,19 +16,19 @@
 		<form:hidden path="contents" readonly = "true"/>
 		
 			<tr>
-				<td style="background-color:#E0E6F8">작성자</td>
+				<td style="background-color:#E0E6F8;text-align:center">작성자</td>
 				<td style="width:420px">${boardVO.rgtId}</td>
-				<td style="background-color:#E0E6F8">조회</td>
+				<td style="background-color:#E0E6F8;text-align:center">조회</td>
 				<td style="width:140px">${boardVO.readCnt}</td>
 			</tr>		
 			<tr>
-				<td style="background-color:#E0E6F8">제목</td>
+				<td style="background-color:#E0E6F8;text-align:center">제목</td>
 				<td style="width:420px">${boardVO.title}</td>
-				<td style="background-color:#E0E6F8">등록시간</td>
+				<td style="background-color:#E0E6F8;text-align:center">등록시간</td>
 				<td style="width:140px">${boardVO.rgtDtm}</td>
 			</tr>	
 			<tr>
-				<td style="background-color:#E0E6F8">내용</td>
+				<td style="background-color:#E0E6F8;text-align:center">내용</td>
 				<td colspan="3" valign=top style="width:640px;height:300px;">${boardVO.contents}</td>
 			</tr>
 			<!-- 

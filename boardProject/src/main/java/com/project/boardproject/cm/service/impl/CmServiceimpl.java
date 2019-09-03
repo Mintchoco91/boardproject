@@ -80,10 +80,10 @@ public class CmServiceimpl implements CmService {
 		return resultval;
 	}
 	
-	public List<BoardVO> chboardGetList(Map<String, Integer> hmap) {
-		return cmDAO.chboardGetList_001(hmap);
+	public List<BoardVO> chboardGetList(BoardVO boardVO) {
+		return cmDAO.chboardGetList_001(boardVO);
 	}
-
+	
 	@Override
 	public int chboardgetBoardCnt(BoardVO boardVO) {
 		return cmDAO.chboardgetBoardCnt_001(boardVO);
@@ -91,7 +91,6 @@ public class CmServiceimpl implements CmService {
 
 	@Override
 	public void chboardDelete(BoardVO vo) {
-		System.out.println(vo + "this isserviceImpi");
 		 cmDAO.chboardDelete_001(vo);
 	}
 
@@ -104,5 +103,4 @@ public class CmServiceimpl implements CmService {
 	public BoardVO chboardDetail(BoardVO boardVO) {
 		return cmDAO.chboardDetail_001(boardVO);
 	}
-
 }
