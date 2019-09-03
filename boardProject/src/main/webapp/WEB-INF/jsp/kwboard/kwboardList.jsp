@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<html>
-<head>
-<title>kwboardList</title>
-</head>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<%@ include file="/WEB-INF/js/cm/cm.js" %>
+    pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
 <body>
 	<h1 align="center">리스트페이지</h1>

@@ -40,7 +40,7 @@ public class CmController {
 	private CmService cmservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
-
+	
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
 		String sampleResult = "";

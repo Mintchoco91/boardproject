@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	 --%>      <!-- jstl 제어,대입문 -->
-<!DOCTYPE html>
-<html>
-<head>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
-<meta charset="UTF-8">
-<title>BOARD</title>
-</head>
 <style>
 
 	.Container {
@@ -44,9 +37,7 @@ cursor :pointer;}
 
 }
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<%@ include file="/WEB-INF/js/cm/cm.js" %>
+
 <script>
 
 $(document).ready(function() {
@@ -110,7 +101,7 @@ function ajaxCall(method, url, request) {
 		data :  JSON.stringify(request),
 		processData : true,
 		contentType : 'application/json; charset=UTF-8',
-		async : false, // default == true  == 비동기 // false == 동기
+		async : false, // default == true  == 동기 // false == 비동기
 		success : function(data) {
 			if(data ==1) {
 				alert("삭제 성공");
@@ -133,6 +124,7 @@ function fn_selectLine(obj) {
 		type : "post",
 		data : {idx : obj},
 		success : function(data) {
+			console.log("!!!"+data);
 			if(data=="1") {
 			//	alert("업데이트 성공");
 				onSuccess(data);
@@ -226,7 +218,7 @@ function onSuccess(data) {
 		</c:if>
 		<tr>
 			<td  colspan="7" align="right">
-			<input type="button" value="등록" onclick="fn_movePage('chboardInsert.do');">
+			<input type="button" value="등록" onclick="fn_movePage('chboardRegister.do');">
 			<input type="button" value="삭제" onclick="fn_Delete();">
 			</td>
 		</tr>
