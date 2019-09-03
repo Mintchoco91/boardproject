@@ -4,9 +4,7 @@ package com.project.boardproject.cm.web;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.boardproject.cm.service.BoardList;
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
 import com.project.boardproject.mm.service.MemberVO;
@@ -188,11 +185,18 @@ public class CmController {
 	
 	@RequestMapping(value="chboard/chboardRegister", method = RequestMethod.GET)
 	public String chboardRegister(Model model) throws Exception {
-		
+		String flag ="등록";
+		model.addAttribute("flag",flag);
 		return "chboard/chboardRegister";
 	}
 	
-	
+	@RequestMapping(value="chboard/chboardUpdList", method= RequestMethod.POST)
+	public String chboardUpdList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model) throws Exception {
+		String flag ="수정";
+		model.addAttribute("flag",flag);
+		model.addAttribute("BoardVO", boardVO);
+		return "chboard/chboardRegister";
+	}
 	
 	@RequestMapping(value="chboard/chboardInsert", method = RequestMethod.GET)
 	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,HttpServletRequest request) throws Exception {
@@ -238,7 +242,7 @@ public class CmController {
 		return result;
 	}
 	
-	@RequestMapping(value="chboard/Detail", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value="chboard/Detail", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public String chboardDetail(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,  HttpServletRequest request) throws Exception {
 		logger.info("chboardDetail");
 		BoardVO vo =new BoardVO();

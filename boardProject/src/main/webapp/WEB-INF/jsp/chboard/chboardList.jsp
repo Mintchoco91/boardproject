@@ -31,10 +31,28 @@
   margin: 20px 20px 0;
   font-size: 12px;
 }
-tr:hover {
+.selectline:hover {
 background-color: #fffcde;
 cursor :pointer;}
 
+
+
+.button {
+    background-color: white;
+    border:  none;
+    font-family: a타이틀고딕3;
+    text-decoration: none;
+    padding: 10px 10px;
+    margin: 1px;
+     border-top-left-radius:20px;
+ border-top-right-radius:20px;
+ border-bottom-right-radius:20px;
+ border-bottom-left-radius:20px;
+ background: #b7c7e5;
+ }
+.button:hover {
+   background: #93A9D1;
+   color : white;
 }
 </style>
 
@@ -166,7 +184,7 @@ function onSuccess(data) {
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	<form:form commandName="BoardVO" id="frm" name="frm" method="get">
+	<form:form commandName="BoardVO" id="frm" name="frm" method="post">
 	<table width="700px" class="listTable" id="" name="" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
@@ -188,7 +206,6 @@ function onSuccess(data) {
 			<td><input type="checkbox" id="allCheck" name="allCheck" value="" /></td>
 			<td>글번호</td>
 			<td>제목</td>
-			<td>내용</td>
 			<td>조회수</td>
 			<td>첨부파일</td>
 			<td>등록일시</td>
@@ -204,13 +221,12 @@ function onSuccess(data) {
 		</c:if>
 		<c:if test="${list.size() !=0 }" >
 		<c:forEach var="vo" items="${boardList}">
-				<tr>
+				<tr class="selectline">
 				<td ><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.contents }</td>
+				<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
-				<td></td>
+				<td ></td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
 				</tr>
 			
@@ -218,8 +234,8 @@ function onSuccess(data) {
 		</c:if>
 		<tr>
 			<td  colspan="7" align="right">
-			<input type="button" value="등록" onclick="fn_movePage('chboardRegister.do');">
-			<input type="button" value="삭제" onclick="fn_Delete();">
+			<input type="button" class="button" value="등록" onclick="fn_movePage('chboardRegister.do');">
+			<input type="button" class="button" value="삭제" onclick="fn_Delete();">
 			</td>
 		</tr>
 	</tbody>
