@@ -19,4 +19,8 @@ public interface MemberDAO {
 	public String CheckPw(String userId);
 	
 	public void ModifyMember(MemberVO vo) ;
+	
+	public MemberVO getMember(String userId);
+	
+	public void deleteMember(String userId);
 }

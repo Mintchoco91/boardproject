@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
@@ -26,8 +27,11 @@
 <title>pjsMemberRegister</title>
 </head>
 <body>
-	<form:form name="register" action="register.do" method="post">
-		<table>
+	<jsp:include page="../header.jsp"></jsp:include>
+	<br/>
+	<br/>
+	<form:form name="register" action="register.do" method="post" modelAttribute="memberVO" onKeyPress="if(event.keyCode==13){memberSave();}">
+		<table align="center" border=1px>
 			<tr>
 				<tr>
 					<td>아이디</td>
@@ -46,9 +50,17 @@
 					<td><form:input path="email1"/></td>
 				</tr>
 		</table>
-		<div>
-			<input type="button" value="저장" onClick = "memberSave()">
-		</div>
+		<br/>
+		<table align="center">
+			<tr>
+				<td align="center"><input type="button" value="저장" onClick = "memberSave()" onKeyPress="if(event.keyCode == 13){ memberSave(); }"></td>
+			</tr>
+			<c:if test="${not empty resultMessage}">
+				<tr>
+					<td ><font color=red>${resultMessage }</font></td>
+				</tr>
+			</c:if>
+		</table>
 	</form:form>
 
 </body>

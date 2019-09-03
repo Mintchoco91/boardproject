@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 
@@ -16,6 +16,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>임시 메인페이지</title>
 </head>
+<jsp:include page="header.jsp"></jsp:include>
 <body>
 	<h1>임시 메인페이지입니다.</h1><br/>
 	<a href="./kwboardInq.do">[기원]게시판이동</a><br/><br/>
@@ -28,6 +29,8 @@
 	<c:if test="${empty memberVO.userId}">
 		<a href="login.do">로그인</a>
 	</c:if>
-	
+  
 </body>
+
+<jsp:include page="footer.jsp"></jsp:include>
 </html>
