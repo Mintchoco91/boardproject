@@ -12,7 +12,7 @@ width:100%;
 margin:5px;
 }
 div#loginbar{
-width:90%;
+width:700px;
 padding-left:15px;
 padding-right:15px;
 margin-left: 5px;
@@ -21,9 +21,9 @@ margin-right: 5px;
 div#navibar{
 width:700px;
 height:100px;
-padding-left:30px;
+padding-left:10px;
 padding-right:30px;
-margin-left:auto;
+margin-left:10px;
 margin-right:auto;
 }
 .logintab li{float: right; list-style: none; margin-right:10px}

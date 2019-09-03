@@ -11,4 +11,6 @@ public interface MemberService {
 	public int memberRegister(MemberVO memberVO);
 	
 	public int memberModify(MemberVO memberVO);
+	
+	public MemberVO getMember(String userId);
 }

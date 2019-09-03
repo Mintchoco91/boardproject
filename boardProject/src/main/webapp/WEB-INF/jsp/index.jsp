@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 
@@ -24,4 +24,6 @@
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판B 이동</a><br/><br/>
 	<a href="#" onclick="alert('게시판링크를 등록해주세요')">[임시]게시판C 이동</a><br/><br/>	
 </body>
+
+<jsp:include page="footer.jsp"></jsp:include>
 </html>
