@@ -1,37 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
-function modify(){
+function memberModify(){
 	var log = document.member;
 	log.action="memberModify.do";
-	var pw=document.member.pw;
-	var name = document.member.name;
-	var email1 = document.member.email1;
+	var pw=document.member.pw.value;
+	var name = document.member.name.value;
+	var email1 = document.member.email1.value;
 	if(name=="") alert("아이디를 입력해주세요");
 	else if(email1=="") alert("이메일을 입력해주세요");
 	else if(pw=="") alert("비밀번호를 입력해주세요");
 	else log.submit();
 }
-function cancel(){
+function memberDelete(){
 	var log=document.member;
-	log.action="index.do";
+	log.action="";
 	log.submit();
 }
 </script>
+<style>
+.inputClass td{
+padding-left: 5px;
+padding-right: 5px;
+}
+</style>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
-<h1>${test }</h1>
 <body>
+	<jsp:include page="../header.jsp"></jsp:include>
+	
+	<br/>
+	<br/>
 	<form:form name="member" method="post">
-	<table>
+	<table align="center" border=1px class="inputClass">
 		<tr>
 			<td>회원 아이디</td>
-			<td>${userId }</td>
+			<td>${memberVO.userId }</td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
@@ -46,8 +56,20 @@ function cancel(){
 			<td><input type="text" name="email1" id="email1" value="${memberVO.email1 }"></td>
 		</tr>
 	</table>
-	<input type="button" value="정보수정" onClick="modify()"> 
-	<input type="button" value="취소" onClick="cancel()">
+	<br/>
+	<table align="center">
+		<tr>
+			<td align="center"> <input type="button" value="정보수정" onClick="memberModify()"></td>
+			<td align="center"> <input type="button" value="회원탈퇴" onClick="memberDelete()"></td> 
+		</tr>
+	</table>
+	<c:if test="${not empty resultMessage}">
+		<table align="center">
+			<tr>
+				<td colspan="2"><font color=red>${resultMessage }</font></td>
+			</tr>
+		</table>
+	</c:if>
 	</form:form>
 </body>
 </html>
