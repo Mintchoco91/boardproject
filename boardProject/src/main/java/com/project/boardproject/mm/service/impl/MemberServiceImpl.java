@@ -51,4 +51,11 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO memberVO= memberDAO.getMember(userId);
 		return memberVO;
 	}
+	
+	@Override
+	public int memberDelete(String userId) {
+		int result=0;
+		memberDAO.deleteMember(userId);
+		return result;
+	}
 }

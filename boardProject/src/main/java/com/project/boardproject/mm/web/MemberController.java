@@ -59,4 +59,12 @@ public class MemberController {
 			return "member/pjsMember";
 		}
 	}
+	
+	@RequestMapping("memberDelete")
+	public String memberDelete(Model model, HttpSession session) {
+		String userId=(String)session.getAttribute("userid");
+		session.invalidate();
+		int result = memberService.memberDelete(userId);
+		return "index";
+	}
 }

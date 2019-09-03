@@ -35,8 +35,6 @@ public interface CmDAO  {
 	
 	public Integer kwboardInqCnt_001(BoardVO boardVO);
 	
-	public void kwboardWrite_001(BoardVO boardVO);
-
 	public List<BoardVO> chboardGetList_001(Map<String, Integer> hmap);
 
 	public int chboardgetBoardCnt_001(BoardVO boardVO);
