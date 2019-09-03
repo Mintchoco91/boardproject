@@ -1,6 +1,8 @@
 package com.project.boardproject.cm.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * 파일명 : CmVO.java
@@ -25,7 +27,13 @@ public class BoardVO implements Serializable{
 	private String rgtDtm;					//등록일시
 	private String updId;						//수정자ID
 	private String updDtm;					//수정일시
+	
+	private int startIndex;				//시작Idx
+	private int pageSize;				//끝(한페이지에 들어갈 게시물 개수)
+	
 	private String name;						//이름?
+	
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -98,12 +106,32 @@ public class BoardVO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public int getStartIndex() {
+		return startIndex;
+	}
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", boardId=" + boardId + ", title=" + title + ", contents=" + contents
 				+ ", delYn=" + delYn + ", atchYn=" + atchYn + ", readCnt=" + readCnt + ", rgtId=" + rgtId + ", rgtDtm="
-				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", name=" + name + "]";
+				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", startIndex=" + startIndex + ", pageSize="
+				+ pageSize + ", name=" + name + "]";
 	}
+	
 
 	
+	
+	
 }
+

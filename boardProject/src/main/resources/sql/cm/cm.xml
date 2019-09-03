@@ -35,7 +35,15 @@
 			,updId
 			,updDtm
 		FROM boardproject.board
+		ORDER BY rgtDtm DESC
+		LIMIT #{startIndex},#{pageSize}
 	</select>
+
+	<select id="kwboardInqCnt_001" resultType="Integer" parameterType="BoardVO">
+		SELECT count(*)
+		FROM boardproject.board
+	</select>
+		
 	
 	<insert id="kwboardWrite_001" parameterType="boardVO">
 		INSERT INTO boardproject.Board (
@@ -59,8 +67,101 @@
 		)
 	</insert>
 	
+	<delete id="kwboardDelete_001" parameterType="boardVO">
+		DELETE FROM boardproject.Board 
+		WHERE idx = #{idx}		
+	</delete>	
 	
+	<select id="kwboardDetail_001" resultMap="BoardVOarr" parameterType="BoardVO">
+		SELECT 
+			idx
+			,boardId
+			,title
+			,contents
+			,delYn
+			,atchYn
+			,readCnt
+			,rgtId
+			,rgtDtm
+			,updId
+			,updDtm
+		FROM boardproject.board
+		WHERE idx = #{idx}	
+	</select>
 	
+	<update id="kwboardModify_001" parameterType="boardVO">
+		UPDATE boardproject.Board 
+		SET	title = #{title}
+		,contents = #{contents}
+		,rgtId = #{rgtId}
+		WHERE idx = #{idx}
+	</update>	
+  
+	<insert id="chboardInsert_001" parameterType="BoardVO">
+		INSERT INTO /* chboardInsert*/
+		boardproject.board (
+		boardId
+		, title
+		, contents
+		, delYn
+		, atchYn
+		, readCnt
+		, rgtId
+		, rgtDtm) 
+		values (
+		#{boardId}
+		, #{title}
+		, #{contents}
+		, 'N'
+		, 'N'
+		, 0
+		, #{rgtId}
+		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
+		</insert>
+	 
+	<select id="chboardGetList_001" parameterType="HashMap" resultMap="BoardVOarr" >
+	<![CDATA[
+				SELECT * FROM BOARDPROJECT.BOARD ORDER BY IDX DESC
+		LIMIT #{startNo}, #{endNo}	
+		]]>
+	</select>
 	
+	<select id="chboardgetBoardCnt_001" parameterType="BoardVO" resultType="int">
+		SELECT /*chboardgetBoardCnt_001*/
+		COUNT(*) 
+		FROM BOARDPROJECT.BOARD
+	</select>
+	
+	<delete id="chboardDelete_001"  parameterType="BoardVO">
+		DELETE   /* chboardDelete_001*/
+		FROM BOARDPROJECT.BOARD
+		WHERE IDX=#{idx}
+	
+	</delete>
+	
+	<insert id="chboardUpdateReadCnt_001" parameterType="int">
+		UPDATE /*chboardUpdateReadCnt_001 */
+		BOARDPROJECT.BOARD
+		SET READCNT = READCNT+1
+		WHERE IDX=#{idx}
+	
+	</insert>
+	<select id="chboardDetail_001" parameterType="BoardVO" resultMap="BoardVO">
+			SELECT 
+			IDX
+			,BOARDID
+			,TITLE
+			,CONTENTS
+			,DELYN
+			,ATCHYN
+			,READCNT
+			,RGTID
+			,RGTDTM
+			,UPDID
+			,UPDDTM
+		FROM BOARDPROJECT.BOARD
+		WHERE IDX= #{idx}
+	
+	</select>
 	
 </mapper>
