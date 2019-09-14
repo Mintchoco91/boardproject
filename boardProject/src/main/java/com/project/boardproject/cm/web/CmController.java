@@ -30,7 +30,7 @@ import com.project.boardproject.mm.service.MemberVO;
  * 파일명 : customController.java
  * 용도    : 사용자 관련 컨트롤러
  * 작성자 : mintchoco91
- * 변경일 : 2019/07/22
+ * 변경일 : 2019/09/14
  */
 
 @Controller

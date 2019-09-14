@@ -13,7 +13,7 @@ import com.project.boardproject.cm.service.CmService;
  * 파일명 : CmServiceimpl.java
  * 용도    : 
  * 작성자 : mintchoco91
- * 변경일 : 2019/07/30
+ * 변경일 : 2019/09/14
  */
 
 @Service
