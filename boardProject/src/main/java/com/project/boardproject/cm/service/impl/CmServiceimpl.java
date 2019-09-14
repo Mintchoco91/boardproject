@@ -21,37 +21,25 @@ public class CmServiceimpl implements CmService {
 	
 	@Autowired
 	private CmDAO cmDAO;	
-	
+
+	//board 정리 시작
 	@Override
-	public String sampleData() {
-		String sampleResult = "";
-		//sampleResult = cmDAO.tempsql_001();
-		return sampleResult;
+	public List<BoardVO> boardInq(BoardVO boardVO) {
+		return cmDAO.boardInq_001(boardVO);
 	}
 
 	@Override
-	public void chboardInsert(BoardVO boardVO) {
-		System.out.println(boardVO.toString());
-			cmDAO.chboardInsert_001(boardVO);
-			
-	}
-	@Override
-	public List<BoardVO> kwboardInq(BoardVO boardVO) {
-		return cmDAO.kwboardInq_001(boardVO);
+	public void boardWrite(BoardVO boardVO) {
+		cmDAO.boardWrite_001(boardVO);
 	}
 
 	@Override
-	public void kwboardWrite(BoardVO boardVO) {
-		cmDAO.kwboardWrite_001(boardVO);
+	public Integer boardInqCnt(BoardVO boardVO) {
+		return cmDAO.boardInqCnt_001(boardVO);
 	}
 
 	@Override
-	public Integer kwboardInqCnt(BoardVO boardVO) {
-		return cmDAO.kwboardInqCnt_001(boardVO);
-	}
-
-	@Override
-	public String kwboardDelete(String[] idxArray) {
+	public String boardDelete(String[] idxArray) {
 		String[] convIdxArray = idxArray[0].split(",");
 		Integer resultval = 0;
 		String result = "error";
@@ -59,7 +47,7 @@ public class CmServiceimpl implements CmService {
 		BoardVO boardVO = new BoardVO();
 		for(int i=0; i<convIdxArray.length ; i++) {
 			boardVO.setIdx(Integer.parseInt(convIdxArray[i]));
-			resultval = resultval + cmDAO.kwboardDelete_001(boardVO);
+			resultval = resultval + cmDAO.boardDelete_001(boardVO);
 		}
 		
 		if(resultval == convIdxArray.length) {
@@ -69,15 +57,23 @@ public class CmServiceimpl implements CmService {
 	}
 	
 	@Override
-	public BoardVO kwboardDetail(BoardVO boardVO) {
-		return cmDAO.kwboardDetail_001(boardVO);
+	public BoardVO boardDetail(BoardVO boardVO) {
+		return cmDAO.boardDetail_001(boardVO);
 	}
 
 	@Override
-	public Integer kwboardModify(BoardVO boardVO) {
+	public Integer boardModify(BoardVO boardVO) {
 		Integer resultval = 0;
-		resultval = cmDAO.kwboardModify_001(boardVO);
+		resultval = cmDAO.boardModify_001(boardVO);
 		return resultval;
+	}
+	//board 정리 끝
+	
+	@Override
+	public void chboardInsert(BoardVO boardVO) {
+		System.out.println(boardVO.toString());
+			cmDAO.chboardInsert_001(boardVO);
+			
 	}
 	
 	public List<BoardVO> chboardGetList(BoardVO boardVO) {

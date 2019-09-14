@@ -1,100 +1,126 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<style>
+<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
 
+<div class="layer_fixed">
+<style>
 	.Container {
 		margin: 0 auto;
 		padding :0;
-		
+		overflow: hidden;		
 	}
-
 	.listTable {
 	text-align: center;
 	}
-</style>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-
-function fn_Register() {
-	var f = document.listform;
-	f.action="/board/boardRegister.do";
-	f.submit();
+	.wrapper {
+	 width: 800px;
+  margin: 0 auto;
+  border: 1px solid #aaa;
+  
 }
+  .header {
+  padding:40px 10px;
+  text-align: center;
+  background: #eee;
+  margin-bottom: 20px;
+}
+.footer {
+  text-align: center;
+  border-top: 1px solid #aaa;
+  margin: 20px 20px 0;
+  font-size: 12px;
+}
+tr:hover {
+background-color: #fffcde;
+cursor :pointer;}
 
-</script>
-<body>
-
-
-<!-- wrapper -->
-
-
-	<!-- header -->
-	
-	<!-- Container -->
-	<div class="Container">
-	<form id="listform" name="listform" method="get">
-	<table width="700px" class="listTable" id="" name="" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
-	<thead>
-		<tr >
-				<td colspan="7">
-				<fieldset style="border:none; text-align: right;">
-				<select id="" name="">
-					<option value="제목">제목</option>
-					<option value="내용">내용</option>
-				</select>
-					<input type="text" id="" name="" value=""/>
-					<input type="button" id="" name="" value="검색" onclick=""/>
-					</fieldset>
-				</td>		
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><input type="checkbox" id="all" name="" value=""/></td>
-			<td>글번호</td>
-			<td>제목</td>
-			<td>내용</td>
-			<td>조회수</td>
-			<td>첨부파일</td>
-			<td>등록일시</td>
+}
+</style>
+	<table align="center" class="listTable" border="1" cellspacing="0" cellpadding="5" align="center">
+		<tr style="background-color:#eee;text-align:center">
+			<td style="width:40px;">선택</td>
+			<td style="width:60px;">글번호</td>
+			<td style="width:600px;">제목</td>
+			<td style="width:60px;">글쓴이</td>
+			<td style="width:60px;">작성일</td>
+		 	<td style="width:40px;">조회</td>
+			<!-- <td>첨부파일</td>-->
 		</tr>
 		
-		
-		<!-- list.size !=0 -->
-		<tr>
-			<td colspan="7"></td>
-		</tr>
-		<tr>
-			<td colspan="7" style="text-align: right">
-				<input type="button" id="" name="" value="등록"  onclick="fn_Register()"/>
-				<input type="button" id="" name="" value="삭제" onclick="fn_Delete()"/>
-			</td>
-		</tr>
-		<!-- Paging -->
-		<tr>
-			<td colspan="7"></td>
-		</tr>
-	</tbody>
-	
+		<c:forEach var="boardVOArr" items="${boardVOArr}">
+			<tr onmouseover="this.style.background='#E0ECF8'" onmouseout="this.style.background='white'">
+				<td style="width:40px;text-align:center"><input type="checkbox" name="idx" value="${boardVOArr.idx}"></td>
+				<td style="width:60px;text-align:center;cursor:hand;" onclick="fn_movePage('boardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.idx}</td>
+				<td style="width:600px;cursor:hand" onclick="fn_movePage('boardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.title}</td>
+				<td style="width:60px;text-align:center";cursor:hand" onclick="fn_movePage('boardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtId}</td>
+				<td style="width:60px;text-align:center";cursor:hand" onclick="fn_movePage('boardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.rgtDtm}</td>
+				<td style="width:40px;text-align:center;cursor:hand" onclick="fn_movePage('boardDetail.do?idx=${boardVOArr.idx}')">${boardVOArr.readCnt}</td>
+				<!-- <td>첨부파일</td> -->
+			</tr>
+		</c:forEach>
 	</table>
-	</form>
-	</div>
+	
+	<br/>
+	
+	<table align="center">
+		<tr>
+			<td><input type="text"><input type="button" value="검색"></td>
+		</tr>
+	</table>
+	
 	<!-- //Container -->
+	<br/>
 	
-	<!-- // header -->
+	<table align="center">
+		<tr>
+			<td><input type="button" value="글쓰기" onclick="fn_movePage('boardWritePage.do');"></td>
+			<td><input type="button" value="삭제" onclick="fn_delboard();"></td>			
+		</tr>
+	</table>
 	
 	
-<!-- //wrapper -->
-	
-</body>
-</html>
+    <!-- paging 시작 -->
+	<%@ include file="/WEB-INF/jsp/board/boardPaging.jsp" %>
+	<!-- paging 끝 -->	
+                
+	</div>
+	<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
+
+<script>
+	function fn_delboard(){
+		var idx = "";
+		var idxArray = new Array();
+		$("input[name=idx]:checked").each(function() { 
+			idx = $(this).val();
+			idxArray.push(idx);
+		});
+
+		if(idxArray.length == 0){
+			alert("삭제 할 게시물을 선택 해 주세요");
+			return false;
+		}else{			
+	        if(confirm("해당 게시물을 삭제 하시겠습니까?")) {}else{
+	            return false;
+	        }
+		}
+		
+		$.ajax({
+		    type: "POST",
+		    url: "./boardDelete.do",
+            dataType : "TEXT",            
+		    data: "idxArray=" + idxArray,
+		    success: function(data){
+			    if(data == "success"){
+				    alert("게시물이 삭제 되었습니다.");
+			    	location.reload();
+			    }else{
+			    	alert("삭제 실패하였습니다. 로그를 확인해보세요.");
+				}
+		    },
+
+		    error: function (request, status, error){    
+			    alert("ajax 실패");
+		    }
+		  });
+	}
+</script>

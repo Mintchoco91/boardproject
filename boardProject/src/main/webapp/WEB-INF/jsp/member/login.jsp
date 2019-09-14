@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
+<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
+
+<div class="layer_fixed">
 <script type="text/javascript">
 	function memberLogin(){
 		var log = document.loginform;
@@ -19,16 +18,7 @@
 		}
 	}
 </script>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 
-<body>
-<jsp:include page="../header.jsp"></jsp:include>
-
-<br/>
-<br/>
 <form:form name="loginform" method="post" onKeyPress="if(event.keyCode==13){memberLogin();}">
 	<table align="center" border=1px>
 		<tr>
@@ -53,7 +43,6 @@
 	</table>
 </form:form>
 
-</body>
-</html>
-
+</div>
+<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
 

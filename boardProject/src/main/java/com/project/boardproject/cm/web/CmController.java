@@ -43,39 +43,20 @@ public class CmController {
 	
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
-		String sampleResult = "";
-		sampleResult = cmservice.sampleData();
-		model.addAttribute("result", sampleResult);
-
 		return "index";
 	}
 
-	@RequestMapping(value = "boardList")
-	public String board(Model model) throws Exception {
-		return "board/boardList";
+	@RequestMapping(value = "boardListPage")
+	public String boardListPage(Model model) throws Exception {
+		return "board/boardListPage";
 	}
 
-	@RequestMapping(value = "boardRegister")
-	public String boardRegister(Model model) throws Exception {
-		return "board/boardRegister";
-	}
-
-	@RequestMapping(value = "kwboardList")
-	public String kwboardList(Model model) {
-		return "kwboard/kwboardList";
-	}
-
-	@RequestMapping(value = "kwboardWritePage")
-	public String kwboardWritePage(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
-		return "kwboard/kwboardRegister";
-	}
-
-	@RequestMapping(value = "kwboardInq")
-	public String kwboardInq(Model model, BoardVO boardVO, @RequestParam(defaultValue="1") int curPage) {
+	@RequestMapping(value = "boardInq")
+	public String boardInq(Model model, BoardVO boardVO, @RequestParam(defaultValue="1") int curPage) {
 		// 리스트로 구현
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		// 전체리스트 개수
-        int listCnt = cmservice.kwboardInqCnt(boardVO);
+        int listCnt = cmservice.boardInqCnt(boardVO);
         
 		//int listCnt = 12;
         Pagination pagination = new Pagination(listCnt, curPage);
@@ -83,7 +64,7 @@ public class CmController {
         boardVO.setStartIndex(pagination.getStartIndex());
         boardVO.setPageSize(pagination.getPageSize());
         
-		boardVOArr = cmservice.kwboardInq(boardVO);
+		boardVOArr = cmservice.boardInq(boardVO);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat ( "yyyyMMdd");
 		Date time = new Date();
@@ -98,8 +79,6 @@ public class CmController {
 			fullRgtDtm = boardVOArr.get(i).getRgtDtm();
 			todayRgtDtm = fullRgtDtm.substring(0,8);			
 			
-			//if(todayRgtDtm == dateNow)  - 틀림	
-			//작성일이 오늘일경우
 			if(todayRgtDtm.equals(dateNow)) {
 				convRgtDtm = fullRgtDtm.substring(8,10) + ":" + fullRgtDtm.substring(10,12);
 			}else {
@@ -112,30 +91,35 @@ public class CmController {
 		model.addAttribute("boardVOArr", boardVOArr);
 		model.addAttribute("pagination",pagination);
 
-		return "kwboard/kwboardList";
+		return "board/boardList";
 	}
-
-	@RequestMapping(value = "kwboardWrite")
-	public String kwboardWrite(Model model, BoardVO boardVO) throws Exception {
-		cmservice.kwboardWrite(boardVO);
-		return "redirect:kwboardInq.do";
+	
+	@RequestMapping(value = "boardWritePage")
+	public String boardWritePage(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
+		return "board/boardRegister";
+	}
+	
+	@RequestMapping(value = "boardWrite")
+	public String boardWrite(Model model, BoardVO boardVO) throws Exception {
+		cmservice.boardWrite(boardVO);
+		return "redirect:boardInq.do";
 	}
 
 	  //Post AJAX
-	  @RequestMapping(value="kwboardDelete", method = RequestMethod.POST)
-	  public @ResponseBody String kwboardDelete(HttpServletRequest request
+	  @RequestMapping(value="boardDelete", method = RequestMethod.POST)
+	  public @ResponseBody String boardDelete(HttpServletRequest request
 			  ,String[] idxArray, Model model) throws Exception {
 		  
 		  String result = "error";
-		  result = cmservice.kwboardDelete(idxArray);
+		  result = cmservice.boardDelete(idxArray);
 		  return result; 
 	  }
 
-		@RequestMapping(value = "kwboardDetail")
-		public String kwboardDetail(Model model, BoardVO boardVO) throws Exception {
+		@RequestMapping(value = "boardDetail")
+		public String boardDetail(Model model, BoardVO boardVO) throws Exception {
 			
 			BoardVO resultBoardVO = new BoardVO();
-			resultBoardVO = cmservice.kwboardDetail(boardVO);
+			resultBoardVO = cmservice.boardDetail(boardVO);
 			String fullRgtDtm = resultBoardVO.getRgtDtm();
 			String convRgtDtm = fullRgtDtm.substring(0,4) + "." + fullRgtDtm.substring(4,6) + "." + fullRgtDtm.substring(6,8) + ". " + fullRgtDtm.substring(8,10) + ":" + fullRgtDtm.substring(10,12);
 			
@@ -143,20 +127,20 @@ public class CmController {
 			
 			model.addAttribute("boardVO",resultBoardVO);
 			
-			return "kwboard/kwboardDetail";
+			return "board/boardDetail";
 		}
 		
 		 
-		@RequestMapping(value = "kwboardModifyPage")
-		public String kwboardModifyPage(Model model, BoardVO boardVO) throws Exception {			
+		@RequestMapping(value = "boardModifyPage")
+		public String boardModifyPage(Model model, BoardVO boardVO) throws Exception {			
 			model.addAttribute("boardVO",boardVO);
-			return "kwboard/kwboardRegister";
+			return "board/boardRegister";
 		}
 
-		@RequestMapping(value = "kwboardModify")
-		public String kwboardModify(Model model, BoardVO boardVO) throws Exception {
-			cmservice.kwboardModify(boardVO);
-			return "redirect:kwboardInq.do";
+		@RequestMapping(value = "boardModify")
+		public String boardModify(Model model, BoardVO boardVO) throws Exception {
+			cmservice.boardModify(boardVO);
+			return "redirect:boardInq.do";
 		}
 	
 	@RequestMapping(value="chboard/chboardList.do", method = RequestMethod.GET)

@@ -16,21 +16,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface CmService {
-	public List<BoardVO> kwboardInq(BoardVO boardVO);
-
-	public void kwboardWrite(BoardVO boardVO);
 	
-	public String kwboardDelete(String[] idxArray);
+	//board 정리
+	public List<BoardVO> boardInq(BoardVO boardVO);
 
-	public BoardVO kwboardDetail(BoardVO boardVO);
-
-	public Integer kwboardModify(BoardVO boardVO);
-
-	public Integer kwboardInqCnt(BoardVO boardVO);
+	public void boardWrite(BoardVO boardVO);
 	
-	
-	public String sampleData();
+	public String boardDelete(String[] idxArray);
 
+	public BoardVO boardDetail(BoardVO boardVO);
+
+	public Integer boardModify(BoardVO boardVO);
+
+	public Integer boardInqCnt(BoardVO boardVO);
+	
+	//board 정리 끝
+	
 	public void chboardInsert(BoardVO boardVO);
 
 	public List<BoardVO> chboardGetList(BoardVO boardVO);
