@@ -22,22 +22,25 @@ public class CmServiceimpl implements CmService {
 	@Autowired
 	private CmDAO cmDAO;	
 
-	//board 정리 시작
+	//내용 : 게시판 조회
 	@Override
 	public List<BoardVO> boardInq(BoardVO boardVO) {
 		return cmDAO.boardInq_001(boardVO);
 	}
 
+	//내용 : 게시판 글쓰기
 	@Override
 	public void boardWrite(BoardVO boardVO) {
 		cmDAO.boardWrite_001(boardVO);
 	}
 
+	//내용 : 게시판 총 글수 count
 	@Override
 	public Integer boardInqCnt(BoardVO boardVO) {
 		return cmDAO.boardInqCnt_001(boardVO);
 	}
 
+	//내용 : 게시판 글 삭제
 	@Override
 	public String boardDelete(String[] idxArray) {
 		String[] convIdxArray = idxArray[0].split(",");
@@ -56,18 +59,19 @@ public class CmServiceimpl implements CmService {
 		return result;
 	}
 	
+	//내용 : 게시판 글 상세조회
 	@Override
 	public BoardVO boardDetail(BoardVO boardVO) {
 		return cmDAO.boardDetail_001(boardVO);
 	}
 
+	//내용 : 게시판 글 수정
 	@Override
 	public Integer boardModify(BoardVO boardVO) {
 		Integer resultval = 0;
 		resultval = cmDAO.boardModify_001(boardVO);
 		return resultval;
 	}
-	//board 정리 끝
 	
 	@Override
 	public void chboardInsert(BoardVO boardVO) {
