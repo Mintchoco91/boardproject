@@ -13,7 +13,7 @@ import com.project.boardproject.cm.service.CmService;
  * 파일명 : CmServiceimpl.java
  * 용도    : 
  * 작성자 : mintchoco91
- * 변경일 : 2019/07/30
+ * 변경일 : 2019/09/14
  */
 
 @Service
@@ -21,37 +21,28 @@ public class CmServiceimpl implements CmService {
 	
 	@Autowired
 	private CmDAO cmDAO;	
-	
+
+	//내용 : 게시판 조회
 	@Override
-	public String sampleData() {
-		String sampleResult = "";
-		//sampleResult = cmDAO.tempsql_001();
-		return sampleResult;
+	public List<BoardVO> boardInq(BoardVO boardVO) {
+		return cmDAO.boardInq_001(boardVO);
 	}
 
+	//내용 : 게시판 글쓰기
 	@Override
-	public void chboardInsert(BoardVO boardVO) {
-		System.out.println(boardVO.toString());
-			cmDAO.chboardInsert_001(boardVO);
-			
-	}
-	@Override
-	public List<BoardVO> kwboardInq(BoardVO boardVO) {
-		return cmDAO.kwboardInq_001(boardVO);
+	public void boardWrite(BoardVO boardVO) {
+		cmDAO.boardWrite_001(boardVO);
 	}
 
+	//내용 : 게시판 총 글수 count
 	@Override
-	public void kwboardWrite(BoardVO boardVO) {
-		cmDAO.kwboardWrite_001(boardVO);
+	public Integer boardInqCnt(BoardVO boardVO) {
+		return cmDAO.boardInqCnt_001(boardVO);
 	}
 
+	//내용 : 게시판 글 삭제
 	@Override
-	public Integer kwboardInqCnt(BoardVO boardVO) {
-		return cmDAO.kwboardInqCnt_001(boardVO);
-	}
-
-	@Override
-	public String kwboardDelete(String[] idxArray) {
+	public String boardDelete(String[] idxArray) {
 		String[] convIdxArray = idxArray[0].split(",");
 		Integer resultval = 0;
 		String result = "error";
@@ -59,7 +50,7 @@ public class CmServiceimpl implements CmService {
 		BoardVO boardVO = new BoardVO();
 		for(int i=0; i<convIdxArray.length ; i++) {
 			boardVO.setIdx(Integer.parseInt(convIdxArray[i]));
-			resultval = resultval + cmDAO.kwboardDelete_001(boardVO);
+			resultval = resultval + cmDAO.boardDelete_001(boardVO);
 		}
 		
 		if(resultval == convIdxArray.length) {
@@ -68,16 +59,25 @@ public class CmServiceimpl implements CmService {
 		return result;
 	}
 	
+	//내용 : 게시판 글 상세조회
 	@Override
-	public BoardVO kwboardDetail(BoardVO boardVO) {
-		return cmDAO.kwboardDetail_001(boardVO);
+	public BoardVO boardDetail(BoardVO boardVO) {
+		return cmDAO.boardDetail_001(boardVO);
 	}
 
+	//내용 : 게시판 글 수정
 	@Override
-	public Integer kwboardModify(BoardVO boardVO) {
+	public Integer boardModify(BoardVO boardVO) {
 		Integer resultval = 0;
-		resultval = cmDAO.kwboardModify_001(boardVO);
+		resultval = cmDAO.boardModify_001(boardVO);
 		return resultval;
+	}
+	
+	@Override
+	public void chboardInsert(BoardVO boardVO) {
+		System.out.println(boardVO.toString());
+			cmDAO.chboardInsert_001(boardVO);
+			
 	}
 	
 	public List<BoardVO> chboardGetList(BoardVO boardVO) {

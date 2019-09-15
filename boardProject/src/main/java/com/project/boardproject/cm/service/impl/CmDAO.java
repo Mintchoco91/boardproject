@@ -17,6 +17,20 @@ import com.project.boardproject.cm.service.BoardVO;
 
 @Mapper
 public interface CmDAO  {
+
+	//board 정리 시작
+	public List<BoardVO> boardInq_001(BoardVO boardVO);
+
+	public Integer boardDelete_001(BoardVO boardVO);	
+	
+	public BoardVO boardDetail_001(BoardVO boardVO);
+
+	public Integer boardModify_001(BoardVO boardVO);
+	
+	public Integer boardInqCnt_001(BoardVO boardVO);
+	
+	public void boardWrite_001(BoardVO boardVO);
+	//board 정리 끝
 	public String tempsql_001();
 
 	public void chboardInsert_001(BoardVO boardVO);

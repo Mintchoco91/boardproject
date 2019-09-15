@@ -17,11 +17,7 @@
 	 	<result property="updDtm" column="updDtm"/>
 	 </resultMap>
 
-	<select id="tempsql_001" resultType="java.lang.String">
-		SELECT name FROM temptbl
-	</select>
-	
-	<select id="kwboardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
+	<select id="boardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
 		SELECT 
 			idx
 			,boardId
@@ -39,13 +35,13 @@
 		LIMIT #{startIndex},#{pageSize}
 	</select>
 
-	<select id="kwboardInqCnt_001" resultType="Integer" parameterType="BoardVO">
+	<select id="boardInqCnt_001" resultType="Integer" parameterType="BoardVO">
 		SELECT count(*)
 		FROM board
 	</select>
 		
 	
-	<insert id="kwboardWrite_001" parameterType="boardVO">
+	<insert id="boardWrite_001" parameterType="boardVO">
 		INSERT INTO board (
 		boardId
 		,title
@@ -67,12 +63,12 @@
 		)
 	</insert>
 	
-	<delete id="kwboardDelete_001" parameterType="boardVO">
+	<delete id="boardDelete_001" parameterType="boardVO">
 		DELETE FROM board 
 		WHERE idx = #{idx}		
 	</delete>	
 	
-	<select id="kwboardDetail_001" resultMap="BoardVOarr" parameterType="BoardVO">
+	<select id="boardDetail_001" resultMap="BoardVOarr" parameterType="BoardVO">
 		SELECT 
 			idx
 			,boardId
@@ -89,14 +85,15 @@
 		WHERE idx = #{idx}	
 	</select>
 	
-	<update id="kwboardModify_001" parameterType="boardVO">
+	<update id="boardModify_001" parameterType="boardVO">
 		UPDATE board 
 		SET	title = #{title}
 		,contents = #{contents}
 		,rgtId = #{rgtId}
 		WHERE idx = #{idx}
 	</update>	
-  
+	<!-- 끝 -->
+	
 	<insert id="chboardInsert_001" parameterType="BoardVO">
 		INSERT INTO /* chboardInsert*/
 		board (

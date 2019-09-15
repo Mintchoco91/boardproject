@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
 
-<body>
+<div class="layer_fixed">
+
 	<h1 align="center">상세페이지</h1>
 	<br />
 	<form:form id="frm" action="#" method="post" modelAttribute="boardVO">
@@ -45,11 +46,11 @@
 	<table align="center">
 		<tr>
 			<td><input type="button" value="수정"
-				onclick="fn_movePage('kwboardModifyPage.do','Y');"></td>
+				onclick="fn_movePage('boardModifyPage.do','Y');"></td>
 			<td><input type="button" value="취소"
-				onclick="fn_movePage('kwboardInq.do');"></td>
+				onclick="fn_movePage('boardInq.do');"></td>
 		</tr>
 	</table>
-	
-</body>
-</html>
+</div>
+<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
+

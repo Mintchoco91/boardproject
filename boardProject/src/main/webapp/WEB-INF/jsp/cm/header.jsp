@@ -1,22 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" %>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Toy Project[Spring]</title>
+
 <style type="text/css">
+
+#layer_fixed
+{
+    height:35px;
+    width:100%;
+    color: #555;
+    font-size:12px;
+    position:fixed;
+    z-index:999;
+    top:0px;
+    left:0px;
+    -webkit-box-shadow: 0 1px 2px 0 #777;
+    box-shadow: 0 1px 2px 0 #777;
+    background-color:#ccc;
+}
+
 div#topbar{
 width:100%;
 margin:5px;
 }
 div#loginbar{
-width:700px;
+width:90%;
 padding-left:15px;
 padding-right:15px;
 margin-left: 5px;
-margin-right: 5px;
 }
 div#navibar{
 width:700px;
@@ -32,11 +48,8 @@ margin-right:auto;
 div#navilogo{
 margin-bottom:-30px;
 margin-left : 15px;
-margin-right:15px;
+margin-right:0px;
 float:left;
-}
-div#navicategory {
-float:right;
 }
 .categorytab li{float:left; list-style:none}
 </style>
@@ -44,7 +57,7 @@ float:right;
 <body>
 <div id="topbar">
 	<div id="loginbar">
-		<ul class=logintab>
+		<ul class="logintab">
 			<c:if test="${not empty sessionScope.userid}">
 				<li><a href="logout.do">로그아웃</a></li>
 				<li><a href="pjsMember.do">${sessionScope.userid }</a></li>
@@ -64,8 +77,8 @@ float:right;
 	</div>
 	<div id="navicategory">
 		<ul class="categorytab">
-			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리1</a></li>
-			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리2</a></li>
+			<li><a href="./boardInq.do" style="padding-left:10px;padding-right:10px;">자유게시판</a></li>
+			<li><a href="./chboard/chboardList.do" style="padding-left:10px;padding-right:10px;">[CH]게시판</a></li>
 			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리3</a></li>
 			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리4</a></li>
 			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리5</a></li>
@@ -73,5 +86,3 @@ float:right;
 		</ul>
 	</div>
 </div>
-</body>
-</html>
