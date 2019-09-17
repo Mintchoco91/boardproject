@@ -42,7 +42,7 @@
 <script type="text/javascript">
 
 function fn_Register() {
-	var f= document.listform;
+	var f= document.frm;
 	
 	if($('#title').val() == '') {
 	    alert("아이디를 입력하세요");
@@ -77,8 +77,8 @@ function fn_Register() {
 	    <h1>수정 페이지</h1>
 		</c:otherwise>
 	</c:choose>
-	<form:form commandName="BoardVO" id="frm" name="frm" method="post" modelAttribute="BoardVO" >
-	<input type="hidden" id="idx" name="idx" value=""/>
+	<form:form commandName="BoardVO" id="frm" name="frm" method="post" >
+	<input type="hidden" id="idx" name="idx" value="${BoardVO.idx }"/>
 	<input type="hidden" id="boardId" name="boardId" value="free"/>
 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
 	<!-- form:input path= "" id랑 name을 맞춰준다 -->
@@ -94,13 +94,15 @@ function fn_Register() {
 		<tbody>
 		<tr>
 			<th scope="col" >제목</th>
-			<td><form:input path="title" maxlength="100" size="50"/></td>
+			<td><input type="text" id="title" name="title" maxlength="100" size="50" value="${BoardVO.title }"/></td>
+		<%-- 	<td><form:input path="title" maxlength="100" size="50"/></td> --%>
 			<th scope="col">작성자</th>
-			<td><form:input path="rgtId"   /></td>
+				<td><input type="text" id="rgtId" name="rgtId"  value="${BoardVO.rgtId }"/></td>
+	<%-- 		<td><form:input path="rgtId"   /></td> --%>
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td colspan="3"><textarea cols="70" rows="20" id="contents" name="contents" style="overflow-y:scroll"><%-- ${boardVO.contents } --%></textarea></td>
+			<td colspan="3"><textarea cols="70" rows="20" id="contents" name="contents" style="overflow-y:scroll">${BoardVO.contents } </textarea></td>
 		</tr>
 		<tr>
 			<th scope="col">첨부파일</th>
@@ -108,7 +110,12 @@ function fn_Register() {
 		</tr>
 		<tr>
 			<td colspan="4" style="text-align: right">
-				<input type="button" class="button" id="" name="" value="등록"  onclick="fn_Register()"/>
+			 <c:if test="${flag == '등록'}">
+				<input type="button" class="button" id="" name="" value="등록"  onclick="fn_movePage('chboardInsert.do','Y')"/>
+			</c:if>
+			<c:if test="${flag == '수정'}">
+				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('chboardUpdBoard.do','Y');"/>
+	  	  </c:if>
 				<input type="button" class="button" id="" name="" value="취소"  onclick="history.back()"/>
 			</td>
 		</tr>

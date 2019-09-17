@@ -4,9 +4,12 @@ package com.project.boardproject.cm.web;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
+import com.project.boardproject.cm.web.Pagination;
 import com.project.boardproject.mm.service.MemberVO;
 
 /*
@@ -198,19 +202,14 @@ public class CmController {
 		return "chboard/chboardRegister";
 	}
 	
-	@RequestMapping(value="chboard/chboardInsert", method = RequestMethod.GET)
+	@RequestMapping(value="chboard/chboardInsert", method = RequestMethod.POST)
 	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,HttpServletRequest request) throws Exception {
 		
-		int currentPage = 1;
-		try {
-			currentPage =Integer.parseInt(request.getParameter("currentPage"));
-		} catch (Exception e) {	}
 		
 //		System.out.println(boardVO.toString());
 		cmservice.chboardInsert(boardVO);
 		
-		model.addAttribute("boardVO", boardVO);
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("BoardVO", boardVO);
 		return "redirect:chboardList.do";
 	}
 
@@ -229,8 +228,6 @@ public class CmController {
 		 result= 1;
 		 System.out.println(vo.getIdx());
 	}
-		/*boardVO.setIdx(Integer.parseInt(check));*/
-		//cmservice.chboardDelete(boardVO);
 	
 		return result;
 	}
@@ -242,13 +239,49 @@ public class CmController {
 		return result;
 	}
 	
-	@RequestMapping(value="chboard/Detail", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String chboardDetail(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,  HttpServletRequest request) throws Exception {
+	@ResponseBody
+	@RequestMapping(value="chboard/chboardSchBoard" , method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public String chboardSchBoard(@RequestParam(value="sel") String sel,@RequestParam(value="test") String text, Model model) throws Exception {
+		System.out.println("일단 들어온당");
+		System.out.println(sel + "," +text);
+		
+		Map<String, String> schMap = new HashMap<>();
+		schMap.put("sel", sel);
+		schMap.put("text", text);
+		BoardVO boardVO=cmservice.chboardSchBoard(schMap);
+		model.addAttribute("boardVO", boardVO);
+		model.addAttribute("schsel", sel);
+		model.addAttribute("schtext", text);
+		return "result";
+	}
+	
+	@RequestMapping(value="chboard/chboardUpdBoard")
+	public String chboardUpdBoard(@ModelAttribute(value="BoardVO") BoardVO boardVO, Model model) throws Exception {
+		cmservice.chboardUpdBoard(boardVO);
+		model.addAttribute("BoardVO", boardVO);
+		model.addAttribute("idx", boardVO.getIdx());
+		return "redirect:Detail.do";
+	}
+	
+	@RequestMapping(value="chboard/Detail")
+	public String chboardDetail(Model model, BoardVO boardVO,@RequestParam(value="idx") int idx,  HttpServletRequest request) throws Exception {
 		logger.info("chboardDetail");
 		BoardVO vo =new BoardVO();
+		boardVO.setIdx(idx);
 		vo =cmservice.chboardDetail(boardVO);
 		model.addAttribute("vo", vo);
 		return "chboard/chboardDetail";
 	}
 
+	
+	/*네이버 로그인
+	@RequestMapping(value="member/naverLogin", method =RequestMethod.GET)
+	public String naverLogin() {
+		return "member/naverLogin";
+	}*/
+	
+	@RequestMapping(value="member/callback", method =RequestMethod.GET)
+	public String naverCallback(HttpSession session) {
+		return "member/callback";
+	}
 }

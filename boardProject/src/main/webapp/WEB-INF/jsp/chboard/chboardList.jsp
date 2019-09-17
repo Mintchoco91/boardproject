@@ -171,6 +171,27 @@ function onSuccess(data) {
 	form.submit();
 }
 
+
+function fn_search() {
+	var f= document.schfrm;
+	var obj= f.serialize();
+	
+	if(schtext !=null) {
+		$.ajax({
+			url : 'chboardSchBoard.do',
+			data : {searchList: obj },
+			success : function(data) {
+				
+			},
+			error : function() {
+				alert("접근 실패");
+			}
+			
+		});
+	}
+}
+
+
 </script>
 <body>
 
@@ -184,20 +205,23 @@ function onSuccess(data) {
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	<form:form commandName="BoardVO" id="frm" name="frm" method="post">
-	<table width="700px" class="listTable" id="" name="" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<form:form commandName="BoardVO" id="schfrm" name="schfrm" >
+	<fieldset style="border:none; text-align: right;">
+	<select id="schsel" name="schsel" onchange="fn_initValue()">
+		<option value="title">제목</option>
+		<option value="contents">내용</option>
+	</select>
+		<input type="text" id="schtext" name="schtext" value="${schtext }"/>
+		<input type="button" id="sch" name="sch" value="검색" onclick="fn_search()" onkeydown=""/>
+		</fieldset>
+	</form:form>
+	
+	<form:form commandName="BoardVO" id="frm" name="frm">
+	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
 		<tr >
 				<td colspan="7">
-				<fieldset style="border:none; text-align: right;">
-				<select id="" name="" onchange="">
-					<option value="제목">제목</option>
-					<option value="내용">내용</option>
-				</select>
-					<input type="text" id="" name="" value=""/>
-					<input type="button" id="" name="" value="검색" onclick=""/>
-					</fieldset>
 				</td>		
 		</tr>
 	</thead>

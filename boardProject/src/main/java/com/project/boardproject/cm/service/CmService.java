@@ -43,6 +43,10 @@ public interface CmService {
 
 	public BoardVO chboardDetail(BoardVO boardVO);
 
+	public BoardVO chboardSchBoard(Map<String, String> schMap);
+
+	public void chboardUpdBoard(BoardVO boardVO);
+
 
 
 }

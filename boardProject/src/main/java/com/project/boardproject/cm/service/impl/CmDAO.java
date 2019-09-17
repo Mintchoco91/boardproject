@@ -41,5 +41,9 @@ public interface CmDAO  {
 
 	public int chboardUpdateReadCnt_001(int idx);
 
-	public BoardVO chboardDetail_001(BoardVO vo);	
+	public BoardVO chboardDetail_001(BoardVO vo);
+
+	public BoardVO chboardSchBoard_001(Map<String, String> schMap);
+
+	public void chbaordUpdBoard_001(BoardVO boardVO);	
 }

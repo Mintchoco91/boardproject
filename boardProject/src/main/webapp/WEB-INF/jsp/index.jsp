@@ -14,8 +14,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <title>임시 메인페이지</title>
 </head>
+<script>
+
+
+</script>
 <jsp:include page="header.jsp"></jsp:include>
 <body>
 	<h1>임시 메인페이지입니다.</h1><br/>

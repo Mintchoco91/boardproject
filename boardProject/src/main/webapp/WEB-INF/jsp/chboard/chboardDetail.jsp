@@ -52,7 +52,11 @@ border: 1px solid #aaa;
 	<div class="Container">
 	<!-- contents -->
 	<form:form commandName="BoardVO" id="frm" name="frm" >
-	<table width="700px;" id="listtable" name="listtable" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<input type="hidden" id="title" name="title" value="${vo.title }"/>
+	<input type="hidden" id="rgtId" name="rgtId" value="${vo.rgtId }"/>
+	<input type="hidden" id="contents" name="contents" value="${vo.contents }"/>
+	<input type="hidden" id="idx" name="idx" value="${vo.idx }"/>
+	<table width="700px;" id="listtable" name="listtable"  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 		<thead>
 		<colgroup>
 			<col width="20%">
@@ -78,7 +82,7 @@ border: 1px solid #aaa;
 		</tr>
 		<tr>
 			<td colspan="2" align="left">
-				<input type="button"class="button"  id="" name="" value="목록으로"  onclick="history.back()"/>
+				<input type="button"class="button"  id="" name="" value="목록으로"  onclick="fn_movePage('chboardList.do')"/>
 			</td>
 			<td colspan="2" align= "right">
 				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('chboardUpdList.do','Y');"/>

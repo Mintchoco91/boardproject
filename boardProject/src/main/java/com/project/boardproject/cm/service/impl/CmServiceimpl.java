@@ -103,4 +103,15 @@ public class CmServiceimpl implements CmService {
 	public BoardVO chboardDetail(BoardVO boardVO) {
 		return cmDAO.chboardDetail_001(boardVO);
 	}
+
+	@Override
+	public BoardVO chboardSchBoard(Map<String, String> schMap) {
+		return cmDAO.chboardSchBoard_001(schMap);
+	}
+
+	@Override
+	public void chboardUpdBoard(BoardVO boardVO) {
+		cmDAO.chbaordUpdBoard_001(boardVO);
+		
+	}
 }
