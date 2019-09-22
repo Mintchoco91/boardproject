@@ -94,6 +94,13 @@
 	</update>	
 	<!-- 끝 -->
 	
+	<update id="boardUpdateReadCnt_001" parameterType="int">
+		UPDATE /*boardUpdateReadCnt_001 */
+		board
+		SET READCNT = READCNT+1
+		WHERE IDX=#{idx}
+	</update>
+	
 	<insert id="chboardInsert_001" parameterType="BoardVO">
 		INSERT INTO /* chboardInsert*/
 		board (

@@ -47,6 +47,8 @@ public interface CmDAO  {
 	
 	public void kwboardWrite_001(BoardVO boardVO);
 
+	public int boardUpdateReadCnt_001(int idx);
+	
 	public List<BoardVO> chboardGetList_001(BoardVO boardVO);
 
 	public int chboardgetBoardCnt_001(BoardVO boardVO);

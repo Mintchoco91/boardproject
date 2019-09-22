@@ -30,7 +30,7 @@
 			</tr>	
 			<tr>
 				<td style="background-color:#E0E6F8;text-align:center">내용</td>
-				<td colspan="3" valign=top style="width:640px;height:300px;">${boardVO.contents}</td>
+				<td colspan="3" valign=top style="width:640px;height:300px;"><pre>${boardVO.contents}</pre></td>
 			</tr>
 			<!-- 
 			<tr>
