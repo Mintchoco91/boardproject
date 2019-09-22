@@ -31,6 +31,10 @@
 			,updId
 			,updDtm
 		FROM board
+		WHERE 1=1 
+		<if test="srchKeyword != null">
+			AND title LIKE CONCAT('%',#{srchKeyword},'%')
+		</if>
 		ORDER BY rgtDtm DESC
 		LIMIT #{startIndex},#{pageSize}
 	</select>
@@ -38,6 +42,10 @@
 	<select id="boardInqCnt_001" resultType="Integer" parameterType="BoardVO">
 		SELECT count(*)
 		FROM board
+		WHERE 1=1 
+		<if test="srchKeyword != null">
+			AND title LIKE CONCAT('%',#{srchKeyword},'%')
+		</if>
 	</select>
 		
 	

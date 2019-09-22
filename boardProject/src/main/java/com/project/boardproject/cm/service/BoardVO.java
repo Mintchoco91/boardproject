@@ -33,6 +33,8 @@ public class BoardVO implements Serializable{
 	
 	private String name;						//이름?
 	
+	private String srchKeyword;			//[검색]검색어
+	
 	
 	public int getIdx() {
 		return idx;
@@ -119,6 +121,13 @@ public class BoardVO implements Serializable{
 	}
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+	
+	public String getSrchKeyword() {
+		return srchKeyword;
+	}
+	public void setSrchKeyword(String srchKeyword) {
+		this.srchKeyword = srchKeyword;
 	}
 	
 	@Override

@@ -62,8 +62,9 @@ public class CmController {
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		// 전체리스트 개수
 		int listCnt = cmservice.boardInqCnt(boardVO);
-
-		// int listCnt = 12;
+		
+		System.out.println("########key : "+boardVO.getSrchKeyword());
+		
 		Pagination pagination = new Pagination(listCnt, curPage);
 
 		boardVO.setStartIndex(pagination.getStartIndex());
