@@ -41,6 +41,8 @@ public class CmController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
 
+	/*****공통 게시판 시작************************************************************/
+	
 	// 내용 : index조회
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
@@ -60,8 +62,9 @@ public class CmController {
 		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
 		// 전체리스트 개수
 		int listCnt = cmservice.boardInqCnt(boardVO);
-
-		// int listCnt = 12;
+		
+		System.out.println("########key : "+boardVO.getSrchKeyword());
+		
 		Pagination pagination = new Pagination(listCnt, curPage);
 
 		boardVO.setStartIndex(pagination.getStartIndex());
@@ -117,15 +120,18 @@ public class CmController {
 			throws Exception {
 
 		String result = "error";
+		
 		result = cmservice.boardDelete(idxArray);
 		return result;
 	}
 
+	// 내용 : 게시판 상세조회
 	@RequestMapping(value = "boardDetail")
 	public String boardDetail(Model model, BoardVO boardVO) throws Exception {
 
 		BoardVO resultBoardVO = new BoardVO();
 		resultBoardVO = cmservice.boardDetail(boardVO);
+		
 		String fullRgtDtm = resultBoardVO.getRgtDtm();
 		String convRgtDtm = fullRgtDtm.substring(0, 4) + "." + fullRgtDtm.substring(4, 6) + "."
 				+ fullRgtDtm.substring(6, 8) + ". " + fullRgtDtm.substring(8, 10) + ":" + fullRgtDtm.substring(10, 12);
@@ -151,6 +157,8 @@ public class CmController {
 		return "redirect:boardInq.do";
 	}
 
+	/*****공통 게시판 끝************************************************************/
+	
 	@RequestMapping(value = "chboard/chboardList.do", method = RequestMethod.GET)
 	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {

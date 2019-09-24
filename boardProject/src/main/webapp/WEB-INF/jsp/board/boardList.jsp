@@ -62,11 +62,17 @@ cursor :pointer;}
 	
 	<br/>
 	
-	<table align="center">
-		<tr>
-			<td><input type="text"><input type="button" value="검색"></td>
-		</tr>
-	</table>
+	<form id="frm" action="#" method="get">
+		<table align="center">
+			<tr>
+				<td>
+					<input type="hidden" name="curPage" value="${pagination.curPage}">
+					<input type="text" name="srchKeyword" value="${boardVO.srchKeyword}">
+					<input type="button" value="검색" onclick="fn_movePage('boardInq.do','Y')">
+				</td>
+			</tr>
+		</table>
+	</form>
 	
 	<!-- //Container -->
 	<br/>

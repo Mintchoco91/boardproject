@@ -43,17 +43,16 @@ public class CmServiceimpl implements CmService {
 	//내용 : 게시판 글 삭제
 	@Override
 	public String boardDelete(String[] idxArray) {
-		String[] convIdxArray = idxArray[0].split(",");
 		Integer resultval = 0;
 		String result = "error";
 		
 		BoardVO boardVO = new BoardVO();
-		for(int i=0; i<convIdxArray.length ; i++) {
-			boardVO.setIdx(Integer.parseInt(convIdxArray[i]));
+		for(int i=0; i<idxArray.length ; i++) {
+			boardVO.setIdx(Integer.parseInt(idxArray[i]));
 			resultval = resultval + cmDAO.boardDelete_001(boardVO);
 		}
 		
-		if(resultval == convIdxArray.length) {
+		if(resultval == idxArray.length) {
 			result = "success";
 		}
 		return result;
@@ -62,6 +61,7 @@ public class CmServiceimpl implements CmService {
 	//내용 : 게시판 글 상세조회
 	@Override
 	public BoardVO boardDetail(BoardVO boardVO) {
+		cmDAO.boardUpdateReadCnt_001(boardVO.getIdx());
 		return cmDAO.boardDetail_001(boardVO);
 	}
 
