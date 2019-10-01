@@ -2,12 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.InputStreamReader" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <title>로그인</title>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
@@ -147,6 +153,7 @@ body {
   </a>
       <p class="message">Not registered? <a href="/pjsMemberRegister.do">Create an account</a></p>
 </form:form>
+<input type="button" onclick="fn_NLogin();" value="로그인">
 		<c:if test="${not empty resultMessage}">
 					<font color=red>${resultMessage }</font>
 		</c:if>
@@ -154,45 +161,8 @@ body {
 </div>
 <br/>
 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-
-<!-- 네이버아디디로로그인 초기화 Script -->
-<script type="text/javascript">
-	var naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "9iK41XPuMNKiA_HdjHl_",
-			callbackUrl: "http://localhost:8808/member/callback.do",
-			isPopup: false, /* 팝업을 통한 연동처리 여부 */
-			loginButton: {color: "white", type: 3, height: 65} /* 로그인 버튼의 타입을 지정 */
-		}
-	);
-	
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
-	naverLogin.getLoginStatus(function (status) {
-		if (status) {
 			
-			var email = naverLogin.user.getEmail();
-			var name = naverLogin.user.getNickName();
-			var profileImage = naverLogin.user.getProfileImage();
-			var birthday = naverLogin.user.getBirthday();			
-			var uniqId = naverLogin.user.getId();
-			var age = naverLogin.user.getAge();
-			console.log(email, name, uniqId);
-		} else {
-			console.log("AccessToken이 올바르지 않습니다.");
-		}
-	});
-	window.addEventListener('load', function () {
-		naverLogin.getLoginStatus(function (status) {
-		if (status) {
-		/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
-		setLoginStatus();
-		}
-		});
-		});
-	
-	
-</script>
+<!-- 네이버아디디로로그인 초기화 Script -->
 <script>
 // 사용할 앱의 JavaScript 키를 설정해 주세요.
  Kakao.init('8e984f12524b7f8bc7ff6b287c131a08');
@@ -225,6 +195,10 @@ body {
  
 
 </script>
+
+<form id="frm" name="frm">
+<input type="hidden" id="userId" name="userId" value="${email}" />
+</form>
 </body>
 </html>
 

@@ -4,33 +4,21 @@
 <style>
 
 	.Container {
-		margin: 0 auto;
-		padding :0;
-		overflow: hidden;
-		
+	width : 1400px;
+height : 500px; 
+padding : 30px;
 	}
 
 	.listTable {
+	
 	text-align: center;
 	}
 	.wrapper {
-	 width: 800px;
+	 width: 1400px;
   margin: 0 auto;
-  border: 1px solid #aaa;
   
 }
-  .header {
-  padding:40px 10px;
-  text-align: center;
-  background: #eee;
-  margin-bottom: 20px;
-}
-.footer {
-  text-align: center;
-  border-top: 1px solid #aaa;
-  margin: 20px 20px 0;
-  font-size: 12px;
-}
+ 
 .selectline:hover {
 background-color: #fffcde;
 cursor :pointer;}
@@ -54,6 +42,18 @@ cursor :pointer;}
    background: #93A9D1;
    color : white;
 }
+
+.searchBox {
+	float : right;
+	width : 800px;
+	margin-bottom:  30px;
+	text-align: center;
+}
+
+form {
+
+margin :0 auto;
+padding  0;}
 </style>
 
 <script>
@@ -191,10 +191,40 @@ function fn_search() {
 	}
 }
 
+function chkword(obj, maxlength){
+	 var strValue = obj.value;
+     var strLen = strValue.length;
+     var totalByte = 0;
+     var len = 0;
+     var oneChar = "";
+     var str2 = "";
 
+     for (var i = 0; i < strLen; i++) {
+         oneChar = strValue.charAt(i);
+         if (escape(oneChar).length > 4) {
+             totalByte += 2;
+         } else {
+             totalByte++;
+         }
+
+         // 입력한 문자 길이보다 넘치면 잘라내기 위해 저장
+         if (totalByte <= maxlength) {
+             len = i + 1;
+         }
+     }
+
+     // 넘어가는 글자는 자른다.
+     if (totalByte > maxlength) {
+         alert(maxlength + "자를 초과 입력 할 수 없습니다.");
+         str2 = strValue.substr(0, len);
+         obj.value = str2;
+         chkword(obj, 4000);
+     }
+
+}
 </script>
 <body>
-
+<jsp:include page="../header.jsp"></jsp:include>
 
 <!-- wrapper -->
 	<div class="wrapper">
@@ -206,24 +236,20 @@ function fn_search() {
 	<!-- Container -->
 	<div class="Container">
 	<form:form commandName="BoardVO" id="schfrm" name="schfrm" >
-	<fieldset style="border:none; text-align: right;">
+	<div class="searchBox">
 	<select id="schsel" name="schsel" onchange="fn_initValue()">
 		<option value="title">제목</option>
 		<option value="contents">내용</option>
 	</select>
 		<input type="text" id="schtext" name="schtext" value="${schtext }"/>
 		<input type="button" id="sch" name="sch" value="검색" onclick="fn_search()" onkeydown=""/>
-		</fieldset>
+		</div>
 	</form:form>
 	
 	<form:form commandName="BoardVO" id="frm" name="frm">
 	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
-		<tr >
-				<td colspan="7">
-				</td>		
-		</tr>
 	</thead>
 	<tbody>
 		<tr>
@@ -273,12 +299,8 @@ function fn_search() {
 	
 	
 	<!-- footer -->
-	<div class="footer">
-	
-	
-	</div>
 	</div>
 <!-- //wrapper -->
-	
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

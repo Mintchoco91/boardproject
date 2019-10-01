@@ -2,23 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
-<body>
 <style>
-
+.wrapper {
+	 width: 1400px;
+  margin: 0 auto;
+  
+}
 	.Container {
-		margin: 0 auto;
-		padding :0;
-		overflow: hidden;
-		
+	width : 1400px;
+height : 500px; 
+padding : 30px;
 	}
 
 	.listTable {
 	text-align: center;
 	}
 	.wrapper {
-	 width: 800px;
+	width: 1400px;
   margin: 0 auto;
-  border: 1px solid #aaa;
   }
 .button {
     background-color: white;
@@ -39,6 +40,7 @@
 }
 }
 </style>
+<body>
 <script type="text/javascript">
 
 function fn_Register() {
@@ -65,10 +67,11 @@ function fn_Register() {
 
 </script>
 <!-- wrapper -->
-
+<jsp:include page="../header.jsp"/>
 	<!-- Container -->
-	<div class="Container">
+	<div class="wrapper">
 	<!-- contents -->
+	<div id="" >
 	<c:choose>
 	    <c:when test="${flag == '등록'}">
 	    <h1>등록 페이지</h1>
@@ -77,6 +80,8 @@ function fn_Register() {
 	    <h1>수정 페이지</h1>
 		</c:otherwise>
 	</c:choose>
+	</div>
+	<div class="Container">
 	<form:form commandName="BoardVO" id="frm" name="frm" method="post" >
 	<input type="hidden" id="idx" name="idx" value="${BoardVO.idx }"/>
 	<input type="hidden" id="boardId" name="boardId" value="free"/>
@@ -97,7 +102,7 @@ function fn_Register() {
 			<td><input type="text" id="title" name="title" maxlength="100" size="50" value="${BoardVO.title }"/></td>
 		<%-- 	<td><form:input path="title" maxlength="100" size="50"/></td> --%>
 			<th scope="col">작성자</th>
-				<td><input type="text" id="rgtId" name="rgtId"  value="${BoardVO.rgtId }"/></td>
+				<td><input type="text" id="rgtId" name="rgtId"  value="${userid }" readonly="readonly"/></td>
 	<%-- 		<td><form:input path="rgtId"   /></td> --%>
 		</tr>
 		<tr>
@@ -121,15 +126,14 @@ function fn_Register() {
 		</tr>
 		<!-- Paging -->
 	</tbody>
-	
 	</table>
 	</form:form>
 	</div>
 	<!-- //Container -->
-	
+	</div>
 	<!-- // header -->
 	
-	
+	<jsp:include page="../footer.jsp"/>
 <!-- //wrapper -->
 </body>
 </html>

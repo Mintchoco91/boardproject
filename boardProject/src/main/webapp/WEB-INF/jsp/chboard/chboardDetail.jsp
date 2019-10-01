@@ -5,9 +5,9 @@
 <style>
 
 .Container {
-	margin: 0 auto;
-	padding :0;
-	overflow: hidden;
+	width : 1400px;
+height : 200px; 
+padding : 30px;
 	
 }
 
@@ -47,7 +47,7 @@ border: 1px solid #aaa;
 </style>
 <body>
 <!-- wrapper -->
-
+<jsp:include page="../header.jsp"></jsp:include>
 	<!-- Container -->
 	<div class="Container">
 	<!-- contents -->
@@ -98,7 +98,7 @@ border: 1px solid #aaa;
 	
 	<!-- // header -->
 	
-	
+	<jsp:include page="../footer.jsp"/>
 <!-- //wrapper -->
 </body>
 
