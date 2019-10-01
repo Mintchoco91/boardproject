@@ -5,9 +5,9 @@
 <style>
 
 .Container {
-	margin: 0 auto;
-	padding :0;
-	overflow: hidden;
+	width : 1400px;
+height : 200px; 
+padding : 30px;
 	
 }
 
@@ -20,16 +20,43 @@ margin: 0 auto;
 border: 1px solid #aaa;
 
 }
+
+.button {
+    background-color: white;
+    border:  none;
+    font-family: a타이틀고딕3;
+    text-decoration: none;
+    padding: 10px 10px;
+    margin: 1px;
+     border-top-left-radius:20px;
+ border-top-right-radius:20px;
+ border-bottom-right-radius:20px;
+ border-bottom-left-radius:20px;
+ background: #b7c7e5;
+ }
+ 
+.button:hover {
+   background: #93A9D1;
+   color : white;
+}
 </style>
 </head>
+<style>
 
+
+</style>
 <body>
 <!-- wrapper -->
-
+<jsp:include page="../header.jsp"></jsp:include>
 	<!-- Container -->
 	<div class="Container">
 	<!-- contents -->
-	<table width="700px;" id="listtable" name="listtable" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<form:form commandName="BoardVO" id="frm" name="frm" >
+	<input type="hidden" id="title" name="title" value="${vo.title }"/>
+	<input type="hidden" id="rgtId" name="rgtId" value="${vo.rgtId }"/>
+	<input type="hidden" id="contents" name="contents" value="${vo.contents }"/>
+	<input type="hidden" id="idx" name="idx" value="${vo.idx }"/>
+	<table width="700px;" id="listtable" name="listtable"  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 		<thead>
 		<colgroup>
 			<col width="20%">
@@ -41,33 +68,37 @@ border: 1px solid #aaa;
 		<tbody>
 		<tr>
 			<th scope="col" >제목</th>
-			<td><input type="text" id="title" name="title" value="${vo.title }" maxlength="100" size="50"/></td>
+			<td>${vo.title }</td>
 			<th scope="col">작성자</th>
-			<td><input type="text" id="rgtId" name="rgtId"  value="${vo.rgtId }" /></td>
+			<td>${vo.rgtId }</td>
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td colspan="3"><textarea cols="70" rows="20" id="contents" name="contents" style="overflow-y:scroll" >${vo.contents }</textarea></td>
+			<td colspan="3">${vo.contents }</td>
 		</tr>
 		<tr>
 			<th scope="col">첨부파일</th>
-			<td colspan="3"><input type="file" id="attachFile" name="attachFile"  value="" /></td>
+			<td colspan="3"></td>
 		</tr>
 		<tr>
-			<td colspan="4" style="text-align: right">
-				<input type="button" id="" name="" value="수정"  onclick="fn_Update()"/>
+			<td colspan="2" align="left">
+				<input type="button"class="button"  id="" name="" value="목록으로"  onclick="fn_movePage('chboardList.do')"/>
+			</td>
+			<td colspan="2" align= "right">
+				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('chboardUpdList.do','Y');"/>
 			</td>
 		</tr>
 		<!-- Paging -->
 	</tbody>
 	</table>
+	</form:form>
 	<!-- //contents -->
 	</div>
 	<!-- //Container -->
 	
 	<!-- // header -->
 	
-	
+	<jsp:include page="../footer.jsp"/>
 <!-- //wrapper -->
 </body>
 

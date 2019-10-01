@@ -23,4 +23,6 @@ public interface MemberDAO {
 	public MemberVO getMember(String userId);
 	
 	public void deleteMember(String userId);
+
+	public void naverRgtUsr_001(MemberVO vo);
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.boardproject.cm.service.BoardList;
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
+import com.project.boardproject.cm.web.Pagination;
 import com.project.boardproject.mm.service.MemberVO;
 
 /*
@@ -159,9 +160,8 @@ public class CmController {
 
 	/*****공통 게시판 끝************************************************************/
 	
-	@RequestMapping(value = "chboard/chboardList.do", method = RequestMethod.GET)
-	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
-			@RequestParam(defaultValue = "1") int curPage) throws Exception {
+	@RequestMapping(value="chboardList.do", method = RequestMethod.GET)
+	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,@RequestParam(defaultValue="1") int curPage) throws Exception {
 
 		int listCnt = cmservice.chboardgetBoardCnt(boardVO);
 		Pagination pagination = new Pagination(listCnt, curPage);
@@ -186,68 +186,86 @@ public class CmController {
 		model.addAttribute("pagination", pagination);
 		return "chboard/chboardList";
 	}
-
-	@RequestMapping(value = "chboard/chboardRegister", method = RequestMethod.GET)
+	
+	@RequestMapping(value="chboardRegister", method = RequestMethod.GET)
 	public String chboardRegister(Model model) throws Exception {
-
+		String flag ="등록";
+		model.addAttribute("flag",flag);
 		return "chboard/chboardRegister";
 	}
-
-	@RequestMapping(value = "chboard/chboardInsert", method = RequestMethod.GET)
-	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO, HttpServletRequest request)
-			throws Exception {
-
-		int currentPage = 1;
-		try {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		} catch (Exception e) {
-		}
-
+	
+	@RequestMapping(value="chboardUpdList", method= RequestMethod.POST)
+	public String chboardUpdList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model) throws Exception {
+		String flag ="수정";
+		model.addAttribute("flag",flag);
+		model.addAttribute("BoardVO", boardVO);
+		return "chboard/chboardRegister";
+	}
+	
+	@RequestMapping(value="chboardInsert", method = RequestMethod.POST)
+	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,HttpServletRequest request) throws Exception {
+		
 //		System.out.println(boardVO.toString());
 		cmservice.chboardInsert(boardVO);
-
-		model.addAttribute("boardVO", boardVO);
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("BoardVO", boardVO);
 		return "redirect:chboardList.do";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "chboard/chboardDelete", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public int chboardDelete(@RequestParam(value = "chbox[]") List<String> chArr, HttpServletRequest request)
-			throws Exception {
-		int idx = 0;
-		int result = 0;
+	@RequestMapping(value = "chboardDelete",  method = RequestMethod.POST, produces = "application/json;charset=UTF-8" )
+	public int chboardDelete( @RequestParam(value="chbox[]") List<String> chArr, HttpServletRequest request) throws Exception {
+		int idx= 0;
+		int result=0;
 		BoardVO vo = new BoardVO();
-
-		for (String delete : chArr) {
-			idx = Integer.parseInt(delete);
-			vo.setIdx(idx);
-
-			cmservice.chboardDelete(vo);
-			result = 1;
-			System.out.println(vo.getIdx());
-		}
-		/* boardVO.setIdx(Integer.parseInt(check)); */
-		// cmservice.chboardDelete(boardVO);
-
+		for(String delete : chArr) {
+		idx = Integer.parseInt(delete);
+		vo.setIdx(idx);
+		
+		 cmservice.chboardDelete(vo);
+		 result= 1;
+		 System.out.println(vo.getIdx());
+	}
 		return result;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "chboard/chboardUpdateReadCnt", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public int chboardUpdateReadCnt(@RequestParam(value = "idx") int idx, HttpServletRequest request) throws Exception {
-		int result = cmservice.chboardUpdateReadCnt(idx);
+	@RequestMapping(value="chboardUpdateReadCnt",   method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public int chboardUpdateReadCnt(@RequestParam(value="idx") int idx, HttpServletRequest request) throws Exception {
+	int result =cmservice.chboardUpdateReadCnt(idx);
 		return result;
 	}
-
-	@RequestMapping(value = "chboard/Detail", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String chboardDetail(Model model, @ModelAttribute("BoardVO") BoardVO boardVO, HttpServletRequest request)
-			throws Exception {
+	
+	@ResponseBody
+	@RequestMapping(value="chboardSchBoard" , method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public String chboardSchBoard(@RequestParam(value="sel") String sel,@RequestParam(value="test") String text, Model model) throws Exception {
+		System.out.println("일단 들어온당");
+		System.out.println(sel + "," +text);
+		
+		Map<String, String> schMap = new HashMap<>();
+		schMap.put("sel", sel);
+		schMap.put("text", text);
+		BoardVO boardVO=cmservice.chboardSchBoard(schMap);
+		model.addAttribute("boardVO", boardVO);
+		model.addAttribute("schsel", sel);
+		model.addAttribute("schtext", text);
+		return "result";
+	}
+	
+	@RequestMapping(value="chboardUpdBoard")
+	public String chboardUpdBoard(@ModelAttribute(value="BoardVO") BoardVO boardVO, Model model) throws Exception {
+		cmservice.chboardUpdBoard(boardVO);
+		model.addAttribute("BoardVO", boardVO);
+		model.addAttribute("idx", boardVO.getIdx());
+		return "redirect:Detail.do";
+	}
+	
+	@RequestMapping(value="Detail")
+	public String chboardDetail(Model model, BoardVO boardVO,@RequestParam(value="idx") int idx,  HttpServletRequest request) throws Exception {
 		logger.info("chboardDetail");
-		BoardVO vo = new BoardVO();
-		vo = cmservice.chboardDetail(boardVO);
+		BoardVO vo =new BoardVO();
+		boardVO.setIdx(idx);
+		vo =cmservice.chboardDetail(boardVO);
 		model.addAttribute("vo", vo);
 		return "chboard/chboardDetail";
 	}
-
 }

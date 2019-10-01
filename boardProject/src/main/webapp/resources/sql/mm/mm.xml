@@ -22,4 +22,25 @@
 	<delete id="deleteMember" parameterType="String">
 		delete from member where userid=#{userId}
 	</delete>
+	
+	<insert id="naverRgtUsr_001" parameterType="MemberVO">
+		INSERT INTO /*naverRgtUsr_001*/
+		member ( 
+		userid,
+		name,
+		email1,
+		email2,
+		isadminyn,
+		delyn,
+		rgtDtm
+		) VALUES(
+		#{userId}
+		,#{name}
+		,#{email1}
+		,#{email2}
+		,'N'
+		,'N'
+		,DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+		)
+	</insert>
 </mapper>

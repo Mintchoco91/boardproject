@@ -130,7 +130,17 @@
 		, #{rgtId}
 		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
 		</insert>
-	 
+
+	<update id="chbaordUpdBoard_001" parameterType="BoardVO">
+		UPDATE /*chboardUpdBoard_001*/
+		board SET
+		 TITLE = #{title}
+		, CONTENTS = #{contents}
+		, RGTID = #{rgtId}
+		, UPDID= #{rgtId}
+		, UPDDTM = DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+		WHERE IDX = #{idx}
+	</update>
 	<select id="chboardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
 	<![CDATA[
 				SELECT * FROM board ORDER BY IDX DESC
@@ -175,4 +185,19 @@
 		WHERE IDX= #{idx}
 	</select>
 	
+	
+	<select id="chboardSchBoard_001" parameterType="HashMap" resultMap="BoardVOarr">
+			SELECT * /*chboardSchBoard_001*/
+			FROM board 
+			WHERE 
+			<if test="sel.equlas('title')">
+			title like CONCAT('%',#{text},'%')
+			</if>
+			<if test="sel.equals('contents')">
+			contents like CONCAT('%',#{text},'%')
+			</if>
+			ORDER BY IDX DESC
+		
+	
+	</select>
 </mapper>

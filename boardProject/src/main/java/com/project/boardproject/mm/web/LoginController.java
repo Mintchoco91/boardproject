@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.boardproject.mm.service.MemberService;
 import com.project.boardproject.mm.service.MemberVO;
@@ -39,6 +41,7 @@ public class LoginController {
 
 	@RequestMapping("login")
 	public String login() {
+		
 		return "member/login";
 	}
 	
@@ -47,5 +50,34 @@ public class LoginController {
 		session.invalidate();
 		return "index";
 	}
+	@RequestMapping(value="member/callback", method =RequestMethod.GET)
+	public String Callback(HttpSession session) {
+		return "member/callback";
+	}
 	
+	@RequestMapping(value="loginSession.do")
+	public String loginSession(HttpSession session, @RequestParam(value="email") String email ,@RequestParam(value="name") String name) throws Exception {
+		String tmpEmail[] = email.split("@");
+		String email1 = tmpEmail[0];
+		String email2 =tmpEmail[1];
+		MemberVO vo = new MemberVO();
+		vo.setUserId(email1);
+		vo.setEmail1(email1);
+		vo.setEmail2(email2);
+		vo.setName(name);
+		memberService.naverRgtUsr(vo);
+		
+		session.setAttribute("userid", email1);
+		return "index";
+	}
+
+	@RequestMapping(value="naverLogin")
+	public String naverLogin() {
+		return "member/naverLogin";
+	}
+	
+	@RequestMapping(value="member/naverCallback", method=RequestMethod.GET)
+	public String naverCallback(HttpSession session) {
+		return "member/naverCallback";
+	}
 }

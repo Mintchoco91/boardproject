@@ -4,38 +4,56 @@
 <style>
 
 	.Container {
-		margin: 0 auto;
-		padding :0;
-		overflow: hidden;
-		
+	width : 1400px;
+height : 500px; 
+padding : 30px;
 	}
 
 	.listTable {
+	
 	text-align: center;
 	}
 	.wrapper {
-	 width: 800px;
+	 width: 1400px;
   margin: 0 auto;
-  border: 1px solid #aaa;
   
 }
-  .header {
-  padding:40px 10px;
-  text-align: center;
-  background: #eee;
-  margin-bottom: 20px;
-}
-.footer {
-  text-align: center;
-  border-top: 1px solid #aaa;
-  margin: 20px 20px 0;
-  font-size: 12px;
-}
-tr:hover {
+ 
+.selectline:hover {
 background-color: #fffcde;
 cursor :pointer;}
 
+
+
+.button {
+    background-color: white;
+    border:  none;
+    font-family: a타이틀고딕3;
+    text-decoration: none;
+    padding: 10px 10px;
+    margin: 1px;
+     border-top-left-radius:20px;
+ border-top-right-radius:20px;
+ border-bottom-right-radius:20px;
+ border-bottom-left-radius:20px;
+ background: #b7c7e5;
+ }
+.button:hover {
+   background: #93A9D1;
+   color : white;
 }
+
+.searchBox {
+	float : right;
+	width : 800px;
+	margin-bottom:  30px;
+	text-align: center;
+}
+
+form {
+
+margin :0 auto;
+padding  0;}
 </style>
 
 <script>
@@ -153,9 +171,60 @@ function onSuccess(data) {
 	form.submit();
 }
 
+
+function fn_search() {
+	var f= document.schfrm;
+	var obj= f.serialize();
+	
+	if(schtext !=null) {
+		$.ajax({
+			url : 'chboardSchBoard.do',
+			data : {searchList: obj },
+			success : function(data) {
+				
+			},
+			error : function() {
+				alert("접근 실패");
+			}
+			
+		});
+	}
+}
+
+function chkword(obj, maxlength){
+	 var strValue = obj.value;
+     var strLen = strValue.length;
+     var totalByte = 0;
+     var len = 0;
+     var oneChar = "";
+     var str2 = "";
+
+     for (var i = 0; i < strLen; i++) {
+         oneChar = strValue.charAt(i);
+         if (escape(oneChar).length > 4) {
+             totalByte += 2;
+         } else {
+             totalByte++;
+         }
+
+         // 입력한 문자 길이보다 넘치면 잘라내기 위해 저장
+         if (totalByte <= maxlength) {
+             len = i + 1;
+         }
+     }
+
+     // 넘어가는 글자는 자른다.
+     if (totalByte > maxlength) {
+         alert(maxlength + "자를 초과 입력 할 수 없습니다.");
+         str2 = strValue.substr(0, len);
+         obj.value = str2;
+         chkword(obj, 4000);
+     }
+
+}
 </script>
 <body>
-
+<jsp:include page="../header.jsp"></jsp:include>
 
 <!-- wrapper -->
 	<div class="wrapper">
@@ -166,29 +235,27 @@ function onSuccess(data) {
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	<form:form commandName="BoardVO" id="frm" name="frm" method="get">
-	<table width="700px" class="listTable" id="" name="" method="get" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<form:form commandName="BoardVO" id="schfrm" name="schfrm" >
+	<div class="searchBox">
+	<select id="schsel" name="schsel" onchange="fn_initValue()">
+		<option value="title">제목</option>
+		<option value="contents">내용</option>
+	</select>
+		<input type="text" id="schtext" name="schtext" value="${schtext }"/>
+		<input type="button" id="sch" name="sch" value="검색" onclick="fn_search()" onkeydown=""/>
+		</div>
+	</form:form>
+	
+	<form:form commandName="BoardVO" id="frm" name="frm">
+	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
-		<tr >
-				<td colspan="7">
-				<fieldset style="border:none; text-align: right;">
-				<select id="" name="" onchange="">
-					<option value="제목">제목</option>
-					<option value="내용">내용</option>
-				</select>
-					<input type="text" id="" name="" value=""/>
-					<input type="button" id="" name="" value="검색" onclick=""/>
-					</fieldset>
-				</td>		
-		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td><input type="checkbox" id="allCheck" name="allCheck" value="" /></td>
 			<td>글번호</td>
 			<td>제목</td>
-			<td>내용</td>
 			<td>조회수</td>
 			<td>첨부파일</td>
 			<td>등록일시</td>
@@ -204,13 +271,12 @@ function onSuccess(data) {
 		</c:if>
 		<c:if test="${list.size() !=0 }" >
 		<c:forEach var="vo" items="${boardList}">
-				<tr>
+				<tr class="selectline">
 				<td ><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.contents }</td>
+				<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
-				<td></td>
+				<td ></td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
 				</tr>
 			
@@ -218,8 +284,8 @@ function onSuccess(data) {
 		</c:if>
 		<tr>
 			<td  colspan="7" align="right">
-			<input type="button" value="등록" onclick="fn_movePage('chboardRegister.do');">
-			<input type="button" value="삭제" onclick="fn_Delete();">
+			<input type="button" class="button" value="등록" onclick="fn_movePage('chboardRegister.do');">
+			<input type="button" class="button" value="삭제" onclick="fn_Delete();">
 			</td>
 		</tr>
 	</tbody>
@@ -233,12 +299,8 @@ function onSuccess(data) {
 	
 	
 	<!-- footer -->
-	<div class="footer">
-	
-	
-	</div>
 	</div>
 <!-- //wrapper -->
-	
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
