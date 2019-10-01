@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
-<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
+<%-- <%@include file="/WEB-INF/jsp/header.jsp" %> --%>
 
-<<<<<<< HEAD
-<div class="layer_fixed">
-<h1>메인페이지입니다.</h1>
-</div>
-=======
 <!-- 
 /*
  * 파일명 : Index.jsp
@@ -95,7 +90,7 @@ body {
 
 
 </script>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
 <body>
 <div class="row">
   <div class="leftcolumn">
@@ -146,7 +141,7 @@ body {
 	</c:if>
    --%>
    </div>
+   <jsp:include page="footer.jsp"></jsp:include>
 </body>
->>>>>>> refs/remotes/origin/ChaeAh
-
-<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
+<%-- 
+<%@include file="/WEB-INF/jsp/cm/footer.jsp" %> --%>

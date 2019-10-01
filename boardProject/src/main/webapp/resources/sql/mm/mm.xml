@@ -42,5 +42,7 @@
 		,'N'
 		,DATE_FORMAT(now(), '%Y%m%d%H%i%s')
 		)
+		
+		
 	</insert>
 </mapper>

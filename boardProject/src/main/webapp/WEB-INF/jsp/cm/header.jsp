@@ -69,13 +69,13 @@ float:left;
 		</ul>
 	</div>
 </div>
-<div id="navibar">
+<%-- <div id="navibar">
 	<div id="navilogi">
 		<a href="index.do">
 			<img id="studylogo" src="${pageContext.request.contextPath}/resources/images/studylogo.png" style="height:60px;border:2px;">
 		</a>
-	</div>
-	<div id="navicategory">
+	</div> --%>
+	<!-- <div id="navicategory">
 		<ul class="categorytab">
 			<li><a href="./boardInq.do" style="padding-left:10px;padding-right:10px;">자유게시판</a></li>
 			<li><a href="./chboard/chboardList.do" style="padding-left:10px;padding-right:10px;">[CH]게시판</a></li>
@@ -84,5 +84,5 @@ float:left;
 			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리5</a></li>
 			<li><a href="" style="padding-left:10px;padding-right:10px;">카테고리6</a></li>
 		</ul>
-	</div>
+	</div> -->
 </div>
