@@ -38,10 +38,31 @@ padding : 30px;
    background: #93A9D1;
    color : white;
 }
+#msgContent {
+text-align: center;
 }
 </style>
 <body>
 <script type="text/javascript">
+
+$(document).ready(function() {
+
+	$('#scrYn').click(function() {
+ 	if($('#scrYn').prop("checked")) {
+ 		$('#scrPw').attr("disabled", false);
+	}else {
+		$('#scrPw').attr("disabled", true);
+	} 
+	});
+	
+	$('#scrPw').keypress(function (event) { 
+		if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8) { 
+			event.preventDefault(); 
+			} 
+		});
+
+
+});
 
 function fn_Register() {
 	var f= document.frm;
@@ -71,7 +92,7 @@ function fn_Register() {
 	<!-- Container -->
 	<div class="wrapper">
 	<!-- contents -->
-	<div id="" >
+	<div id="msgContent" >
 	<c:choose>
 	    <c:when test="${flag == '등록'}">
 	    <h1>등록 페이지</h1>
@@ -83,15 +104,19 @@ function fn_Register() {
 	</div>
 	<div class="Container">
 	<form:form commandName="BoardVO" id="frm" name="frm" method="post" >
-	<input type="hidden" id="idx" name="idx" value="${BoardVO.idx }"/>
+	<c:choose>
+		<c:when test="${not empty BoardVO.idx }">
+			<input type="hidden" id="idx" name="idx" value="${BoardVO.idx }"/>
+		</c:when>
+	</c:choose>
 	<input type="hidden" id="boardId" name="boardId" value="free"/>
 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
 	<!-- form:input path= "" id랑 name을 맞춰준다 -->
-	<table width="700px;" id="insertTable" name="insertTable"  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<table width="700px;" id="insertTable" name="insertTable"  summary="게시물입니다" border="1" cellspacing="0" align="center">
 		<thead>
 		<colgroup>
-			<col width="30%">
-			<col width="30%">
+			<col width="40%">
+			<col width="20%">
 			<col width="30%">
 			<col width="20%">
 		</colgroup>
@@ -106,8 +131,28 @@ function fn_Register() {
 	<%-- 		<td><form:input path="rgtId"   /></td> --%>
 		</tr>
 		<tr>
+			
+			<td colspan="4">
+				<span style="padding: 10px; padding-left: 20px;"><strong>비밀글</strong>	<span>
+			<c:choose>
+				<c:when test="${empty BoardVO.scrYn }">
+					<input type="checkBox" id="scrYn" name="scrYn" value="Y" />
+					<span style="padding: 10px;">비밀번호</span>
+					<input type="password" id="scrPw" name="scrPw"maxlength="4" disabled="disabled" />
+				</c:when>
+				<c:otherwise>
+					<span style="padding: 10px;">비밀번호</span>
+					<input type="checkBox" id="scrYn" name="scrYn" <c:if test="${ BoardVO.scrYn eq 'Y'}"> checked</c:if> />
+						<input type="password" id="scrPw" name="scrPw" value="${BoardVO.scrPw }" maxlength="4"  />
+				</c:otherwise>
+			</c:choose>
+			
+		
+			</td>
+		</tr>
+		<tr>
 			<th scope="col">내용</th>
-			<td colspan="3"><textarea cols="70" rows="20" id="contents" name="contents" style="overflow-y:scroll">${BoardVO.contents } </textarea></td>
+			<td colspan="3"><textarea  cols="74" rows="20" id="contents" name="contents" style="overflow-y:scroll">${BoardVO.contents } </textarea></td>
 		</tr>
 		<tr>
 			<th scope="col">첨부파일</th>

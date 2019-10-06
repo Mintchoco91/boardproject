@@ -99,7 +99,7 @@ public class CmController {
 		model.addAttribute("boardVOArr", boardVOArr);
 		model.addAttribute("pagination", pagination);
 
-		return "board/boardList";
+		return "chboard/chboardList";
 	}
 
 	// 내용 : 게시판 글쓰기페이지 로드
@@ -160,7 +160,7 @@ public class CmController {
 
 	/*****공통 게시판 끝************************************************************/
 	
-	@RequestMapping(value="chboardList.do", method = RequestMethod.GET)
+	@RequestMapping(value="chboardList.do")
 	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,@RequestParam(defaultValue="1") int curPage) throws Exception {
 
 		int listCnt = cmservice.chboardgetBoardCnt(boardVO);
@@ -180,10 +180,12 @@ public class CmController {
 			String date = boardList.get(i).getRgtDtm().substring(6, 8);
 			boardList.get(i).setRgtDtm(year + "년" + month + "월" + date + "일");
 		}
-		System.out.println(boardList.toString());
+		System.out.println(boardList.toString()  + "ㅋㅋㅋ");
 		// boardList =cmservice.chboardGetList(boardVO);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
+		model.addAttribute("srchKeyword", boardVO.getSrchKeyword());
+		model.addAttribute("srchtrg", boardVO.getSrchtrg());
 		return "chboard/chboardList";
 	}
 	
@@ -205,7 +207,7 @@ public class CmController {
 	@RequestMapping(value="chboardInsert", method = RequestMethod.POST)
 	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,HttpServletRequest request) throws Exception {
 		
-//		System.out.println(boardVO.toString());
+		System.out.println(boardVO.toString());
 		cmservice.chboardInsert(boardVO);
 		model.addAttribute("BoardVO", boardVO);
 		return "redirect:chboardList.do";
@@ -235,7 +237,7 @@ public class CmController {
 		return result;
 	}
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value="chboardSchBoard" , method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String chboardSchBoard(@RequestParam(value="sel") String sel,@RequestParam(value="test") String text, Model model) throws Exception {
 		System.out.println("일단 들어온당");
@@ -249,7 +251,7 @@ public class CmController {
 		model.addAttribute("schsel", sel);
 		model.addAttribute("schtext", text);
 		return "result";
-	}
+	}*/
 	
 	@RequestMapping(value="chboardUpdBoard")
 	public String chboardUpdBoard(@ModelAttribute(value="BoardVO") BoardVO boardVO, Model model) throws Exception {

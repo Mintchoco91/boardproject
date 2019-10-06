@@ -222,6 +222,18 @@ function chkword(obj, maxlength){
      }
 
 }
+
+function fn_enter() {
+	if(event.keyCode == 13) {
+		fn_movePage('chboardList.do','Y')
+	}
+}
+
+function fn_search() {
+	var srchtrg = $("#srchtrg option:selected").val();
+	
+	fn_movePage('chboardList.do','Y')
+}
 </script>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -235,18 +247,27 @@ function chkword(obj, maxlength){
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	<form:form commandName="BoardVO" id="schfrm" name="schfrm" >
+	${boardVO.srchKeyword }
+	${boardVO.srchtrg }
 	<div class="searchBox">
-	<select id="schsel" name="schsel" onchange="fn_initValue()">
-		<option value="title">제목</option>
-		<option value="contents">내용</option>
-	</select>
-		<input type="text" id="schtext" name="schtext" value="${schtext }"/>
-		<input type="button" id="sch" name="sch" value="검색" onclick="fn_search()" onkeydown=""/>
-		</div>
-	</form:form>
+ 	<form id="schfrm" name="schfrm" action="#" method="get">
+ 	<table align="center">
+			<tr>
+				<td>
+					<input type="hidden" name="curPage" value="${pagination.curPage}">
+					<select  id="srchtrg" name="srchtrg" onchange="" >
+						<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목<option>
+						<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
+					</select>
+					<input type="text" name="srchKeyword" value="${BoardVO.srchKeyword}">
+					<input type="button" value="검색" onclick="fn_search(this)" onkeypress="fn_enter()">
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>	
 	
-	<form:form commandName="BoardVO" id="frm" name="frm">
+	<form:form commandName="BoardVO" id="frm" name="frm"> 
 	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
@@ -259,18 +280,11 @@ function chkword(obj, maxlength){
 			<td>조회수</td>
 			<td>첨부파일</td>
 			<td>등록일시</td>
-		</tr>
 		
-		<!-- list.size !=0 -->
-		<c:if test="${list.size() == 0 }">
-			<tr>
-			<td colspan="7" align="center">
-				게시물이 없습니다.
-			</td>
+		
 		</tr>
-		</c:if>
-		<c:if test="${list.size() !=0 }" >
-		<c:forEach var="vo" items="${boardList}">
+	<c:if test="${list.size() !=0 }">
+			<c:forEach var="vo" items="${boardList}">
 				<tr class="selectline">
 				<td ><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
@@ -281,7 +295,15 @@ function chkword(obj, maxlength){
 				</tr>
 			
 		</c:forEach>
-		</c:if>
+	</c:if>		
+	<c:if test="${list.size() == 0 }">
+		<tr>
+			<td colspan="7" align="center">
+				조회된 게시물이 없습니다.
+			</td>
+		</tr>
+	</c:if>
+
 		<tr>
 			<td  colspan="7" align="right">
 			<input type="button" class="button" value="등록" onclick="fn_movePage('chboardRegister.do');">
