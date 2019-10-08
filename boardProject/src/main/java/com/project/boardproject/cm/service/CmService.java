@@ -52,6 +52,8 @@ public interface CmService {
 
 	public void chboardUpdBoard(BoardVO boardVO);
 
+	public int chboardScrPwChkConfirm(BoardVO vo);
+
 
 
 }

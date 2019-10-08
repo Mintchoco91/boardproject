@@ -54,8 +54,15 @@ border: 1px solid #aaa;
 	<form:form commandName="BoardVO" id="frm" name="frm" >
 	<input type="hidden" id="title" name="title" value="${vo.title }"/>
 	<input type="hidden" id="rgtId" name="rgtId" value="${vo.rgtId }"/>
+	<input type="hidden" id="rgtDtm" name="rgtDtm" value="${vo.rgtDtm }"/>
 	<input type="hidden" id="contents" name="contents" value="${vo.contents }"/>
+	<input type="hidden" id="boardId" name="boardId" value="${vo.boardId }"/>
+	<input type="hidden" id="scrYn" name="scrYn" value="${vo.scrYn }"/>
+	<input type="hidden" id="scrPw" name="scrPw" value="${vo.scrPw }"/>
 	<input type="hidden" id="idx" name="idx" value="${vo.idx }"/>
+	<input type="hidden" id="readCnt" name="readCnt" value="${vo.readCnt }"/><%-- 
+	<input type="text" id="srchKeyword" name="srchKeyword" value="${vo.srchKeyword }"/>
+	<input type="text" id="srchtrg" name="srchtrg" value="${vo.srchtrg }"/> --%>
 	<table width="700px;" id="listtable" name="listtable"  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 		<thead>
 		<colgroup>

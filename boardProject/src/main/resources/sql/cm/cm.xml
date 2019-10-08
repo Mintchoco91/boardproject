@@ -148,12 +148,12 @@
 		, CONTENTS = #{contents}
 		, RGTID = #{rgtId}
 		, UPDID= #{rgtId}
-		, UPDDTM = DATE_FORMAT(now(), '%Y%m%d%H%i%s'
+		, UPDDTM = DATE_FORMAT(now(), '%Y%m%d%H%i%s')
 		<if test="scrYn !=null">
 		, scrYn = #{scrYn}
 		, scrPw = #{scrPw}
 		</if>
-		)
+		
 		WHERE IDX = #{idx}
 	</update>
 	<select id="chboardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
@@ -222,11 +222,20 @@
 			,RGTDTM
 			,UPDID
 			,UPDDTM
+			,SCRYN
+			,SCRPW
 		FROM board
 		WHERE IDX= #{idx}
 	</select>
 	
+	<select id="chboardScrPwChkConfirm_001" parameterType="BoardVO" resultType="int">
+	 SELECT /* chboardScrPwChkConfirm_001 */
+	 COUNT(*)
+	 FROM BOARD
+	 WHERE IDX= #{idx}
+	 and SCRPW= #{scrPw}
 	
+	</select>
 <!-- 	<select id="chboardSchBoard_001" parameterType="HashMap" resultMap="BoardVOarr">
 			SELECT * /*chboardSchBoard_001*/
 			FROM board 

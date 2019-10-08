@@ -61,5 +61,7 @@ public interface CmDAO  {
 
 	public BoardVO chboardSchBoard_001(Map<String, String> schMap);
 
-	public void chbaordUpdBoard_001(BoardVO boardVO);	
+	public void chbaordUpdBoard_001(BoardVO boardVO);
+
+	public int chboardScrPwChkConfirm_001(BoardVO vo);	
 }

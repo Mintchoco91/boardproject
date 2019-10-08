@@ -237,21 +237,6 @@ public class CmController {
 		return result;
 	}
 	
-	/*@ResponseBody
-	@RequestMapping(value="chboardSchBoard" , method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String chboardSchBoard(@RequestParam(value="sel") String sel,@RequestParam(value="test") String text, Model model) throws Exception {
-		System.out.println("일단 들어온당");
-		System.out.println(sel + "," +text);
-		
-		Map<String, String> schMap = new HashMap<>();
-		schMap.put("sel", sel);
-		schMap.put("text", text);
-		BoardVO boardVO=cmservice.chboardSchBoard(schMap);
-		model.addAttribute("boardVO", boardVO);
-		model.addAttribute("schsel", sel);
-		model.addAttribute("schtext", text);
-		return "result";
-	}*/
 	
 	@RequestMapping(value="chboardUpdBoard")
 	public String chboardUpdBoard(@ModelAttribute(value="BoardVO") BoardVO boardVO, Model model) throws Exception {
@@ -262,12 +247,38 @@ public class CmController {
 	}
 	
 	@RequestMapping(value="Detail")
-	public String chboardDetail(Model model, BoardVO boardVO,@RequestParam(value="idx") int idx,  HttpServletRequest request) throws Exception {
+	public String chboardDetail(Model model, BoardVO boardVO,@RequestParam(value="idx") int idx,  
+			@RequestParam(defaultValue = "F") String flag,
+			HttpServletRequest request) throws Exception {
 		logger.info("chboardDetail");
+		String url="";
 		BoardVO vo =new BoardVO();
 		boardVO.setIdx(idx);
 		vo =cmservice.chboardDetail(boardVO);
+		if(vo.getScrYn().equals("Y") && flag.equals("F")) {
+			url="chboard/chboardScrPwChk";
+		}else {
+			url="chboard/chboardDetail";
+		}
 		model.addAttribute("vo", vo);
-		return "chboard/chboardDetail";
+		return url;
+	}
+	
+	@RequestMapping(value="chboardScrPwChk")
+	public String chboardScrPwChk(BoardVO boardVO, Model model) throws Exception {
+		System.out.println("여기 안들어오냐");
+		model.addAttribute("vo", boardVO);
+		return "chboard/chboardScrPwChk";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="chboardScrPwChkConfirm")
+	public int chboardScrPwChkConfirm(@RequestParam(value="idx") int idx, @RequestParam(value="scrPw") String scrPw, Model model )throws Exception {
+		BoardVO vo= new BoardVO();
+		vo.setIdx(idx);
+		vo.setScrPw(scrPw);
+		System.out.println("hello" + vo.toString());
+		int result= cmservice.chboardScrPwChkConfirm(vo);
+		return result;
 	}
 }

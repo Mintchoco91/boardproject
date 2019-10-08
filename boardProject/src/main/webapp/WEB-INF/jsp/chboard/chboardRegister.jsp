@@ -52,6 +52,7 @@ $(document).ready(function() {
  		$('#scrPw').attr("disabled", false);
 	}else {
 		$('#scrPw').attr("disabled", true);
+		$('#scrPw').val("");
 	} 
 	});
 	
@@ -131,19 +132,18 @@ function fn_Register() {
 	<%-- 		<td><form:input path="rgtId"   /></td> --%>
 		</tr>
 		<tr>
-			
 			<td colspan="4">
 				<span style="padding: 10px; padding-left: 20px;"><strong>비밀글</strong>	<span>
 			<c:choose>
-				<c:when test="${empty BoardVO.scrYn }">
+				<c:when test="${BoardVO.scrYn eq 'N' || BoardVO.scrYn eq '' || BoardVO.scrYn == null }">
 					<input type="checkBox" id="scrYn" name="scrYn" value="Y" />
 					<span style="padding: 10px;">비밀번호</span>
 					<input type="password" id="scrPw" name="scrPw"maxlength="4" disabled="disabled" />
 				</c:when>
 				<c:otherwise>
+					<input name="scrYn" id="scrYn"  type="checkbox"  value="Y" checked="checked" >
 					<span style="padding: 10px;">비밀번호</span>
-					<input type="checkBox" id="scrYn" name="scrYn" <c:if test="${ BoardVO.scrYn eq 'Y'}"> checked</c:if> />
-						<input type="password" id="scrPw" name="scrPw" value="${BoardVO.scrPw }" maxlength="4"  />
+					<input type="password" id="scrPw" name="scrPw" value="${BoardVO.scrPw }" maxlength="4"  />
 				</c:otherwise>
 			</c:choose>
 			
@@ -163,7 +163,7 @@ function fn_Register() {
 			 <c:if test="${flag == '등록'}">
 				<input type="button" class="button" id="" name="" value="등록"  onclick="fn_movePage('chboardInsert.do','Y')"/>
 			</c:if>
-			<c:if test="${flag == '수정'}">
+			<c:if test="${flag == '수정' }">
 				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('chboardUpdBoard.do','Y');"/>
 	  	  </c:if>
 				<input type="button" class="button" id="" name="" value="취소"  onclick="history.back()"/>

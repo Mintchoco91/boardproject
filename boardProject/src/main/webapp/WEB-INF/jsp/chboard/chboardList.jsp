@@ -1,59 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css"/>
 <style>
-
-	.Container {
-	width : 1400px;
-height : 500px; 
-padding : 30px;
-	}
-
-	.listTable {
 	
-	text-align: center;
-	}
-	.wrapper {
-	 width: 1400px;
-  margin: 0 auto;
-  
-}
- 
-.selectline:hover {
-background-color: #fffcde;
-cursor :pointer;}
-
-
-
-.button {
-    background-color: white;
-    border:  none;
-    font-family: a타이틀고딕3;
-    text-decoration: none;
-    padding: 10px 10px;
-    margin: 1px;
-     border-top-left-radius:20px;
- border-top-right-radius:20px;
- border-bottom-right-radius:20px;
- border-bottom-left-radius:20px;
- background: #b7c7e5;
- }
-.button:hover {
-   background: #93A9D1;
-   color : white;
-}
-
-.searchBox {
-	float : right;
-	width : 800px;
-	margin-bottom:  30px;
-	text-align: center;
-}
-
-form {
-
-margin :0 auto;
-padding  0;}
 </style>
 
 <script>
@@ -172,7 +122,7 @@ function onSuccess(data) {
 }
 
 
-function fn_search() {
+/* function fn_search() {
 	var f= document.schfrm;
 	var obj= f.serialize();
 	
@@ -189,7 +139,7 @@ function fn_search() {
 			
 		});
 	}
-}
+} */
 
 function chkword(obj, maxlength){
 	 var strValue = obj.value;
@@ -225,14 +175,13 @@ function chkword(obj, maxlength){
 
 function fn_enter() {
 	if(event.keyCode == 13) {
-		fn_movePage('chboardList.do','Y')
+		fn_movePage('chboardList.do','Y');
 	}
 }
 
 function fn_search() {
 	var srchtrg = $("#srchtrg option:selected").val();
-	
-	fn_movePage('chboardList.do','Y')
+	fn_movePage('chboardList.do','Y');
 }
 </script>
 <body>
@@ -254,12 +203,15 @@ function fn_search() {
  	<table align="center">
 			<tr>
 				<td>
+				<%--  --%>
 					<input type="hidden" name="curPage" value="${pagination.curPage}">
 					<select  id="srchtrg" name="srchtrg" onchange="" >
-						<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목<option>
-						<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
+					<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목</option>
+					<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
+					<!-- 	<option value="title">제목<option>
+						<option value="contents" >내용</option> -->
 					</select>
-					<input type="text" name="srchKeyword" value="${BoardVO.srchKeyword}">
+					<input type="text" id="srchKeyword" name="srchKeyword" value="${BoardVO.srchKeyword}">
 					<input type="button" value="검색" onclick="fn_search(this)" onkeypress="fn_enter()">
 				</td>
 			</tr>
@@ -271,15 +223,15 @@ function fn_search() {
 	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
+	
 	</thead>
 	<tbody>
 		<tr>
 			<td><input type="checkbox" id="allCheck" name="allCheck" value="" /></td>
 			<td>글번호</td>
-			<td>제목</td>
+			<td width="200px">제목</td>
 			<td>조회수</td>
-			<td>첨부파일</td>
-			<td>등록일시</td>
+			<td width="200px">등록일시</td>
 		
 		
 		</tr>
@@ -290,7 +242,6 @@ function fn_search() {
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
 				<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
-				<td ></td>
 				<td  onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
 				</tr>
 			

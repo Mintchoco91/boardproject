@@ -114,4 +114,11 @@ public class CmServiceimpl implements CmService {
 		cmDAO.chbaordUpdBoard_001(boardVO);
 		
 	}
+
+	@Override
+	public int chboardScrPwChkConfirm(BoardVO vo) {
+		int result;
+		result =cmDAO.chboardScrPwChkConfirm_001(vo);
+		return result;
+	}
 }
