@@ -232,7 +232,7 @@ public class CmController {
 		cmservice.boardUpdBoard(boardVO);
 		model.addAttribute("BoardVO", boardVO);
 		model.addAttribute("idx", boardVO.getIdx());
-		return "redirect:Detail.do";
+		return "redirect:Detail.do?flag='T'";
 	}
 
 	@RequestMapping(value = "Detail")
