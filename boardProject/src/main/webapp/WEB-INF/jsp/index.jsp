@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
-<%-- <%@include file="/WEB-INF/jsp/header.jsp" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 
 /*
@@ -10,7 +10,7 @@
  * 변경일 : 2019/07/22
  */
  -->
-<!DOCTYPE html>   
+<!DOCTYPE htmㅈl>   
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -90,7 +90,7 @@ body {
 
 
 </script>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp"></jsp:include>
 <body>
 <div class="row">
   <div class="leftcolumn">
@@ -141,7 +141,7 @@ body {
 	</c:if>
    --%>
    </div>
-   <jsp:include page="footer.jsp"></jsp:include>
 </body>
-<%-- 
-<%@include file="/WEB-INF/jsp/cm/footer.jsp" %> --%>
+
+<jsp:include page="footer.jsp"></jsp:include>
+</html>

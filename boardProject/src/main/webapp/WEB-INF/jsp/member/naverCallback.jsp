@@ -1,3 +1,5 @@
+<%@page import="org.json.simple.parser.JSONParser"%>
+<%@page import="org.json.simple.JSONObject"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.HttpURLConnection" %>
@@ -48,10 +50,27 @@
       br.close();
       if(responseCode==200) {
         out.println(res.toString());
+        JSONParser parsing = new JSONParser();
+        Object obj = parsing.parse(res.toString());
+        JSONObject jsonObj = (JSONObject)obj;
+    	access_token =(String) jsonObj.get("access_token");
+    	refresh_token =(String) jsonObj.get("refresh_token");
+    
       }
     } catch (Exception e) {
       System.out.println(e);
     }
   %>
 </body>
+<script>
+
+$(document).ready(function() {
+	fn_movePage('naverCallbackAfter.do','Y')"
+});
+</script>
+<form id="frm" name="frm" >
+<input type="hidden"  id="access_token" name="access_token" value="<%=access_token%>">
+<input type="hidden" id="refresh_token" name="refresh_token" value="<%=refresh_token%>">
+
+</form>
 </html>

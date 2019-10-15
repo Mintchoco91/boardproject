@@ -132,8 +132,8 @@ font-weight: bold;
 		<div id="navicategory">
 			<ul class="categorytab">
 				<li class="category"><a href="">INDEX</a></li>
-				<li class="category"><a href="./boardInq.do" >기원</a></li>
-				<li class="category"><a href="../chboardList.do" >채아</a></li>
+			<!-- 	<li class="category"><a href="./boardInq.do" >기원</a></li> -->
+				<li class="category"><a href="../boardList.do" >게시판</a></li>
 				<li class="category"  style="float:right; "><a href="" >더보기</a></li>
 			</ul>
 		</div>

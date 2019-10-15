@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.wrapper {
+	 width: 1400px;
+  margin: 0 auto;
+}
+
+.Container {
+	width : 1400px;
+height : 500px; 
+padding : 30px;
+}
+
+.listTable {
+	text-align: center;
+}
+ 
+.selectline:hover {
+background-color: #fffcde;
+cursor :pointer;}
+
+.button {
+    background-color: white;
+    border:  none;
+    font-family: a타이틀고딕3;
+    text-decoration: none;
+    padding: 10px 10px;
+    margin: 1px;
+     border-top-left-radius:20px;
+ border-top-right-radius:20px;
+ border-bottom-right-radius:20px;
+ border-bottom-left-radius:20px;
+ background: #b7c7e5;
+ }
+ 
+.button:hover {
+   background: #93A9D1;
+   color : white;
+}
+
+.searchBox {
+	float : right;
+	width : 800px;
+	margin-bottom:  30px;
+	text-align: center;
+}
+
+form {
+margin :0 auto;
+padding  0;
+}
