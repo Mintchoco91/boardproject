@@ -155,7 +155,6 @@ public class CmController {
 	public String boardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 
-		System.out.println("!!!!");
 		int listCnt = cmservice.boardgetBoardCnt(boardVO);
 		Pagination pagination = new Pagination(listCnt, curPage);
 
@@ -173,7 +172,6 @@ public class CmController {
 			String date = boardList.get(i).getRgtDtm().substring(6, 8);
 			boardList.get(i).setRgtDtm(year + "년" + month + "월" + date + "일");
 		}
-		System.out.println(boardList.toString() + "ㅋㅋㅋ");
 		// boardList =cmservice.boardGetList(boardVO);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
@@ -200,8 +198,6 @@ public class CmController {
 	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
 	public String boardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO, HttpServletRequest request)
 			throws Exception {
-
-		System.out.println(boardVO.toString());
 		cmservice.boardInsert(boardVO);
 		model.addAttribute("BoardVO", boardVO);
 		return "redirect:boardList.do";
@@ -220,7 +216,6 @@ public class CmController {
 
 			cmservice.boardDelete(vo);
 			result = 1;
-			System.out.println(vo.getIdx());
 		}
 		return result;
 	}
@@ -243,20 +238,14 @@ public class CmController {
 	@RequestMapping(value = "Detail")
 	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx") int idx,
 			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
-		logger.info("boardDetail");
-		System.out.println(idx + "인덱스번호가 ㅇ나넘아어니ㅏ러니");
 		String url = "";
 		BoardVO vo = new BoardVO();
 		boardVO.setIdx(idx);
 		vo = cmservice.boardDetail(boardVO);
-		System.out.println(vo.toString() + "왜 안찍히니");
-		System.out.println(flag + "너가 정답이냐 아 졸려 ??졸려죽겟냐 ");
 
 		if ("Y".equals(vo.getScrYn()) && "F".equals(flag)) {
-			System.out.println("이쪽인고야?");
 			url = "board/boardScrPwChk";
 		} else {
-			System.out.println("안녕하세요?zzzz");
 			url = "board/boardDetail";
 		}
 		model.addAttribute("vo", vo);
@@ -265,7 +254,6 @@ public class CmController {
 
 	@RequestMapping(value = "boardScrPwChk")
 	public String boardScrPwChk(BoardVO boardVO, Model model) throws Exception {
-		System.out.println("여기 안들어오냐");
 		model.addAttribute("vo", boardVO);
 		return "board/boardScrPwChk";
 	}
@@ -277,7 +265,6 @@ public class CmController {
 		BoardVO vo = new BoardVO();
 		vo.setIdx(idx);
 		vo.setScrPw(scrPw);
-		System.out.println("hello" + vo.toString());
 		int result = cmservice.boardScrPwChkConfirm(vo);
 		return result;
 	}

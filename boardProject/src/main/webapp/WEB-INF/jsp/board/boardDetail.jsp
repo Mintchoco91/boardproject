@@ -81,7 +81,7 @@ border: 1px solid #aaa;
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td colspan="3">${vo.contents }</td>
+			<td colspan="3"><pre>${vo.contents }</pre></td>
 		</tr>
 		<tr>
 			<th scope="col">첨부파일</th>
