@@ -42,8 +42,8 @@ public class CmController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
 
-	/*****공통 게시판 시작************************************************************/
-	
+	/***** 공통 게시판 시작 ************************************************************/
+
 	// 내용 : index조회
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
@@ -56,114 +56,107 @@ public class CmController {
 		return "board/boardListPage";
 	}
 
-	// 내용 : 게시판 조회
-	@RequestMapping(value = "boardInq")
-	public String boardInq(Model model, BoardVO boardVO, @RequestParam(defaultValue = "1") int curPage) {
-		// 리스트로 구현
-		List<BoardVO> boardVOArr = new ArrayList<BoardVO>();
-		// 전체리스트 개수
-		int listCnt = cmservice.boardInqCnt(boardVO);
-		
-		System.out.println("########key : "+boardVO.getSrchKeyword());
-		
-		Pagination pagination = new Pagination(listCnt, curPage);
+	/*
+	 * // 내용 : 게시판 조회
+	 * 
+	 * @RequestMapping(value = "boardInq") public String boardInq(Model model,
+	 * BoardVO boardVO, @RequestParam(defaultValue = "1") int curPage) { // 리스트로 구현
+	 * List<BoardVO> boardVOArr = new ArrayList<BoardVO>(); // 전체리스트 개수 int listCnt
+	 * = cmservice.boardInqCnt(boardVO);
+	 * 
+	 * System.out.println("########key : "+boardVO.getSrchKeyword());
+	 * 
+	 * Pagination pagination = new Pagination(listCnt, curPage);
+	 * 
+	 * boardVO.setStartIndex(pagination.getStartIndex());
+	 * boardVO.setPageSize(pagination.getPageSize());
+	 * 
+	 * boardVOArr = cmservice.boardInq(boardVO);
+	 * 
+	 * SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); Date time =
+	 * new Date();
+	 * 
+	 * String dateNow = dateFormat.format(time);
+	 * 
+	 * String fullRgtDtm = ""; String todayRgtDtm = ""; String convRgtDtm = "";
+	 * 
+	 * for (int i = 0; i < boardVOArr.size(); i++) { fullRgtDtm =
+	 * boardVOArr.get(i).getRgtDtm(); todayRgtDtm = fullRgtDtm.substring(0, 8);
+	 * 
+	 * if (todayRgtDtm.equals(dateNow)) { convRgtDtm = fullRgtDtm.substring(8, 10) +
+	 * ":" + fullRgtDtm.substring(10, 12); } else { convRgtDtm =
+	 * fullRgtDtm.substring(2, 4) + "." + fullRgtDtm.substring(4, 6) + "." +
+	 * fullRgtDtm.substring(6, 8); }
+	 * 
+	 * boardVOArr.get(i).setRgtDtm(convRgtDtm); }
+	 * 
+	 * model.addAttribute("boardVOArr", boardVOArr);
+	 * model.addAttribute("pagination", pagination);
+	 * 
+	 * return "board/boardList"; }
+	 * 
+	 * // 내용 : 게시판 글쓰기페이지 로드
+	 * 
+	 * @RequestMapping(value = "boardWritePage") public String
+	 * boardWritePage(@ModelAttribute("boardVO") BoardVO boardVO, Model model)
+	 * throws Exception { return "board/boardRegister"; }
+	 * 
+	 * // 내용 : 게시판 글쓰기 등록
+	 * 
+	 * @RequestMapping(value = "boardWrite") public String boardWrite(Model model,
+	 * BoardVO boardVO) throws Exception { cmservice.boardWrite(boardVO); return
+	 * "redirect:boardInq.do"; }
+	 * 
+	 * // Post AJAX
+	 * 
+	 * @RequestMapping(value = "boardDelete", method = RequestMethod.POST)
+	 * public @ResponseBody String boardDelete(HttpServletRequest request, String[]
+	 * idxArray, Model model) throws Exception {
+	 * 
+	 * String result = "error";
+	 * 
+	 * result = cmservice.boardDelete(idxArray); return result; }
+	 * 
+	 * // 내용 : 게시판 상세조회
+	 * 
+	 * @RequestMapping(value = "boardDetail") public String boardDetail(Model model,
+	 * BoardVO boardVO) throws Exception {
+	 * 
+	 * BoardVO resultBoardVO = new BoardVO(); resultBoardVO =
+	 * cmservice.boardDetail(boardVO);
+	 * 
+	 * String fullRgtDtm = resultBoardVO.getRgtDtm(); String convRgtDtm =
+	 * fullRgtDtm.substring(0, 4) + "." + fullRgtDtm.substring(4, 6) + "." +
+	 * fullRgtDtm.substring(6, 8) + ". " + fullRgtDtm.substring(8, 10) + ":" +
+	 * fullRgtDtm.substring(10, 12);
+	 * 
+	 * resultBoardVO.setRgtDtm(convRgtDtm);
+	 * 
+	 * model.addAttribute("boardVO", resultBoardVO);
+	 * 
+	 * return "board/boardDetail"; }
+	 * 
+	 * // 내용 : 게시판 수정페이지 로드
+	 * 
+	 * @RequestMapping(value = "boardModifyPage") public String
+	 * boardModifyPage(Model model, BoardVO boardVO) throws Exception {
+	 * model.addAttribute("boardVO", boardVO); return "board/boardRegister"; }
+	 * 
+	 * // 내용 : 게시판 내용 수정
+	 * 
+	 * @RequestMapping(value = "boardModify") public String boardModify(Model model,
+	 * BoardVO boardVO) throws Exception { cmservice.boardModify(boardVO); return
+	 * "redirect:boardInq.do"; }
+	 */
 
-		boardVO.setStartIndex(pagination.getStartIndex());
-		boardVO.setPageSize(pagination.getPageSize());
+	/***** 공통 게시판 끝 ************************************************************/
 
-		boardVOArr = cmservice.boardInq(boardVO);
+	@RequestMapping(value = "boardList.do")
+	public String boardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
+			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-		Date time = new Date();
-
-		String dateNow = dateFormat.format(time);
-
-		String fullRgtDtm = "";
-		String todayRgtDtm = "";
-		String convRgtDtm = "";
-
-		for (int i = 0; i < boardVOArr.size(); i++) {
-			fullRgtDtm = boardVOArr.get(i).getRgtDtm();
-			todayRgtDtm = fullRgtDtm.substring(0, 8);
-
-			if (todayRgtDtm.equals(dateNow)) {
-				convRgtDtm = fullRgtDtm.substring(8, 10) + ":" + fullRgtDtm.substring(10, 12);
-			} else {
-				convRgtDtm = fullRgtDtm.substring(2, 4) + "." + fullRgtDtm.substring(4, 6) + "."
-						+ fullRgtDtm.substring(6, 8);
-			}
-
-			boardVOArr.get(i).setRgtDtm(convRgtDtm);
-		}
-
-		model.addAttribute("boardVOArr", boardVOArr);
-		model.addAttribute("pagination", pagination);
-
-		return "chboard/chboardList";
-	}
-
-	// 내용 : 게시판 글쓰기페이지 로드
-	@RequestMapping(value = "boardWritePage")
-	public String boardWritePage(@ModelAttribute("boardVO") BoardVO boardVO, Model model) throws Exception {
-		return "board/boardRegister";
-	}
-
-	// 내용 : 게시판 글쓰기 등록
-	@RequestMapping(value = "boardWrite")
-	public String boardWrite(Model model, BoardVO boardVO) throws Exception {
-		cmservice.boardWrite(boardVO);
-		return "redirect:boardInq.do";
-	}
-
-	// Post AJAX
-	@RequestMapping(value = "boardDelete", method = RequestMethod.POST)
-	public @ResponseBody String boardDelete(HttpServletRequest request, String[] idxArray, Model model)
-			throws Exception {
-
-		String result = "error";
-		
-		result = cmservice.boardDelete(idxArray);
-		return result;
-	}
-
-	// 내용 : 게시판 상세조회
-	@RequestMapping(value = "boardDetail")
-	public String boardDetail(Model model, BoardVO boardVO) throws Exception {
-
-		BoardVO resultBoardVO = new BoardVO();
-		resultBoardVO = cmservice.boardDetail(boardVO);
-		
-		String fullRgtDtm = resultBoardVO.getRgtDtm();
-		String convRgtDtm = fullRgtDtm.substring(0, 4) + "." + fullRgtDtm.substring(4, 6) + "."
-				+ fullRgtDtm.substring(6, 8) + ". " + fullRgtDtm.substring(8, 10) + ":" + fullRgtDtm.substring(10, 12);
-
-		resultBoardVO.setRgtDtm(convRgtDtm);
-
-		model.addAttribute("boardVO", resultBoardVO);
-
-		return "board/boardDetail";
-	}
-
-	// 내용 : 게시판 수정페이지 로드
-	@RequestMapping(value = "boardModifyPage")
-	public String boardModifyPage(Model model, BoardVO boardVO) throws Exception {
-		model.addAttribute("boardVO", boardVO);
-		return "board/boardRegister";
-	}
-
-	// 내용 : 게시판 내용 수정
-	@RequestMapping(value = "boardModify")
-	public String boardModify(Model model, BoardVO boardVO) throws Exception {
-		cmservice.boardModify(boardVO);
-		return "redirect:boardInq.do";
-	}
-
-	/*****공통 게시판 끝************************************************************/
-	
-	@RequestMapping(value="chboardList.do")
-	public String chboardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,@RequestParam(defaultValue="1") int curPage) throws Exception {
-
-		int listCnt = cmservice.chboardgetBoardCnt(boardVO);
+		System.out.println("!!!!");
+		int listCnt = cmservice.boardgetBoardCnt(boardVO);
 		Pagination pagination = new Pagination(listCnt, curPage);
 
 		boardVO.setStartIndex(pagination.getStartIndex());
@@ -171,7 +164,7 @@ public class CmController {
 
 		List<BoardVO> boardList = new ArrayList<>();
 
-		boardList = cmservice.chboardGetList(boardVO);
+		boardList = cmservice.boardGetList(boardVO);
 		// List<BoardVO> boardList = new ArrayList<>();
 
 		for (int i = 0; i < boardList.size(); i++) {
@@ -180,105 +173,112 @@ public class CmController {
 			String date = boardList.get(i).getRgtDtm().substring(6, 8);
 			boardList.get(i).setRgtDtm(year + "년" + month + "월" + date + "일");
 		}
-		System.out.println(boardList.toString()  + "ㅋㅋㅋ");
-		// boardList =cmservice.chboardGetList(boardVO);
+		System.out.println(boardList.toString() + "ㅋㅋㅋ");
+		// boardList =cmservice.boardGetList(boardVO);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("srchKeyword", boardVO.getSrchKeyword());
 		model.addAttribute("srchtrg", boardVO.getSrchtrg());
-		return "chboard/chboardList";
+		return "board/boardList";
 	}
-	
-	@RequestMapping(value="chboardRegister", method = RequestMethod.GET)
-	public String chboardRegister(Model model) throws Exception {
-		String flag ="등록";
-		model.addAttribute("flag",flag);
-		return "chboard/chboardRegister";
+
+	@RequestMapping(value = "boardRegister", method = RequestMethod.GET)
+	public String boardRegister(Model model) throws Exception {
+		String flag = "등록";
+		model.addAttribute("flag", flag);
+		return "board/boardRegister";
 	}
-	
-	@RequestMapping(value="chboardUpdList", method= RequestMethod.POST)
-	public String chboardUpdList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model) throws Exception {
-		String flag ="수정";
-		model.addAttribute("flag",flag);
+
+	@RequestMapping(value = "boardUpdList", method = RequestMethod.POST)
+	public String boardUpdList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model) throws Exception {
+		String flag = "수정";
+		model.addAttribute("flag", flag);
 		model.addAttribute("BoardVO", boardVO);
-		return "chboard/chboardRegister";
+		return "board/boardRegister";
 	}
-	
-	@RequestMapping(value="chboardInsert", method = RequestMethod.POST)
-	public String chboardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO,HttpServletRequest request) throws Exception {
-		
+
+	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
+	public String boardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO, HttpServletRequest request)
+			throws Exception {
+
 		System.out.println(boardVO.toString());
-		cmservice.chboardInsert(boardVO);
+		cmservice.boardInsert(boardVO);
 		model.addAttribute("BoardVO", boardVO);
-		return "redirect:chboardList.do";
+		return "redirect:boardList.do";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "chboardDelete",  method = RequestMethod.POST, produces = "application/json;charset=UTF-8" )
-	public int chboardDelete( @RequestParam(value="chbox[]") List<String> chArr, HttpServletRequest request) throws Exception {
-		int idx= 0;
-		int result=0;
+	@RequestMapping(value = "boardDelete", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public int boardDelete(@RequestParam(value = "chbox[]") List<String> chArr, HttpServletRequest request)
+			throws Exception {
+		int idx = 0;
+		int result = 0;
 		BoardVO vo = new BoardVO();
-		for(String delete : chArr) {
-		idx = Integer.parseInt(delete);
-		vo.setIdx(idx);
-		
-		 cmservice.chboardDelete(vo);
-		 result= 1;
-		 System.out.println(vo.getIdx());
-	}
+		for (String delete : chArr) {
+			idx = Integer.parseInt(delete);
+			vo.setIdx(idx);
+
+			cmservice.boardDelete(vo);
+			result = 1;
+			System.out.println(vo.getIdx());
+		}
 		return result;
 	}
 
 	@ResponseBody
-	@RequestMapping(value="chboardUpdateReadCnt",   method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public int chboardUpdateReadCnt(@RequestParam(value="idx") int idx, HttpServletRequest request) throws Exception {
-	int result =cmservice.chboardUpdateReadCnt(idx);
+	@RequestMapping(value = "boardUpdateReadCnt", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public int boardUpdateReadCnt(@RequestParam(value = "idx") int idx, HttpServletRequest request) throws Exception {
+		int result = cmservice.boardUpdateReadCnt(idx);
 		return result;
 	}
-	
-	
-	@RequestMapping(value="chboardUpdBoard")
-	public String chboardUpdBoard(@ModelAttribute(value="BoardVO") BoardVO boardVO, Model model) throws Exception {
-		cmservice.chboardUpdBoard(boardVO);
+
+	@RequestMapping(value = "boardUpdBoard")
+	public String boardUpdBoard(@ModelAttribute(value = "BoardVO") BoardVO boardVO, Model model) throws Exception {
+		cmservice.boardUpdBoard(boardVO);
 		model.addAttribute("BoardVO", boardVO);
 		model.addAttribute("idx", boardVO.getIdx());
 		return "redirect:Detail.do";
 	}
-	
-	@RequestMapping(value="Detail")
-	public String chboardDetail(Model model, BoardVO boardVO,@RequestParam(value="idx") int idx,  
-			@RequestParam(defaultValue = "F") String flag,
-			HttpServletRequest request) throws Exception {
-		logger.info("chboardDetail");
-		String url="";
-		BoardVO vo =new BoardVO();
+
+	@RequestMapping(value = "Detail")
+	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx") int idx,
+			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
+		logger.info("boardDetail");
+		System.out.println(idx + "인덱스번호가 ㅇ나넘아어니ㅏ러니");
+		String url = "";
+		BoardVO vo = new BoardVO();
 		boardVO.setIdx(idx);
-		vo =cmservice.chboardDetail(boardVO);
-		if(vo.getScrYn().equals("Y") && flag.equals("F")) {
-			url="chboard/chboardScrPwChk";
-		}else {
-			url="chboard/chboardDetail";
+		vo = cmservice.boardDetail(boardVO);
+		System.out.println(vo.toString() + "왜 안찍히니");
+		System.out.println(flag + "너가 정답이냐 아 졸려 ??졸려죽겟냐 ");
+
+		if ("Y".equals(vo.getScrYn()) && "F".equals(flag)) {
+			System.out.println("이쪽인고야?");
+			url = "board/boardScrPwChk";
+		} else {
+			System.out.println("안녕하세요?zzzz");
+			url = "board/boardDetail";
 		}
 		model.addAttribute("vo", vo);
 		return url;
 	}
-	
-	@RequestMapping(value="chboardScrPwChk")
-	public String chboardScrPwChk(BoardVO boardVO, Model model) throws Exception {
+
+	@RequestMapping(value = "boardScrPwChk")
+	public String boardScrPwChk(BoardVO boardVO, Model model) throws Exception {
 		System.out.println("여기 안들어오냐");
 		model.addAttribute("vo", boardVO);
-		return "chboard/chboardScrPwChk";
+		return "board/boardScrPwChk";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="chboardScrPwChkConfirm")
-	public int chboardScrPwChkConfirm(@RequestParam(value="idx") int idx, @RequestParam(value="scrPw") String scrPw, Model model )throws Exception {
-		BoardVO vo= new BoardVO();
+	@RequestMapping(value = "boardScrPwChkConfirm")
+	public int boardScrPwChkConfirm(@RequestParam(value = "idx") int idx, @RequestParam(value = "scrPw") String scrPw,
+			Model model) throws Exception {
+		BoardVO vo = new BoardVO();
 		vo.setIdx(idx);
 		vo.setScrPw(scrPw);
 		System.out.println("hello" + vo.toString());
-		int result= cmservice.chboardScrPwChkConfirm(vo);
+		int result = cmservice.boardScrPwChkConfirm(vo);
 		return result;
 	}
 }

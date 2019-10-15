@@ -19,7 +19,7 @@ function fn_PwConfrim() {
 	var idxTrg =f.idx.value;
 	var scrPwTrg =f.scrPw.value;
  	$.ajax({
-		url : "chboardScrPwChkConfirm.do",
+		url : "boardScrPwChkConfirm.do",
 		type : "post",
 		datatype : "text",
 		data  : {idx : idxTrg, scrPw : scrPwTrg },
