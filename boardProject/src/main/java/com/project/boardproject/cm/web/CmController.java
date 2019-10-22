@@ -44,119 +44,23 @@ public class CmController {
 
 	/***** 공통 게시판 시작 ************************************************************/
 
-	// 내용 : index조회
+	//index조회
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
 		return "index";
 	}
 
-	// 내용 : 게시판 리스트 페이지 로드
+	//게시판 리스트 페이지 로드
 	@RequestMapping(value = "boardListPage")
 	public String boardListPage(Model model) throws Exception {
 		return "board/boardListPage";
 	}
-
-	/*
-	 * // 내용 : 게시판 조회
-	 * 
-	 * @RequestMapping(value = "boardInq") public String boardInq(Model model,
-	 * BoardVO boardVO, @RequestParam(defaultValue = "1") int curPage) { // 리스트로 구현
-	 * List<BoardVO> boardVOArr = new ArrayList<BoardVO>(); // 전체리스트 개수 int listCnt
-	 * = cmservice.boardInqCnt(boardVO);
-	 * 
-	 * System.out.println("########key : "+boardVO.getSrchKeyword());
-	 * 
-	 * Pagination pagination = new Pagination(listCnt, curPage);
-	 * 
-	 * boardVO.setStartIndex(pagination.getStartIndex());
-	 * boardVO.setPageSize(pagination.getPageSize());
-	 * 
-	 * boardVOArr = cmservice.boardInq(boardVO);
-	 * 
-	 * SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); Date time =
-	 * new Date();
-	 * 
-	 * String dateNow = dateFormat.format(time);
-	 * 
-	 * String fullRgtDtm = ""; String todayRgtDtm = ""; String convRgtDtm = "";
-	 * 
-	 * for (int i = 0; i < boardVOArr.size(); i++) { fullRgtDtm =
-	 * boardVOArr.get(i).getRgtDtm(); todayRgtDtm = fullRgtDtm.substring(0, 8);
-	 * 
-	 * if (todayRgtDtm.equals(dateNow)) { convRgtDtm = fullRgtDtm.substring(8, 10) +
-	 * ":" + fullRgtDtm.substring(10, 12); } else { convRgtDtm =
-	 * fullRgtDtm.substring(2, 4) + "." + fullRgtDtm.substring(4, 6) + "." +
-	 * fullRgtDtm.substring(6, 8); }
-	 * 
-	 * boardVOArr.get(i).setRgtDtm(convRgtDtm); }
-	 * 
-	 * model.addAttribute("boardVOArr", boardVOArr);
-	 * model.addAttribute("pagination", pagination);
-	 * 
-	 * return "board/boardList"; }
-	 * 
-	 * // 내용 : 게시판 글쓰기페이지 로드
-	 * 
-	 * @RequestMapping(value = "boardWritePage") public String
-	 * boardWritePage(@ModelAttribute("boardVO") BoardVO boardVO, Model model)
-	 * throws Exception { return "board/boardRegister"; }
-	 * 
-	 * // 내용 : 게시판 글쓰기 등록
-	 * 
-	 * @RequestMapping(value = "boardWrite") public String boardWrite(Model model,
-	 * BoardVO boardVO) throws Exception { cmservice.boardWrite(boardVO); return
-	 * "redirect:boardInq.do"; }
-	 * 
-	 * // Post AJAX
-	 * 
-	 * @RequestMapping(value = "boardDelete", method = RequestMethod.POST)
-	 * public @ResponseBody String boardDelete(HttpServletRequest request, String[]
-	 * idxArray, Model model) throws Exception {
-	 * 
-	 * String result = "error";
-	 * 
-	 * result = cmservice.boardDelete(idxArray); return result; }
-	 * 
-	 * // 내용 : 게시판 상세조회
-	 * 
-	 * @RequestMapping(value = "boardDetail") public String boardDetail(Model model,
-	 * BoardVO boardVO) throws Exception {
-	 * 
-	 * BoardVO resultBoardVO = new BoardVO(); resultBoardVO =
-	 * cmservice.boardDetail(boardVO);
-	 * 
-	 * String fullRgtDtm = resultBoardVO.getRgtDtm(); String convRgtDtm =
-	 * fullRgtDtm.substring(0, 4) + "." + fullRgtDtm.substring(4, 6) + "." +
-	 * fullRgtDtm.substring(6, 8) + ". " + fullRgtDtm.substring(8, 10) + ":" +
-	 * fullRgtDtm.substring(10, 12);
-	 * 
-	 * resultBoardVO.setRgtDtm(convRgtDtm);
-	 * 
-	 * model.addAttribute("boardVO", resultBoardVO);
-	 * 
-	 * return "board/boardDetail"; }
-	 * 
-	 * // 내용 : 게시판 수정페이지 로드
-	 * 
-	 * @RequestMapping(value = "boardModifyPage") public String
-	 * boardModifyPage(Model model, BoardVO boardVO) throws Exception {
-	 * model.addAttribute("boardVO", boardVO); return "board/boardRegister"; }
-	 * 
-	 * // 내용 : 게시판 내용 수정
-	 * 
-	 * @RequestMapping(value = "boardModify") public String boardModify(Model model,
-	 * BoardVO boardVO) throws Exception { cmservice.boardModify(boardVO); return
-	 * "redirect:boardInq.do"; }
-	 */
-
-	/***** 공통 게시판 끝 ************************************************************/
-
+	
+	//게시판 조회
 	@RequestMapping(value = "boardList.do")
 	public String boardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 
-		System.out.println("############"+boardVO.toString());
-		
 		int listCnt = cmservice.boardgetBoardCnt(boardVO);
 		Pagination pagination = new Pagination(listCnt, curPage);
 
@@ -166,7 +70,6 @@ public class CmController {
 		List<BoardVO> boardList = new ArrayList<>();
 
 		boardList = cmservice.boardGetList(boardVO);
-		// List<BoardVO> boardList = new ArrayList<>();
 
 		for (int i = 0; i < boardList.size(); i++) {
 			String year = boardList.get(i).getRgtDtm().substring(0, 4);
@@ -174,7 +77,6 @@ public class CmController {
 			String date = boardList.get(i).getRgtDtm().substring(6, 8);
 			boardList.get(i).setRgtDtm(year + "년" + month + "월" + date + "일");
 		}
-		// boardList =cmservice.boardGetList(boardVO);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("srchKeyword", boardVO.getSrchKeyword());
@@ -182,6 +84,7 @@ public class CmController {
 		return "board/boardList";
 	}
 
+	//게시글 등록페이지
 	@RequestMapping(value = "boardRegister", method = RequestMethod.GET)
 	public String boardRegister(Model model) throws Exception {
 		String flag = "등록";
@@ -189,6 +92,7 @@ public class CmController {
 		return "board/boardRegister";
 	}
 
+	//게시글 수정페이지
 	@RequestMapping(value = "boardUpdList", method = RequestMethod.POST)
 	public String boardUpdList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model) throws Exception {
 		String flag = "수정";
@@ -197,6 +101,7 @@ public class CmController {
 		return "board/boardRegister";
 	}
 
+	//게시글 등록
 	@RequestMapping(value = "boardInsert", method = RequestMethod.POST)
 	public String boardInsert(Model model, @ModelAttribute("BoardVO") BoardVO boardVO, HttpServletRequest request)
 			throws Exception {
@@ -205,6 +110,7 @@ public class CmController {
 		return "redirect:boardList.do";
 	}
 
+	//게시글 삭제
 	@ResponseBody
 	@RequestMapping(value = "boardDelete", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public int boardDelete(@RequestParam(value = "chbox[]") List<String> chArr, HttpServletRequest request)
@@ -222,6 +128,7 @@ public class CmController {
 		return result;
 	}
 
+	//게시글 조회수증가
 	@ResponseBody
 	@RequestMapping(value = "boardUpdateReadCnt", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public int boardUpdateReadCnt(@RequestParam(value = "idx") int idx, HttpServletRequest request) throws Exception {
@@ -229,6 +136,7 @@ public class CmController {
 		return result;
 	}
 
+	//게시글 수정
 	@RequestMapping(value = "boardUpdBoard")
 	public String boardUpdBoard(@ModelAttribute(value = "BoardVO") BoardVO boardVO, Model model) throws Exception {
 		cmservice.boardUpdBoard(boardVO);
@@ -237,6 +145,7 @@ public class CmController {
 		return "redirect:Detail.do?flag='T'";
 	}
 
+	//게시글 상세보기
 	@RequestMapping(value = "Detail")
 	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx") int idx,
 			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
@@ -254,12 +163,14 @@ public class CmController {
 		return url;
 	}
 
+	//비밀글 체크?
 	@RequestMapping(value = "boardScrPwChk")
 	public String boardScrPwChk(BoardVO boardVO, Model model) throws Exception {
 		model.addAttribute("vo", boardVO);
 		return "board/boardScrPwChk";
 	}
 
+	//비밀글 확인
 	@ResponseBody
 	@RequestMapping(value = "boardScrPwChkConfirm")
 	public int boardScrPwChkConfirm(@RequestParam(value = "idx") int idx, @RequestParam(value = "scrPw") String scrPw,
