@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css"/>
-<style>
-	
-</style>
-
 <script>
 
 $(document).ready(function() {
@@ -37,7 +33,6 @@ function fn_Delete() {
 		$("input[type='checkBox']:checked").each(function() {
 			checkArr.push($(this).attr("data-cartNum"));
 		});
-		alert(checkArr);		 
 		$.ajax({
 			url : "boardDelete.do",
 			type : "post",
@@ -45,7 +40,7 @@ function fn_Delete() {
 			data : {chbox : checkArr },
 			success : function(data) {
 				if(data ==1) {
-				alert("댓글 삭제완료!");
+				alert("글 삭제완료!");
 				  location.href = "boardList.do";
 				}
 			},
@@ -104,42 +99,12 @@ function fn_selectLine(obj) {
 		}
 		
 	});
-	
-	/* var str="";
-	var tr= $(this);
-	var tdArr = new Array();
-	var td= tr.children();
-	td.each(function(i){
-		tdArr.push(td.eq(i).text());		//클릭된 행의 모든값을 한번에 가져오기 : text()
-		)}; */
-		/* alert(tdArr); */
 }
 function onSuccess(data) {
 	var form = document.frm;
- //	var result = $('#idx').val();
 	form.action="Detail.do";
 	form.submit();
 }
-
-
-/* function fn_search() {
-	var f= document.schfrm;
-	var obj= f.serialize();
-	
-	if(schtext !=null) {
-		$.ajax({
-			url : 'boardSboard.do',
-			data : {searchList: obj },
-			success : function(data) {
-				
-			},
-			error : function() {
-				alert("접근 실패");
-			}
-			
-		});
-	}
-} */
 
 function chkword(obj, maxlength){
 	 var strValue = obj.value;
@@ -175,13 +140,13 @@ function chkword(obj, maxlength){
 
 function fn_enter() {
 	if(event.keyCode == 13) {
-		fn_movePage('boardList.do','Y');
+		fn_movePage('boardList.do','frm','Y');
 	}
 }
 
 function fn_search() {
 	var srchtrg = $("#srchtrg option:selected").val();
-	fn_movePage('boardList.do','Y');
+	fn_movePage('boardList.do','schfrm','Y');
 }
 </script>
 <body>
@@ -196,20 +161,15 @@ function fn_search() {
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	${boardVO.srchKeyword }
-	${boardVO.srchtrg }
 	<div class="searchBox">
  	<form id="schfrm" name="schfrm" action="#" method="get">
  	<table align="center">
 			<tr>
 				<td>
-				<%--  --%>
 					<input type="hidden" name="curPage" value="${pagination.curPage}">
 					<select  id="srchtrg" name="srchtrg" onchange="" >
 					<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목</option>
 					<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
-					<!-- 	<option value="title">제목<option>
-						<option value="contents" >내용</option> -->
 					</select>
 					<input type="text" id="srchKeyword" name="srchKeyword" value="${BoardVO.srchKeyword}">
 					<input type="button" value="검색" onclick="fn_search(this)" onkeypress="fn_enter()">
@@ -223,7 +183,6 @@ function fn_search() {
 	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>
 	<thead>
-	
 	</thead>
 	<tbody>
 		<tr>
@@ -232,19 +191,16 @@ function fn_search() {
 			<td width="200px">제목</td>
 			<td>조회수</td>
 			<td width="200px">등록일시</td>
-		
-		
 		</tr>
 	<c:if test="${list.size() !=0 }">
-			<c:forEach var="vo" items="${boardList}">
+		<c:forEach var="vo" items="${boardList}">
 				<tr class="selectline">
-				<td ><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
-				<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
-				<td  onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
+				<td><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
+					<td onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
+					<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
+					<td onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
+					<td onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
 				</tr>
-			
 		</c:forEach>
 	</c:if>		
 	<c:if test="${list.size() == 0 }">

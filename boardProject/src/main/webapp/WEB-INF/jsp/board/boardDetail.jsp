@@ -92,7 +92,7 @@ border: 1px solid #aaa;
 				<input type="button"class="button"  id="" name="" value="목록으로"  onclick="fn_movePage('boardList.do')"/>
 			</td>
 			<td colspan="2" align= "right">
-				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('boardUpdList.do','Y');"/>
+				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('boardUpdList.do','frm','Y');"/>
 			</td>
 		</tr>
 		<!-- Paging -->

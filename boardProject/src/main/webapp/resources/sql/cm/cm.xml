@@ -141,7 +141,7 @@
 		) 
 		</insert>
 
-	<update id="chbaordUpdBoard_001" parameterType="BoardVO">
+	<update id="boardUpdBoard_001" parameterType="BoardVO">
 		UPDATE /*boardUpdBoard_001*/
 		board SET
 		 TITLE = #{title}
@@ -157,22 +157,23 @@
 		WHERE IDX = #{idx}
 	</update>
 	
+	
 	<select id="boardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
 		SELECT * FROM board 
 		<if test="srchKeyword != null">
 			<where>
-			<if test='srchtrg == "title"'>
-		title 
-		</if>
-		<if test='srchtrg == "contents"'>
-		contents 
-		</if>
-			<![CDATA[
-			  LIKE CONCAT('%',#{srchKeyword},'%')
-			]]>
-	 </where>
-	 </if>
-			 ORDER BY IDX DESC
+				<if test='srchtrg == "title"'>
+				title 
+				</if>
+				<if test='srchtrg == "contents"'>
+				contents 
+				</if>
+				<![CDATA[
+				  LIKE CONCAT('%',#{srchKeyword},'%')
+				]]>
+	 		</where>
+	 	</if>
+		ORDER BY IDX DESC
 		LIMIT #{startIndex},#{pageSize}
 	</select>
 	
@@ -182,16 +183,16 @@
 		FROM board
 		<if test="srchKeyword != null">
 			<where>
-		<if test='srchtrg == "title"'>
-		title 
-		</if>
-		<if test='srchtrg == "contents"'>
-		contents 
-		</if>
-			<![CDATA[
-			  LIKE CONCAT('%',#{srchKeyword},'%')
-			]]>
-			 </where>
+				<if test='srchtrg == "title"'>
+				title 
+				</if>
+				<if test='srchtrg == "contents"'>
+				contents 
+				</if>
+				<![CDATA[
+				  LIKE CONCAT('%',#{srchKeyword},'%')
+				]]>
+			</where>
 		</if>
 	</select>
 	

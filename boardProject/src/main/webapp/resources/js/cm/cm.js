@@ -10,18 +10,18 @@
  * 용도 : submit or 페이지 이동시 사용. 폼 아이디는 frm 설정해야함.
  * 예시 : fn_movePage("write.do","Y") or fn_movePage("list.do");
  *****************************************************************/
-  function fn_movePage(actionUrl,submitYn ="N",confirmMsg = "") {
+  function fn_movePage(actionUrl,formId = "",submitYn = "N",confirmMsg = "") {
 	  	if(confirmMsg != ""){
 	        if(confirm(confirmMsg)) {}else{
 	            return false;
 	        }
 	  	}
-	  
+	  	
 		if(submitYn == "N"){
 			location.replace(actionUrl);
 		}else{
-			$("#frm").attr("action", actionUrl);
-			$("#frm").submit();
+			$("#"+formId).attr("action", actionUrl);
+			$("#"+formId).submit();
 		}
 		return true;
 	}
