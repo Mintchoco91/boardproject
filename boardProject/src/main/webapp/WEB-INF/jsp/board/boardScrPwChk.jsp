@@ -39,7 +39,7 @@ function fn_PwConfrim() {
 }
 
 function onSuccess() {
-	fn_movePage("Detail.do?flag='T'", 'Y');
+	fn_movePage("Detail.do?flag='T'",'frm','Y');
 }
 
 </script>

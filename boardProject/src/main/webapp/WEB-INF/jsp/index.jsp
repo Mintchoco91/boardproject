@@ -10,7 +10,7 @@
  * 변경일 : 2019/07/22
  */
  -->
-<!DOCTYPE htmㅈl>   
+<!DOCTYPE html>   
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -61,8 +61,6 @@ $(document).ready(function() {
 			event.preventDefault(); 
 			} 
 		});
-
-
 });
 
 function fn_Register() {
@@ -161,10 +159,10 @@ function fn_Register() {
 		<tr>
 			<td colspan="4" style="text-align: right">
 			 <c:if test="${flag == '등록'}">
-				<input type="button" class="button" id="" name="" value="등록"  onclick="fn_movePage('boardInsert.do','Y')"/>
+				<input type="button" class="button" id="" name="" value="등록"  onclick="fn_movePage('boardInsert.do','frm','Y')"/>
 			</c:if>
 			<c:if test="${flag == '수정' }">
-				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('boardUpdBoard.do','Y');"/>
+				<input type="button" class="button" id="" name="" value="수정"  onclick="fn_movePage('boardUpdBoard.do','frm','Y');"/>
 	  	  </c:if>
 				<input type="button" class="button" id="" name="" value="취소"  onclick="history.back()"/>
 			</td>

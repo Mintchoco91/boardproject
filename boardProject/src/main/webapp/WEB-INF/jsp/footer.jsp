@@ -15,6 +15,7 @@ height:150px;
 background-color:#D8D8D8;
 }
 .footer {
+position:relative;
     width:100%;
     height: 180px;
     bottom: 0;
