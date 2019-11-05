@@ -25,37 +25,37 @@ function fn_Register() {
 function fn_Delete() {
 	var f=document.frm;
 	var data = $('#frm').serialize();
-	var msg = confirm("정말 삭제하시겠습니까?");
 	var arrCnt = 0;
-	if(msg ==true) {
-		var checkArr =new Array();
-		$("input[type='checkBox']:checked").each(function() {
-			checkArr.push($(this).attr("data-cartNum"));
-			arrCnt++;
-		});
+	var checkArr =new Array();
+	$("input[type='checkBox']:checked").each(function() {
+		checkArr.push($(this).attr("data-cartNum"));
+		arrCnt++;
+	});
 
-		//글선택 안했을경우
-		if(arrCnt == 0) alert("삭제 할 항목을 선택 해 주세요."); return false;
-		
-		$.ajax({
-			url : "boardDelete.do",
-			type : "post",
-			datatype:"text",
-			data : {chbox : checkArr },
-			success : function(data) {
-				if(data ==1) {
-				alert("글 삭제완료!");
-				  location.href = "boardList.do";
-				}
-			},
-			error : function() {
-				alert("삭제 실패");
-			}
-		});
-	}else {
-		return;
+	//글선택 안했을경우
+	if(arrCnt == 0) {
+		alert("삭제 할 항목을 선택 해 주세요."); 
+		return false;
 	}
+
+	var msg = confirm("정말 삭제하시겠습니까?");
+	if(msg == false) return false;
 	
+	$.ajax({
+		url : "boardDelete.do",
+		type : "post",
+		datatype:"text",
+		data : {chbox : checkArr },
+		success : function(data) {
+			if(data ==1) {
+			alert("글 삭제완료!");
+			  location.href = "boardList.do";
+			}
+		},
+		error : function() {
+			alert("삭제 실패");
+		}
+	});
 }
 
 function fn_selectLine(obj) {
