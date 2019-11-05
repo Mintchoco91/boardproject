@@ -111,8 +111,10 @@ public class CmServiceimpl implements CmService {
 
 	@Override
 	public void boardUpdBoard(BoardVO boardVO) {
+		if(boardVO.getScrYn() == null || boardVO.getScrPw() == null || boardVO.getScrPw().trim().equals("")) {
+			boardVO.setScrYn("N");
+		}
 		cmDAO.boardUpdBoard_001(boardVO);
-		
 	}
 
 	@Override

@@ -105,7 +105,6 @@ border: 1px solid #aaa;
 	
 	<!-- // header -->
 	
-	<jsp:include page="../footer.jsp"/>
 <!-- //wrapper -->
 </body>
 

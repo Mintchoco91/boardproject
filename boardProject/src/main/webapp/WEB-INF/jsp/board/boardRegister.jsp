@@ -176,7 +176,6 @@ function fn_Register() {
 	</div>
 	<!-- // header -->
 	
-	<jsp:include page="../footer.jsp"/>
 <!-- //wrapper -->
 </body>
 </html>
