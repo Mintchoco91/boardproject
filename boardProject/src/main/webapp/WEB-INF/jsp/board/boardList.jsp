@@ -11,8 +11,6 @@ $(document).ready(function() {
 		}else {
 			$("input[type=checkbox]").prop("checked", false);
 		}
-		
-
 	});
 });
 
@@ -28,11 +26,17 @@ function fn_Delete() {
 	var f=document.frm;
 	var data = $('#frm').serialize();
 	var msg = confirm("정말 삭제하시겠습니까?");
+	var arrCnt = 0;
 	if(msg ==true) {
 		var checkArr =new Array();
 		$("input[type='checkBox']:checked").each(function() {
 			checkArr.push($(this).attr("data-cartNum"));
+			arrCnt++;
 		});
+
+		//글선택 안했을경우
+		if(arrCnt == 0) alert("삭제 할 항목을 선택 해 주세요."); return false;
+		
 		$.ajax({
 			url : "boardDelete.do",
 			type : "post",
@@ -47,38 +51,12 @@ function fn_Delete() {
 			error : function() {
 				alert("삭제 실패");
 			}
-			
 		});
 	}else {
 		return;
 	}
 	
 }
-
-function ajaxCall(method, url, request) {
-	var returnData = new Object;
-	$.ajax({
-		method : method,
-		url : url,
-		dataType : 'json',
-		data :  JSON.stringify(request),
-		processData : true,
-		contentType : 'application/json; charset=UTF-8',
-		async : false, // default == true  == 동기 // false == 비동기
-		success : function(data) {
-			if(data ==1) {
-				alert("삭제 성공");
-			}else {
-				alert("삭제 실패");
-			}
-			
-		},
-		error :function() {
-			alert("실패작");
-		}
-	});
-	return returnData;
-};
 
 function fn_selectLine(obj) {
 	document.frm.idx.value =obj;
@@ -230,6 +208,5 @@ function fn_search() {
 	<!-- footer -->
 	</div>
 <!-- //wrapper -->
-	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

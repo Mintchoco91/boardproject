@@ -84,6 +84,5 @@ function onSuccess() {
 	
 	<!-- // header -->
 	
-	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
