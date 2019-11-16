@@ -34,7 +34,7 @@
 			value="jdbc:mariadb://mintchoco91.cafe24.com:3306/mintchoco91"></property>
 		<property name="username" value="mintchoco91"></property>
 		<property name="password" value="rldnjs01!@"></property>
-	</bean> 
+	</bean>
 
 
 <!--  서버용

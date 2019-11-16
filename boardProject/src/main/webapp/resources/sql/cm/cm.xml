@@ -65,7 +65,7 @@
 	
 	<select id="boardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
 		SELECT * FROM board 
-		<if test="srchKeyword != null">
+		<if test="srchKeyword != null and srchKeyword != ''">
 			<where>
 				<if test='srchtrg == "title"'>
 				title 
@@ -86,7 +86,7 @@
 		SELECT /*boardgetBoardCnt_001*/
 		COUNT(*) 
 		FROM board
-		<if test="srchKeyword != null">
+		<if test="srchKeyword != null and srchKeyword != ''">
 			<where>
 				<if test='srchtrg == "title"'>
 				title 
@@ -106,7 +106,6 @@
 		DELETE   /* boardDelete_001*/
 		FROM board
 		WHERE IDX=#{idx}
-	
 	</delete>
 	
 	<insert id="boardUpdateReadCnt_001" parameterType="int">

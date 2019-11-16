@@ -87,7 +87,6 @@ function fn_Register() {
 
 </script>
 <!-- wrapper -->
-<jsp:include page="../header.jsp"/>
 	<!-- Container -->
 	<div class="wrapper">
 	<!-- contents -->

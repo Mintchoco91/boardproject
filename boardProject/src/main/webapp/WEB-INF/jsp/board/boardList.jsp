@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
-<link rel="stylesheet" type="text/css" href="/resources/css/common.css"/>
 <script>
 
 $(document).ready(function() {
@@ -128,7 +127,6 @@ function fn_search() {
 }
 </script>
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
 
 <!-- wrapper -->
 	<div class="wrapper">
@@ -146,8 +144,8 @@ function fn_search() {
 				<td>
 					<input type="hidden" name="curPage" value="${pagination.curPage}">
 					<select  id="srchtrg" name="srchtrg" onchange="" >
-					<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목</option>
-					<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
+						<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목</option>
+						<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
 					</select>
 					<input type="text" id="srchKeyword" name="srchKeyword" value="${BoardVO.srchKeyword}">
 					<input type="button" value="검색" onclick="fn_search(this)" onkeypress="fn_enter()">

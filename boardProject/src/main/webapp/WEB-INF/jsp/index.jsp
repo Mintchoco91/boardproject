@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css"/>
 
 <!-- 
 /*
@@ -90,7 +91,6 @@ body {
 
 
 </script>
-<jsp:include page="header.jsp"></jsp:include>
 <body>
 <div class="row">
   <div class="leftcolumn">
@@ -143,5 +143,5 @@ body {
    </div>
 </body>
 
-<jsp:include page="footer.jsp"></jsp:include>
+<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
 </html>
