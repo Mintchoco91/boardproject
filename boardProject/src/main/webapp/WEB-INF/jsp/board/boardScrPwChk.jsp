@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <title>비밀글확인페이지</title>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
-<link rel="stylesheet" type="text/css" href="/resources/css/common.css"/>
 <script>
 
 function fn_enter() {
@@ -44,7 +43,6 @@ function onSuccess() {
 
 </script>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
 	<!-- Container -->
 	<div class="Container">
 	<!-- contents -->

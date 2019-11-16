@@ -181,6 +181,14 @@
             <version>2.8.5</version>
         </dependency>
 
+		<!-- Mail lib(SMTP) -->
+		<dependency> 
+			<groupId>javax.mail</groupId> 
+			<artifactId>mail</artifactId> 
+			<version>1.4.7</version> 
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

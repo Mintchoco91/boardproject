@@ -2,52 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
-<style>
-
-.Container {
-	width : 1400px;
-height : 200px; 
-padding : 30px;
-	
-}
-
-.listTable {
-text-align: center;
-}
-.wrapper {
- width: 800px;
-margin: 0 auto;
-border: 1px solid #aaa;
-
-}
-
-.button {
-    background-color: white;
-    border:  none;
-    font-family: a타이틀고딕3;
-    text-decoration: none;
-    padding: 10px 10px;
-    margin: 1px;
-     border-top-left-radius:20px;
- border-top-right-radius:20px;
- border-bottom-right-radius:20px;
- border-bottom-left-radius:20px;
- background: #b7c7e5;
- }
- 
-.button:hover {
-   background: #93A9D1;
-   color : white;
-}
-</style>
-</head>
-<style>
-
-
-</style>
 <body>
 <!-- wrapper -->
-<jsp:include page="../header.jsp"></jsp:include>
 	<!-- Container -->
 	<div class="Container">
 	<!-- contents -->
