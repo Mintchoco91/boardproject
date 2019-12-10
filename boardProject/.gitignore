@@ -12,8 +12,7 @@ cmake-build-debug/
 # Directories #
 /build/
 /bin/
-target/
-webapp/
+/target/
 .idea
 META-INF/
   

@@ -18,7 +18,7 @@ import com.project.boardproject.cm.service.BoardVO;
 @Mapper
 public interface CmDAO  {
 
-	//board 정리 시작
+	/*//board 정리 시작
 	public List<BoardVO> boardInq_001(BoardVO boardVO);
 
 	public Integer boardDelete_001(BoardVO boardVO);	
@@ -33,7 +33,6 @@ public interface CmDAO  {
 	//board 정리 끝
 	public String tempsql_001();
 
-	public void chboardInsert_001(BoardVO boardVO);
 
 	public List<BoardVO> kwboardInq_001(BoardVO boardVO);
 
@@ -47,13 +46,22 @@ public interface CmDAO  {
 	
 	public void kwboardWrite_001(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList_001(BoardVO boardVO);
+	public int boardUpdateReadCnt_001(int idx);*/
+	
+	public void boardInsert_001(BoardVO boardVO);
+	public List<BoardVO> boardGetList_001(BoardVO boardVO);
 
-	public int chboardgetBoardCnt_001(BoardVO boardVO);
+	public int boardgetBoardCnt_001(BoardVO boardVO);
 
-	public void chboardDelete_001(BoardVO boardVO);
+	public void boardDelete_001(BoardVO boardVO);
 
-	public int chboardUpdateReadCnt_001(int idx);
+	public int boardUpdateReadCnt_001(int idx);
 
-	public BoardVO chboardDetail_001(BoardVO vo);	
+	public BoardVO boardDetail_001(BoardVO vo);
+
+	public BoardVO boardSchBoard_001(Map<String, String> schMap);
+
+	public void boardUpdBoard_001(BoardVO boardVO);
+
+	public int boardScrPwChkConfirm_001(BoardVO vo);	
 }

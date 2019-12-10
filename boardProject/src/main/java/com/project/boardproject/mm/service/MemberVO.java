@@ -89,4 +89,12 @@ public class MemberVO {
 	public void setUpdDtm(String updDtm) {
 		this.updDtm = updDtm;
 	}
+	@Override
+	public String toString() {
+		return "MemberVO [idx=" + idx + ", userId=" + userId + ", pw=" + pw + ", name=" + name + ", email1=" + email1
+				+ ", email2=" + email2 + ", isAdminYn=" + isAdminYn + ", delYn=" + delYn + ", rgtId=" + rgtId
+				+ ", rgtDtm=" + rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + "]";
+	}
+	
+	
 }
