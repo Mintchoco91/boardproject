@@ -137,65 +137,67 @@ function fn_search() {
 	</div>
 	<!-- Container -->
 	<div class="Container">
-	<div class="searchBox">
- 	<form id="schfrm" name="schfrm" action="#" method="get">
+	
+	<form:form commandName="BoardVO" id="frm" name="frm"> 
+	<table width="700px" class="table" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+	<input type="hidden" id="idx" name="idx" value=""/>
+		<thead class="table-warning">
+			<tr>
+				<th><input type="checkbox" id="allCheck" name="allCheck" value="" /></th>
+				<th>글번호</th>
+				<th width="200px">제목</th>
+				<th>조회수</th>
+				<th width="200px">등록일시</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:if test="${list.size() !=0 }">
+				<c:forEach var="vo" items="${boardList}">
+						<tr class="selectline">
+						<td><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
+							<td onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
+							<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
+							<td onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
+							<td onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
+						</tr>
+				</c:forEach>
+			</c:if>		
+			<c:if test="${list.size() == 0 }">
+				<tr>
+					<td colspan="7" align="center">
+						조회된 게시물이 없습니다.
+					</td>
+				</tr>
+			</c:if>
+		</tbody>
+
+		<tr>
+			<td  colspan="7" align="right">
+			<input type="button" class="btn btn-default" value="등록" onclick="fn_movePage('boardRegister.do');">
+			<input type="button" class="btn btn-default" value="삭제" onclick="fn_Delete();">
+			</td>
+		</tr>
+	
+	</tbody>
+	</table>
+	</form:form>
+	
+ 	<form class="form-inline" id="schfrm" name="schfrm" action="#" method="get">
  	<table align="center">
 			<tr>
 				<td>
 					<input type="hidden" name="curPage" value="${pagination.curPage}">
-					<select  id="srchtrg" name="srchtrg" onchange="" >
+					<select class="form-control" id="srchtrg" name="srchtrg" onchange="" >
 						<option value="title" <c:if test="${ BoardVO.srchtrg eq 'title'}"> selected</c:if>>제목</option>
 						<option value="contents" <c:if test="${BoardVO.srchtrg eq 'contents'}">selected</c:if>>내용</option>
 					</select>
-					<input type="text" id="srchKeyword" name="srchKeyword" value="${BoardVO.srchKeyword}">
-					<input type="button" value="검색" onclick="fn_search(this)" onkeypress="fn_enter()">
+					<input type="text" class="form-control" id="srchKeyword" name="srchKeyword" value="${BoardVO.srchKeyword}">
+					<button class="btn btn-default" onclick="fn_search(this)" onkeypress="fn_enter()">검색</button>
 				</td>
 			</tr>
 		</table>
 	</form>
-	</div>	
 	
-	<form:form commandName="BoardVO" id="frm" name="frm"> 
-	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
-	<input type="hidden" id="idx" name="idx" value=""/>
-	<thead>
-	</thead>
-	<tbody>
-		<tr>
-			<td><input type="checkbox" id="allCheck" name="allCheck" value="" /></td>
-			<td>글번호</td>
-			<td width="200px">제목</td>
-			<td>조회수</td>
-			<td width="200px">등록일시</td>
-		</tr>
-	<c:if test="${list.size() !=0 }">
-		<c:forEach var="vo" items="${boardList}">
-				<tr class="selectline">
-				<td><input type="checkbox" id="check" class="chBox" name="check" value="${vo.idx }"   data-cartNum="${vo.idx}" /></td>
-					<td onclick="fn_selectLine(${vo.idx})">${vo.idx }</td>
-					<td onclick="fn_selectLine(${vo.idx})">${vo.title }</td>
-					<td onclick="fn_selectLine(${vo.idx})">${vo.readCnt }</td>
-					<td onclick="fn_selectLine(${vo.idx})">${vo.rgtDtm }</td>
-				</tr>
-		</c:forEach>
-	</c:if>		
-	<c:if test="${list.size() == 0 }">
-		<tr>
-			<td colspan="7" align="center">
-				조회된 게시물이 없습니다.
-			</td>
-		</tr>
-	</c:if>
-
-		<tr>
-			<td  colspan="7" align="right">
-			<input type="button" class="button" value="등록" onclick="fn_movePage('boardRegister.do');">
-			<input type="button" class="button" value="삭제" onclick="fn_Delete();">
-			</td>
-		</tr>
-	</tbody>
-	</table>
-	</form:form>
 	</div>
 	<!-- //Container -->
 	    <!-- paging 시작 -->
