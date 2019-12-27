@@ -5,7 +5,7 @@
 	<groupId>boardProject</groupId>
 	<artifactId>boardProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<properties>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
