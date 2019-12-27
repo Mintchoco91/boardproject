@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
+import com.project.boardproject.cm.service.ReplyVO;
 
 /*
  * 파일명 : CmServiceimpl.java
@@ -22,57 +23,7 @@ public class CmServiceimpl implements CmService {
 	@Autowired
 	private CmDAO cmDAO;	
 
-/*	//내용 : 게시판 조회
-	@Override
-	public List<BoardVO> boardInq(BoardVO boardVO) {
-		return cmDAO.boardInq_001(boardVO);
-	}
 
-	//내용 : 게시판 글쓰기
-	@Override
-	public void boardWrite(BoardVO boardVO) {
-		cmDAO.boardWrite_001(boardVO);
-	}
-
-	//내용 : 게시판 총 글수 count
-	@Override
-	public Integer boardInqCnt(BoardVO boardVO) {
-		return cmDAO.boardInqCnt_001(boardVO);
-	}
-
-	//내용 : 게시판 글 삭제
-	@Override
-	public String boardDelete(String[] idxArray) {
-		Integer resultval = 0;
-		String result = "error";
-		
-		BoardVO boardVO = new BoardVO();
-		for(int i=0; i<idxArray.length ; i++) {
-			boardVO.setIdx(Integer.parseInt(idxArray[i]));
-			resultval = resultval + cmDAO.boardDelete_001(boardVO);
-		}
-		
-		if(resultval == idxArray.length) {
-			result = "success";
-		}
-		return result;
-	}
-	
-	//내용 : 게시판 글 상세조회
-	@Override
-	public BoardVO boardDetail(BoardVO boardVO) {
-		cmDAO.boardUpdateReadCnt_001(boardVO.getIdx());
-		return cmDAO.boardDetail_001(boardVO);
-	}
-*/
-	/*//내용 : 게시판 글 수정
-	@Override
-	public Integer boardModify(BoardVO boardVO) {
-		Integer resultval = 0;
-		resultval = cmDAO.boardModify_001(boardVO);
-		return resultval;
-	}
-	*/
 	@Override
 	public void boardInsert(BoardVO boardVO) {
 		System.out.println(boardVO.toString());
@@ -122,5 +73,17 @@ public class CmServiceimpl implements CmService {
 		int result;
 		result =cmDAO.boardScrPwChkConfirm_001(vo);
 		return result;
+	}
+
+	/***************************댓글***************************/
+	
+	@Override
+	public List<ReplyVO> replyGetList(int bno) {
+		return cmDAO.replyGetList(bno);
+	}
+
+	@Override
+	public void replyInsert(ReplyVO replyVO) {
+		cmDAO.replyInsert(replyVO);
 	}
 }

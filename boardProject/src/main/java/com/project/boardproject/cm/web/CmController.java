@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
+import com.project.boardproject.cm.service.ReplyVO;
 import com.project.boardproject.mm.service.MemberVO;
 
 /*
@@ -144,20 +147,25 @@ public class CmController {
 		return "redirect:Detail.do?flag='T'";
 	}
 
-	//게시글 상세보기
+	//게시글 상세보기+댓글 추가
 	@RequestMapping(value = "Detail")
 	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx") int idx,
 			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
+		
 		String url = "";
 		BoardVO vo = new BoardVO();
 		boardVO.setIdx(idx);
 		vo = cmservice.boardDetail(boardVO);
-
+		
+		List<ReplyVO> replyList = cmservice.replyGetList(idx);
+		System.out.println(replyList);//출력 테스트
+		
 		if ("Y".equals(vo.getScrYn()) && "F".equals(flag)) {
 			url = "board/boardScrPwChk";
 		} else {
 			url = "board/boardDetail";
 		}
+		model.addAttribute("replyList", replyList);
 		model.addAttribute("vo", vo);
 		return url;
 	}
@@ -180,4 +188,28 @@ public class CmController {
 		int result = cmservice.boardScrPwChkConfirm(vo);
 		return result;
 	}
+	
+	
+	
+	/****************************댓글***********************************/
+	
+	
+	//댓글 입력
+	@RequestMapping(value = "replyInsert")
+	public String replyInsert(ReplyVO vo, HttpSession session, Model model) {
+//		String rgtId = (String) session.getAttribute("userid");
+//		vo.setRgtId(rgtId); //현재 로그인 되어 있는 사람 아이디가 댓글 작성자
+		cmservice.replyInsert(vo);
+		model.addAttribute("idx", vo.getIdx());
+		return "redirect:Detail.do";
+	}
+	
+	
+	
+	
+
+	
+	
+	
+	
 }
