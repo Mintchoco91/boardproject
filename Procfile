@@ -1,1 +1,1 @@
-web: java -war boardProject.war --app boardproject-kw
+web: java -jar boardProject.jar
