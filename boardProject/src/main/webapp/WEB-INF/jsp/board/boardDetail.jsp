@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<script type="text/javascript">
+
+/*
+		$("#btnReply").click(function(){
+			var contents = $("#contents").val();
+			var bno = "${dto.bno}";
+			var param = "contents="+replytext+"&bno="+bno;
+			$.ajax({
+				type: "post",
+				dataType: "json",
+				url: "${path}/reply/insert.do",
+				data: param,
+				success: function(){
+					alert("댓글이 등록되었습니다.");
+					//listReply2();
+				}
+			});
+		});
+*/
+</script>
+
+
 
 <body>
 <!-- wrapper -->
@@ -60,6 +82,19 @@
 	<!-- //Container -->
 	
 	<!-- // header -->
+	
+	<!-- 댓글작성 입력폼 -->
+	<form action="./replyInsert.do" method="post">
+		<div style="width:650px; text-align: center;">
+			<br>
+			<input type="text" name="idx" value="${vo.idx}">
+			<textarea rows="5" cols="80" name="contents" id="contents" placeholder="댓글을 작성해주세요"></textarea>
+			<br>
+			<input type="submit">댓글 작성</button>
+			
+		
+		</div>
+	</form>
 	
 <!-- //wrapper -->
 </body>
