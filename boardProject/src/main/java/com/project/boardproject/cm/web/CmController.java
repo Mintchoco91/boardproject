@@ -37,7 +37,12 @@ public class CmController {
 	private static final Logger logger = LoggerFactory.getLogger(CmController.class);
 
 	/***** 공통 게시판 시작 ************************************************************/
-
+	//index조회
+	@RequestMapping("/")
+	public String indexRoot(Model model, MemberVO memberVO) {
+		return "index";
+	}
+	
 	//index조회
 	@RequestMapping("index")
 	public String index(Model model, MemberVO memberVO) {
