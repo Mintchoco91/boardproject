@@ -1,1 +1,1 @@
-web: java -jar target/boardProject.jar
+web: java -war boardProject.war
