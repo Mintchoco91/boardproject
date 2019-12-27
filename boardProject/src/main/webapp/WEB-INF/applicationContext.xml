@@ -26,7 +26,17 @@
 	<!-- -->
 	<!--dataSource 객체 설정 -->
 
+ 	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mariadb://nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/xb1r10me3708gb2n"></property>
+		<property name="username" value="f0l638e2sjs79qvy"></property>
+		<property name="password" value="jnzddq39trcdbzt2"></property>
+	</bean>
+	
 <!-- 로컬용(cafe24 서버연결) -->
+<!-- 
  	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
@@ -35,7 +45,7 @@
 		<property name="username" value="mintchoco91"></property>
 		<property name="password" value="rldnjs01!@"></property>
 	</bean>
-
+-->
 
 <!--  서버용
 -->
