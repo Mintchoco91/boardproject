@@ -54,10 +54,7 @@ public class CmController {
 	@RequestMapping(value = "boardList")
 	public String boardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
-		
-		System.out.println("###########"+boardVO.getSrchtrg());
-		System.out.println("###########"+boardVO.getSrchKeyword());
-
+	
 		int listCnt = cmservice.boardgetBoardCnt(boardVO);
 		Pagination pagination = new Pagination(listCnt, curPage);
 
