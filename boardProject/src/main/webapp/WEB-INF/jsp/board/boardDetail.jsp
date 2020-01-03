@@ -76,9 +76,20 @@
 			<input type="hidden" name="bno" value="${vo.idx}">
 			<textarea rows="5" cols="80" name="contents" id="contents" placeholder="댓글을 작성해주세요"></textarea>
 			<br>
-      <input type="submit" value ="댓글 작성">
+      <input type="submit" class="btn btn-default" value ="댓글 작성"><br/><br/>
 		</div>
 	</form>
+		
+<table class="table" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
+		<tr>
+		   <td>댓글</td>
+		</tr>
+		<c:forEach var="vo" items="${replyList}">
+		      <tr>
+		         <td><pre>${vo.contents}</pre></td>
+		      </tr>
+		</c:forEach>	
+</table>	
 		
 	<!-- footer -->
 	<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
