@@ -85,12 +85,12 @@
 	
 	<!-- 댓글작성 입력폼 -->
 	<form action="./replyInsert.do" method="post">
-		<div style="width:650px; text-align: center;">
+		<div style="width:650px; text-align: center; margin: auto; position: relative;">
 			<br>
-			<input type="text" name="idx" value="${vo.idx}">
+			<input type="hidden" name="bno" value="${vo.idx}">
 			<textarea rows="5" cols="80" name="contents" id="contents" placeholder="댓글을 작성해주세요"></textarea>
 			<br>
-			<input type="submit">댓글 작성</button>
+			<input type="submit" value ="댓글 작성">
 			
 		
 		</div>

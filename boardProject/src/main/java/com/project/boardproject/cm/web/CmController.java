@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
@@ -155,10 +155,9 @@ public class CmController {
 		String url = "";
 		BoardVO vo = new BoardVO();
 		boardVO.setIdx(idx);
+		System.out.println(boardVO);
 		vo = cmservice.boardDetail(boardVO);
-		
 		List<ReplyVO> replyList = cmservice.replyGetList(idx);
-		System.out.println(replyList);//출력 테스트
 		
 		if ("Y".equals(vo.getScrYn()) && "F".equals(flag)) {
 			url = "board/boardScrPwChk";
@@ -196,11 +195,13 @@ public class CmController {
 	
 	//댓글 입력
 	@RequestMapping(value = "replyInsert")
-	public String replyInsert(ReplyVO vo, HttpSession session, Model model) {
+	public String replyInsert(RedirectAttributes redirect, ReplyVO vo, HttpSession session, Model model) {
 //		String rgtId = (String) session.getAttribute("userid");
 //		vo.setRgtId(rgtId); //현재 로그인 되어 있는 사람 아이디가 댓글 작성자
+		
 		cmservice.replyInsert(vo);
-		model.addAttribute("idx", vo.getIdx());
+		redirect.addAttribute("idx", vo.getBno());//리다이렉트 시 게시글번호 리턴
+		
 		return "redirect:Detail.do";
 	}
 	
