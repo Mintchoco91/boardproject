@@ -137,6 +137,7 @@ function fn_search() {
 	</div>
 	<!-- Container -->
 	<div class="Container">
+	게시판 > 게시판 리스트
 	
 	<form:form commandName="BoardVO" id="frm" name="frm"> 
 	<table width="700px" class="table" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
@@ -182,6 +183,10 @@ function fn_search() {
 	</table>
 	</form:form>
 	
+	<!-- paging 시작 -->
+	<%@ include file="/WEB-INF/jsp/board/boardPaging.jsp" %>
+	<!-- paging 끝 -->	
+		
  	<form class="form-inline" id="schfrm" name="schfrm" action="#" method="get">
  	<table align="center">
 			<tr>
@@ -200,13 +205,13 @@ function fn_search() {
 	
 	</div>
 	<!-- //Container -->
-	    <!-- paging 시작 -->
-	<%@ include file="/WEB-INF/jsp/board/boardPaging.jsp" %>
-	<!-- paging 끝 -->	
-	
 	
 	<!-- footer -->
+	<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
+	<!-- footer 끝 -->
+	
 	</div>
 <!-- //wrapper -->
+
 </body>
 </html>

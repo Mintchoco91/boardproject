@@ -1,4 +1,3 @@
-
 package com.project.boardproject.cm.web;
 
 import java.util.ArrayList;
@@ -204,13 +203,3 @@ public class CmController {
 		
 		return "redirect:Detail.do";
 	}
-	
-	
-	
-	
-
-	
-	
-	
-	
-}
