@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
-<div class="layer_fixed">
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 
 <script type="text/javascript">
 	function memberSave(){
@@ -21,40 +20,42 @@
 	}
 </script>
 
-	<br/>
-	<br/>
-	<form:form name="register" action="register.do" method="post" modelAttribute="memberVO" onKeyPress="if(event.keyCode==13){memberSave();}">
-		<table align="center" border=1px>
-			<tr>
-				<tr>
-					<td>아이디</td>
-					<td><form:input path="userId" placeholder="아이디 입력" /></td>
-				</tr>
-				<tr>
-					<td>패스워드</td>
-					<td><form:password path="pw" placeholder="비밀번호 입력"/></td>
-				</tr>
-				<tr>	
-					<td>이름</td>
-					<td><form:input path="name" placeholder="이름 입력"/></td>
-				</tr>
-				<tr>
-					<td>email 주소</td>
-					<td><form:input path="email1"/></td>
-				</tr>
-		</table>
-		<br/>
-		<table align="center">
-			<tr>
-				<td align="center"><input type="button" value="저장" onClick = "memberSave()" onKeyPress="if(event.keyCode == 13){ memberSave(); }"></td>
-			</tr>
-			<c:if test="${not empty resultMessage}">
-				<tr>
-					<td ><font color=red>${resultMessage }</font></td>
-				</tr>
-			</c:if>
-		</table>
-	</form:form>
-
-</div>
+<html>
+	<body>
+		<div class="Container">
+			<form:form name="register" action="register.do" method="post" modelAttribute="memberVO" onKeyPress="if(event.keyCode==13){memberSave();}">
+				<table class="table" align="center" border=1px>
+					<tr>
+						<tr>
+							<td>아이디</td>
+							<td><form:input path="userId" placeholder="아이디 입력" /></td>
+						</tr>
+						<tr>
+							<td>패스워드</td>
+							<td><form:password path="pw" placeholder="비밀번호 입력"/></td>
+						</tr>
+						<tr>	
+							<td>이름</td>
+							<td><form:input path="name" placeholder="이름 입력"/></td>
+						</tr>
+						<tr>
+							<td>email 주소</td>
+							<td><form:input path="email1"/></td>
+						</tr>
+				</table>
+				<br/>
+				<table align="center">
+					<tr>
+						<td align="center"><input type="button" value="저장" onClick = "memberSave()" onKeyPress="if(event.keyCode == 13){ memberSave(); }"></td>
+					</tr>
+					<c:if test="${not empty resultMessage}">
+						<tr>
+							<td ><font color=red>${resultMessage }</font></td>
+						</tr>
+					</c:if>
+				</table>
+			</form:form>
+		</div>
+	</body>
+</html>
 <%@include file="/WEB-INF/jsp/cm/footer.jsp" %>

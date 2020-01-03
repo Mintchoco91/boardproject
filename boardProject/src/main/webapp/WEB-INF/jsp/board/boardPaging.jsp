@@ -24,11 +24,13 @@
                         <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
                     </c:if>
                 </div>
+                <br/>
                 
-                
+                <!-- 
                 <div align="center">
                     총 게시글 수 : ${pagination.listCnt } /    총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPage } / 현재 블럭 : ${pagination.curRange } / 총 블럭 수 : ${pagination.rangeCnt }
                 </div>
+                -->
                 
                 
 <script>
