@@ -151,6 +151,7 @@ public class CmController {
 	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx") int idx,
 			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
 		
+		
 		String url = "";
 		BoardVO vo = new BoardVO();
 		boardVO.setIdx(idx);
@@ -203,3 +204,8 @@ public class CmController {
 		
 		return "redirect:Detail.do";
 	}
+	
+	
+	
+	
+}
