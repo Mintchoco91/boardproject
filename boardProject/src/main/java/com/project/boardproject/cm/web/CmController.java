@@ -97,8 +97,12 @@ public class CmController {
 	@RequestMapping(value = "boardUpdList", method = RequestMethod.POST)
 	public String boardUpdList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model) throws Exception {
 		String flag = "수정";
+		
+		BoardVO srchBoardVO = new BoardVO();
+		srchBoardVO = cmservice.boardDetail(boardVO);
+		
 		model.addAttribute("flag", flag);
-		model.addAttribute("BoardVO", boardVO);
+		model.addAttribute("BoardVO", srchBoardVO);
 		return "board/boardRegister";
 	}
 
@@ -155,7 +159,6 @@ public class CmController {
 		String url = "";
 		BoardVO vo = new BoardVO();
 		boardVO.setIdx(idx);
-		System.out.println(boardVO);
 		vo = cmservice.boardDetail(boardVO);
 		List<ReplyVO> replyList = cmservice.replyGetList(idx);
 		
@@ -205,7 +208,7 @@ public class CmController {
 		return "redirect:Detail.do";
 	}
 	
-	//댓글 수정
+		//댓글 수정
 	@RequestMapping(value = "replyUpdate")
 	public String replyUpdate(RedirectAttributes redirect, ReplyVO vo) {
 //		cmservice.replyUpdate(vo);
@@ -213,6 +216,5 @@ public class CmController {
 //		redirect.addAttribute("idx", vo.getBno());
 		return "redirect:Detail.do";
 	}
-	
-	
+  
 }
