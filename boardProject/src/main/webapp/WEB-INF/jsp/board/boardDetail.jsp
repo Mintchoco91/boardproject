@@ -3,26 +3,26 @@
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <script type="text/javascript">
 
-/*
-		$("#btnReply").click(function(){
-			var contents = $("#contents").val();
-			var bno = "${dto.bno}";
-			var param = "contents="+replytext+"&bno="+bno;
-			$.ajax({
-				type: "post",
-				dataType: "json",
-				url: "${path}/reply/insert.do",
-				data: param,
-				success: function(){
-					alert("댓글이 등록되었습니다.");
-					//listReply2();
-				}
-			});
-		});
-*/
+  function replyUpdateBtn_click(idx) {
+		console.log($(this));
+		if($("#btnReplyUpdate_"+idx).html() == '수정'){
+			$("#btnReplyUpdate_"+idx).html('수정완료');
+			$("#replyContent_"+idx).attr("readonly", false);
+			$("#replyContent_"+idx).focus();
+		} else {
+			$("#btnReplyUpdate_"+idx).html('수정');
+			$("#replyContent_"+idx).attr("readonly", true);
+			//컨트롤러 호출
+			$("#replyupdate_idx").val(idx);
+			$("#replyupdate_contents").val($("#replyContent_"+idx).val());
+			$("#replyupdate_rgtId").val("");
+			$("#replyForm").submit();
+		}
+		
+		
+	}
+
 </script>
-
-
 
 <body>
 	<div class="Container">
@@ -76,14 +76,21 @@
 		</tr>
 		<c:forEach var="vo" items="${replyList}">
 		      <tr>
-		         <td><pre>${vo.contents}</pre></td>
+		         <td><textarea id="replyContent_${vo.idx}" rows="2" cols="100" readonly>${vo.contents}</textarea><button id="btnReplyUpdate_${vo.idx}" onclick="replyUpdateBtn_click(${vo.idx})">수정</button><button id="btnReplyDelete_${vo.idx}">삭제</button></td>
 		      </tr>
-		</c:forEach>	
+		</c:forEach>
 </table>	
-		
+	
+<form id="replyForm" action="./replyUpdate.do" method="post">
+	<!-- 댓글 수정 삭제 시 전송폼 (글내용, 게시물 인덱스, 댓글 인덱스, 작성자) -->
+	<input type="hidden" id="replyupdate_idx" name="idx">
+	<input type="hidden" value="${vo.idx}" id="bno" name="bno">
+	<input type="hidden" id="replyupdate_contents" name="contents">
+	<input type="hidden" id="replyupdate_rgtId" name="rgtId">
+</form>
+
 	<!-- footer -->
 	<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
 	<!-- footer 끝 -->
 </body>
-
 </html>
