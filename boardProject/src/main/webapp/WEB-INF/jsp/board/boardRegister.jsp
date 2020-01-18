@@ -35,7 +35,7 @@ function fn_Validate() {
 	var f= document.frm;
 	
 	if($('#title').val() == '') {
-	    alert("아이디를 입력하세요");
+	    alert("제목을 입력하세요");
 	    $('#title').focus();
 	    return;
 	}
@@ -109,7 +109,7 @@ function fn_Validate() {
 				<tr>
 					<th style="width:100;text-align:center" scope="col">내용</th>
 					<td colspan="4">
-					<textarea  cols="130" rows="20" id="summernote" name="contents" style="overflow-y:scroll"><pre>${BoardVO.contents }</pre> </textarea></td>
+					<textarea  cols="130" rows="20" id="summernote" name="contents" style="overflow-y:scroll">${BoardVO.contents }</textarea></td>
 				</tr>
 				<tr>
 					<th style="width:100;text-align:center" scope="col">첨부파일</th>
