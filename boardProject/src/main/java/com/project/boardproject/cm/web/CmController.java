@@ -205,7 +205,14 @@ public class CmController {
 		return "redirect:Detail.do";
 	}
 	
-	
+	//댓글 수정
+	@RequestMapping(value = "replyUpdate")
+	public String replyUpdate(RedirectAttributes redirect, ReplyVO vo) {
+//		cmservice.replyUpdate(vo);
+		
+//		redirect.addAttribute("idx", vo.getBno());
+		return "redirect:Detail.do";
+	}
 	
 	
 }
