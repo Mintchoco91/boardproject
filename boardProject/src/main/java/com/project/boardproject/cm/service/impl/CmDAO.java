@@ -43,4 +43,10 @@ public interface CmDAO  {
 	
 	public void replyInsert(ReplyVO replyVO); //댓글 등록
 	
+	public void replyUpdate(ReplyVO replyVO); //댓글 수정
+	
+	public void replyDelete(ReplyVO replyVO); //댓글 삭제
+	
+	public boolean volumeCheck(); //디비사용량 체크
+	
 }

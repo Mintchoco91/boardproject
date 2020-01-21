@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
@@ -27,8 +28,12 @@ public class CmServiceimpl implements CmService {
 	@Override
 	public void boardInsert(BoardVO boardVO) {
 		System.out.println(boardVO.toString());
+		if(cmDAO.volumeCheck()) {//디비용량 충분할 경우 insert문 실행
 			cmDAO.boardInsert_001(boardVO);
-			
+		}else {
+			System.out.println("디비용량 부족으로 데이터를 저장하지 못했습니다.");
+		}
+		
 	}
 	
 	public List<BoardVO> boardGetList(BoardVO boardVO) {
@@ -84,6 +89,32 @@ public class CmServiceimpl implements CmService {
 
 	@Override
 	public void replyInsert(ReplyVO replyVO) {
-		cmDAO.replyInsert(replyVO);
+		try {
+		if(cmDAO.volumeCheck()) {//디비용량 충분할 경우 insert문 실행
+			cmDAO.replyInsert(replyVO);
+		}else {
+			System.out.println("디비용량 부족으로 데이터를 저장하지 못했습니다.");
+		}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+		}
+		
 	}
+
+	@Override
+	public void replyUpdate(ReplyVO replyVO) {
+		if(cmDAO.volumeCheck()) {//디비용량 충분할 경우 update문 실행
+			cmDAO.replyUpdate(replyVO);
+		}else {
+			System.out.println("디비용량 부족으로 데이터를 저장하지 못했습니다.");
+		}
+		
+	}
+
+	@Override
+	public void replyDelete(ReplyVO replyVO) {
+		cmDAO.replyDelete(replyVO);
+	}
+
 }
