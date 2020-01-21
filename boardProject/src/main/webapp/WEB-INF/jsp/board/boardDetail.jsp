@@ -5,23 +5,31 @@
 
   function replyUpdateBtn_click(idx) {
 		console.log($(this));
-		if($("#btnReplyUpdate_"+idx).html() == '수정'){
+		if($("#btnReplyUpdate_"+idx).html() == '수정'){//수정하기 버튼 클릭 시 -> 읽기전용모드 해제, 포커싱, 버튼 텍스트 변경
 			$("#btnReplyUpdate_"+idx).html('수정완료');
 			$("#replyContent_"+idx).attr("readonly", false);
 			$("#replyContent_"+idx).focus();
-		} else {
-			$("#btnReplyUpdate_"+idx).html('수정');
-			$("#replyContent_"+idx).attr("readonly", true);
-			//컨트롤러 호출
+		} else {//댓글 수정 후 수정완료 버튼 클릭 시 -> 폼 전송
 			$("#replyupdate_idx").val(idx);
 			$("#replyupdate_contents").val($("#replyContent_"+idx).val());
 			$("#replyupdate_rgtId").val("");
+			$("#replyForm").attr("action", "./replyUpdate.do");
 			$("#replyForm").submit();
 		}
-		
-		
 	}
 
+  	
+  function replyDeleteBtn_click(idx) {
+		console.log($(this));
+		var check = confirm("댓글을 정말 삭제하시겠습니까?");
+	
+		if(check){//댓글 삭제 시 필요한 전송값: 게시글 번호, 댓글 인덱스번호만 있으면 됨 
+			$("#replyupdate_idx").val(idx);
+			$("#replyForm").attr("action", "./replyDelete.do");
+			$("#replyForm").submit();
+		}
+	}
+  
 </script>
 
 <body>
@@ -76,12 +84,12 @@
 		</tr>
 		<c:forEach var="vo" items="${replyList}">
 		      <tr>
-		         <td><textarea id="replyContent_${vo.idx}" rows="2" cols="100" readonly>${vo.contents}</textarea><button id="btnReplyUpdate_${vo.idx}" onclick="replyUpdateBtn_click(${vo.idx})">수정</button><button id="btnReplyDelete_${vo.idx}">삭제</button></td>
+		         <td><textarea id="replyContent_${vo.idx}" rows="2" cols="100" readonly>${vo.contents}</textarea><button id="btnReplyUpdate_${vo.idx}" onclick="replyUpdateBtn_click(${vo.idx})">수정</button><button id="btnReplyDelete_${vo.idx}" onclick="replyDeleteBtn_click(${vo.idx})">삭제</button></td>
 		      </tr>
 		</c:forEach>
 </table>	
 	
-<form id="replyForm" action="./replyUpdate.do" method="post">
+<form id="replyForm" method="post">
 	<!-- 댓글 수정 삭제 시 전송폼 (글내용, 게시물 인덱스, 댓글 인덱스, 작성자) -->
 	<input type="hidden" id="replyupdate_idx" name="idx">
 	<input type="hidden" value="${vo.idx}" id="bno" name="bno">
