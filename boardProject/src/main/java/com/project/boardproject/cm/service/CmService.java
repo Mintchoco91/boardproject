@@ -40,9 +40,9 @@ public interface CmService {
 	/********************************댓글****************/
 	public List<ReplyVO> replyGetList(int bno); //특정 게시물에 달린 댓글 리스트 불러오기
 	
-	public void replyInsert(ReplyVO replyVO); //댓글 등록 
+	public boolean replyInsert(ReplyVO replyVO); //댓글 등록 
 	
-	public void replyUpdate(ReplyVO replyVO); //댓글 수정
+	public boolean replyUpdate(ReplyVO replyVO); //댓글 수정
 	
 	public void replyDelete(ReplyVO replyVO); //댓글 삭제
 

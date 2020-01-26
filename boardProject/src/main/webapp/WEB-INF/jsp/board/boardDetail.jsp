@@ -3,6 +3,13 @@
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <script type="text/javascript">
 
+	$(document).ready(function() { 
+		var msg = '${msg}';
+		if(msg!=""){
+			alert(msg);
+		}
+	});
+
   function replyUpdateBtn_click(idx) {
 		console.log($(this));
 		if($("#btnReplyUpdate_"+idx).html() == '수정'){//수정하기 버튼 클릭 시 -> 읽기전용모드 해제, 포커싱, 버튼 텍스트 변경
