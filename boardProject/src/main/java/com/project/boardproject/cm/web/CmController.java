@@ -2,6 +2,7 @@ package com.project.boardproject.cm.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
@@ -152,9 +154,16 @@ public class CmController {
 
 	//게시글 상세보기+댓글 추가
 	@RequestMapping(value = "Detail")
-	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx") int idx,
+	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx", defaultValue="1") int idx,
 			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
 		
+		//댓글 관련 기능 실행 후 리다이렉트시 메세지 전송
+		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
+		if(redirectMap != null) {
+			idx = (Integer)redirectMap.get("idx");
+			String msg = (String)redirectMap.get("msg");
+			model.addAttribute("msg", msg);
+		}
 		
 		String url = "";
 		BoardVO vo = new BoardVO();
@@ -202,8 +211,15 @@ public class CmController {
 //		String rgtId = (String) session.getAttribute("userid");
 //		vo.setRgtId(rgtId); //현재 로그인 되어 있는 사람 아이디가 댓글 작성자
 		
-		cmservice.replyInsert(vo);
-		redirect.addAttribute("idx", vo.getBno());//리다이렉트 시 게시글번호 리턴
+		boolean result = cmservice.replyInsert(vo);
+		
+		if(result) {
+			redirect.addFlashAttribute("msg", "댓글이 등록되었습니다.");
+		}else {
+			redirect.addFlashAttribute("msg", "디비 용량 부족으로 댓글을 등록하지 못했습니다.");
+		}
+		
+		redirect.addFlashAttribute("idx", vo.getBno());//리다이렉트 시 게시글번호 리턴
 		
 		return "redirect:Detail.do";
 	}
@@ -211,8 +227,15 @@ public class CmController {
 	//댓글 수정
 	@RequestMapping(value = "replyUpdate")
 	public String replyUpdate(RedirectAttributes redirect, ReplyVO vo) {
-		cmservice.replyUpdate(vo);
-		redirect.addAttribute("idx", vo.getBno());
+		boolean result = cmservice.replyUpdate(vo);
+		
+		if(result) {
+			redirect.addFlashAttribute("msg", "댓글이 수정되었습니다.");
+		}else {
+			redirect.addFlashAttribute("msg", "디비 용량 부족으로 댓글을 수정하지 못했습니다.");
+		}
+		
+		redirect.addFlashAttribute("idx", vo.getBno());
 		return "redirect:Detail.do";
 	}
   
@@ -220,7 +243,8 @@ public class CmController {
 	@RequestMapping(value = "replyDelete")
 	public String replyDelete(RedirectAttributes redirect, ReplyVO vo) {
 		cmservice.replyDelete(vo);
-		redirect.addAttribute("idx", vo.getBno());
+		redirect.addFlashAttribute("idx", vo.getBno());
+		redirect.addFlashAttribute("msg", "댓글 삭제 완료");
 		return "redirect:Detail.do";
 	}
 	

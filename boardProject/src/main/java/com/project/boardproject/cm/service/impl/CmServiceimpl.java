@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
@@ -88,26 +89,22 @@ public class CmServiceimpl implements CmService {
 	}
 
 	@Override
-	public void replyInsert(ReplyVO replyVO) {
-		try {
+	public boolean replyInsert(ReplyVO replyVO) {
 		if(cmDAO.volumeCheck()) {//디비용량 충분할 경우 insert문 실행
 			cmDAO.replyInsert(replyVO);
-		}else {
-			System.out.println("디비용량 부족으로 데이터를 저장하지 못했습니다.");
+			return true;
+		}else {//디비용량 부족할 경우 insert쿼리 실행하지 않음
+			return false;
 		}
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-			
-		}
-		
 	}
 
 	@Override
-	public void replyUpdate(ReplyVO replyVO) {
+	public boolean replyUpdate(ReplyVO replyVO) {
 		if(cmDAO.volumeCheck()) {//디비용량 충분할 경우 update문 실행
 			cmDAO.replyUpdate(replyVO);
-		}else {
-			System.out.println("디비용량 부족으로 데이터를 저장하지 못했습니다.");
+			return true;
+		}else {//디비용량 부족할 경우 실행하지 않음
+			return false;
 		}
 		
 	}
