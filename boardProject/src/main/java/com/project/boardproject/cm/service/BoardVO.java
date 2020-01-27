@@ -38,6 +38,7 @@ public class BoardVO implements Serializable{
 	
 	private String scrYn;						//비밀글여부
 	private String scrPw;						//비밀글패스워드
+	private String msg;						//비밀글패스워드
 	
 	public int getIdx() {
 		return idx;
@@ -152,15 +153,23 @@ public class BoardVO implements Serializable{
 	public void setScrPw(String scrPw) {
 		this.scrPw = scrPw;
 	}
+	
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", boardId=" + boardId + ", title=" + title + ", contents=" + contents
 				+ ", delYn=" + delYn + ", atchYn=" + atchYn + ", readCnt=" + readCnt + ", rgtId=" + rgtId + ", rgtDtm="
 				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", startIndex=" + startIndex + ", pageSize="
 				+ pageSize + ", name=" + name + ", srchKeyword=" + srchKeyword + ", srchtrg=" + srchtrg + ", scrYn="
-				+ scrYn + ", scrPw=" + scrPw + "]";
+				+ scrYn + ", scrPw=" + scrPw + ", msg=" + msg + "]";
 	}
 
+	
 	
 	
 	
