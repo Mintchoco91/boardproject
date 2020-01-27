@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@include file="/WEB-INF/jsp/cm/common.jsp" %>
 <script>
 
@@ -26,6 +27,14 @@ function fn_Delete() {
 	var data = $('#frm').serialize();
 	var arrCnt = 0;
 	var checkArr =new Array();
+
+	//Message
+	var del_selChkMsg = '<spring:message code="board.selChk" arguments="삭제"/>';
+	var del_confirmMsg = '<spring:message code="board.confirm" arguments="삭제"/>';
+	var del_processMsg = '<spring:message code="board.process" arguments="삭제"/>';
+	var del_processFailMsg = '<spring:message code="board.processFail" arguments="삭제"/>';
+	var common_failMsg = '<spring:message code="common.fail" arguments="삭제"/>';
+	
 	$("input[type='checkBox']:checked").each(function() {
 		checkArr.push($(this).attr("data-cartNum"));
 		arrCnt++;
@@ -33,11 +42,11 @@ function fn_Delete() {
 
 	//글선택 안했을경우
 	if(arrCnt == 0) {
-		alert("삭제 할 항목을 선택 해 주세요."); 
+		alert(del_selChkMsg); 
 		return false;
 	}
 
-	var msg = confirm("정말 삭제하시겠습니까?");
+	var msg = confirm(del_confirmMsg);
 	if(msg == false) return false;
 	
 	$.ajax({
@@ -47,12 +56,12 @@ function fn_Delete() {
 		data : {chbox : checkArr },
 		success : function(data) {
 			if(data ==1) {
-			alert("글 삭제완료!");
+			alert(del_processMsg);
 			  location.href = "boardList.do";
 			}
 		},
 		error : function() {
-			alert("삭제 실패");
+			alert(del_processFailMsg);
 		}
 	});
 }
@@ -64,15 +73,12 @@ function fn_selectLine(obj) {
 		type : "post",
 		data : {idx : obj},
 		success : function(data) {
-			console.log("!!!"+data);
 			if(data=="1") {
-			//	alert("업데이트 성공");
 				onSuccess(data);
-	//			 location.href = "boardList.do";
 			}
 		},
 		error : function() {
-			alert("접근 실패");
+			alert(common_failMsg);
 		}
 		
 	});
@@ -84,6 +90,8 @@ function onSuccess(data) {
 }
 
 function chkword(obj, maxlength){
+	 var validateLengthMsg = '<spring:message code="validate.length" arguments="'+maxlength+'"/>';
+	
 	 var strValue = obj.value;
      var strLen = strValue.length;
      var totalByte = 0;
@@ -107,7 +115,7 @@ function chkword(obj, maxlength){
 
      // 넘어가는 글자는 자른다.
      if (totalByte > maxlength) {
-         alert(maxlength + "자를 초과 입력 할 수 없습니다.");
+         alert(validateLengthMsg);
          str2 = strValue.substr(0, len);
          obj.value = str2;
          chkword(obj, 4000);
@@ -138,7 +146,6 @@ function fn_search() {
 	<!-- Container -->
 	<div class="Container">
 	게시판 > 게시판 리스트
-	
 	<form:form commandName="BoardVO" id="frm" name="frm"> 
 	<table width="700px" class="table" summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
 	<input type="hidden" id="idx" name="idx" value=""/>

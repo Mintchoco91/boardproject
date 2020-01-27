@@ -138,8 +138,8 @@ public class CmController {
 	//게시글 조회수증가
 	@ResponseBody
 	@RequestMapping(value = "boardUpdateReadCnt", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public int boardUpdateReadCnt(@RequestParam(value = "idx") int idx, HttpServletRequest request) throws Exception {
-		int result = cmservice.boardUpdateReadCnt(idx);
+	public int boardUpdateReadCnt(BoardVO boardVO, HttpServletRequest request) throws Exception {
+		int result = cmservice.boardUpdateReadCnt(boardVO.getIdx());
 		return result;
 	}
 
@@ -154,22 +154,21 @@ public class CmController {
 
 	//게시글 상세보기+댓글 추가
 	@RequestMapping(value = "Detail")
-	public String boardDetail(Model model, BoardVO boardVO, @RequestParam(value = "idx", defaultValue="1") int idx,
-			@RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
-		
-		//댓글 관련 기능 실행 후 리다이렉트시 메세지 전송
-		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
-		if(redirectMap != null) {
-			idx = (Integer)redirectMap.get("idx");
-			String msg = (String)redirectMap.get("msg");
-			model.addAttribute("msg", msg);
-		}
+	public String boardDetail(Model model, BoardVO boardVO
+			, @RequestParam(defaultValue = "F") String flag, HttpServletRequest request) throws Exception {
 		
 		String url = "";
 		BoardVO vo = new BoardVO();
-		boardVO.setIdx(idx);
+		//댓글 관련 기능 실행 후 리다이렉트시 메세지 전송
+		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
+		if(redirectMap != null) {
+			boardVO.setIdx((Integer)redirectMap.get("idx"));
+			String msg = (String)redirectMap.get("msg");
+			model.addAttribute("msg", msg);
+		}
+
 		vo = cmservice.boardDetail(boardVO);
-		List<ReplyVO> replyList = cmservice.replyGetList(idx);
+		List<ReplyVO> replyList = cmservice.replyGetList(boardVO.getIdx());
 		
 		if ("Y".equals(vo.getScrYn()) && "F".equals(flag)) {
 			url = "board/boardScrPwChk";
@@ -181,7 +180,7 @@ public class CmController {
 		return url;
 	}
 
-	//비밀글 체크?
+	//비밀글 체크
 	@RequestMapping(value = "boardScrPwChk")
 	public String boardScrPwChk(BoardVO boardVO, Model model) throws Exception {
 		model.addAttribute("vo", boardVO);
@@ -191,10 +190,10 @@ public class CmController {
 	//비밀글 확인
 	@ResponseBody
 	@RequestMapping(value = "boardScrPwChkConfirm")
-	public int boardScrPwChkConfirm(@RequestParam(value = "idx") int idx, @RequestParam(value = "scrPw") String scrPw,
+	public int boardScrPwChkConfirm(BoardVO boardVO, @RequestParam(value = "scrPw") String scrPw,
 			Model model) throws Exception {
 		BoardVO vo = new BoardVO();
-		vo.setIdx(idx);
+		vo.setIdx(boardVO.getIdx());
 		vo.setScrPw(scrPw);
 		int result = cmservice.boardScrPwChkConfirm(vo);
 		return result;

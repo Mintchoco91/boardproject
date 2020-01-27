@@ -171,5 +171,25 @@
 	</select>
 	
 	
+	<update id="replyUpdate" parameterType="ReplyVO">
+		UPDATE reply SET CONTENTS = #{contents}, updDtm = DATE_FORMAT(now(),'%Y%m%d%H%i%s') WHERE IDX = #{idx} AND BNO = #{bno} 
+	</update>
+	
+	
+	<delete id="replyDelete"  parameterType="ReplyVO">
+		DELETE FROM reply WHERE bno = #{bno} AND IDX = #{idx}
+	</delete>
+	
+	
+	<select id="volumeCheck" resultType="boolean">
+	<![CDATA[
+		SELECT 
+   			CASE 
+      			WHEN ceil(SUM(data_length + index_length) / 1024 / 1024*10)/10 < 4.9 THEN 'true'
+     	 		ELSE 'false'
+   			END
+		FROM information_schema.tables
+    ]]>
+	</select>
 	
 </mapper>

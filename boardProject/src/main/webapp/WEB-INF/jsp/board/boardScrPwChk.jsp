@@ -70,7 +70,7 @@ function onSuccess() {
 			<td>
 			<input type="password" id="scrPw" name="scrPw" onkeypress="fn_enter()"/>
 			
-			<input type="button" onclick="fn_PwConfrim()" value="확인" />
+			<input type="button" class="btn btn-default" onclick="fn_PwConfrim()" value="확인" />
 			</td>
 		</tr>
 	</tbody>

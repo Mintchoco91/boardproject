@@ -11,7 +11,6 @@
 	});
 
   function replyUpdateBtn_click(idx) {
-		console.log($(this));
 		if($("#btnReplyUpdate_"+idx).html() == '수정'){//수정하기 버튼 클릭 시 -> 읽기전용모드 해제, 포커싱, 버튼 텍스트 변경
 			$("#btnReplyUpdate_"+idx).html('수정완료');
 			$("#replyContent_"+idx).attr("readonly", false);
@@ -27,8 +26,8 @@
 
   	
   function replyDeleteBtn_click(idx) {
-		console.log($(this));
-		var check = confirm("댓글을 정말 삭제하시겠습니까?");
+		var del_confirmMsg = '<spring:message code="board.confirm" arguments="삭제"/>';
+		var check = confirm(del_confirmMsg);
 	
 		if(check){//댓글 삭제 시 필요한 전송값: 게시글 번호, 댓글 인덱스번호만 있으면 됨 
 			$("#replyupdate_idx").val(idx);
