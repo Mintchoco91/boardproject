@@ -35,6 +35,8 @@
             <typeAlias alias="MemberVO" type="com.project.boardproject.mm.service.MemberVO"></typeAlias>
             <typeAlias alias="CsSendMailVO" type="com.project.boardproject.cs.service.CsSendMailVO"></typeAlias>
             <typeAlias alias="HashMap" type="java.util.HashMap"></typeAlias>
+            <typeAlias type="com.project.boardproject.bc.blockBoard.BlockBoardVO" alias="BlockBoardVO"/>
+            <typeAlias type="com.project.boardproject.bc.member.BlockMemberVO" alias="BlockMemberVO"/>
       </typeAliases>
 
 

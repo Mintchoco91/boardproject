@@ -4,7 +4,7 @@
  
 	<!-- property : vo에서 변수명.  column : DB상 컬럼명  -->
 	 <resultMap id="BoardVOarr" type="BoardVO">
-	 	<result property="idx" column="idx"/>
+	 	<result property="idx" column="idx" />
 	 	<result property="boardId" column="boardId"/>
 	 	<result property="title" column="title"/>
 	 	<result property="contents" column="contents"/> 	

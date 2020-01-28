@@ -153,7 +153,7 @@ body {
 }
 </style>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../cm/header.jsp"></jsp:include>
 
 	<br />
 	<br />
