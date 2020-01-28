@@ -33,9 +33,12 @@ $(document).ready(function() {
 
 function fn_Validate() {
 	var f= document.frm;
+	var validate_nullDataSubjectMsg = '<spring:message code="validate.nullData" arguments="제목"/>';
+	var validate_nullDatacontentsMsg = '<spring:message code="validate.nullData" arguments="내용"/>';
+	
 	
 	if($('#title').val() == '') {
-	    alert("제목을 입력하세요");
+	    alert(validate_nullDataSubjectMsg);
 	    $('#title').focus();
 	    return;
 	}
@@ -49,7 +52,7 @@ function fn_Validate() {
 	}*/
 		
 	if($('#summernote')[0].value.trim() == "") {
-	    alert("내용을 입력하세요");
+	    alert(validate_nullDatacontentsMsg);
 	    $('#summernote').focus();
 	    return;
 	}

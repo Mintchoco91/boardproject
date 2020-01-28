@@ -11,7 +11,9 @@ function fn_enter() {
 }
 
 function fn_PwConfrim() {
+	var validate_nullDataSubjectMsg = '<spring:message code="validate.nullData" arguments="비밀번호"/>';
 	if($('#scrPw').val() == '' || $('#scrPw').val() == null) {
+		alert(validate_nullDataSubjectMsg);
 		return;
 	}
  	var f= document.frm;
@@ -23,14 +25,14 @@ function fn_PwConfrim() {
 		datatype : "text",
 		data  : {idx : idxTrg, scrPw : scrPwTrg },
 		success :function(data){
-			if(data==1 ){
+			if(data == 1){
 				onSuccess();
 			}else {
-				alert("비밀번호가 맞지 않습니다");
+				alert('<spring:message code="common.wrongPw"/>');
 			}
 		},
 		error : function() {
-			alert("실패");
+			alert('<spring:message code="common.fail"/>');
 		}
 		
 	});
