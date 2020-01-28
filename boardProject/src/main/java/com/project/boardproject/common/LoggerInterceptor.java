@@ -19,6 +19,23 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
             log.debug("======================================          START         ======================================");
             log.debug(" Request URI \t:  " + request.getRequestURI());
         }
+  
+  //모든 URL에 대해 IP 저장 부분 구현할것.
+  /*
+   * 
+   * CREATE TABLE visit_info(
+	idx 		int 			NOT NULL AUTO_INCREMENT,
+    ip             varchar(20) NOT NULL,
+    url             TEXT NOT NULL,
+	rgtId		varchar(20) NOT NULL,
+	rgtDtm		varchar(15) NOT NULL,
+	updId		varchar(20) NULL,
+	updDtm		varchar(15) NULL,
+     PRIMARY KEY (idx)
+);
+   * 
+   */
+  
   return super.preHandle(request, response, handler);
  }
  

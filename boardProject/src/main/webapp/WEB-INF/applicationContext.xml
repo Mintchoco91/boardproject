@@ -13,8 +13,7 @@
    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
    http://www.springframework.org/schema/tx
    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
-
-
+	
 	<context:component-scan
 		base-package="com.project.boardproject" />
 
@@ -46,30 +45,6 @@
 	<!-- @Transactional 애노테이션을 scan하기 위한 설정 -->
 	<tx:annotation-driven/>
 
-	
-<!-- 로컬용(cafe24 서버연결) -->
-<!-- 
- 	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mariadb://mintchoco91.cafe24.com:3306/mintchoco91"></property>
-		<property name="username" value="mintchoco91"></property>
-		<property name="password" value="rldnjs01!@"></property>
-	</bean>
--->
-
-<!--  서버용
--->
-<!-- 	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mariadb://localhost:3307/boardproject"></property>
-		<property name="username" value="mintchoco91"></property>
-		<property name="password" value="rldnjs01!@"></property>
-	</bean> -->
-	
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -99,6 +74,15 @@
         <property name="cacheSeconds" value="180" />
 	</bean>
 
+	<!-- 인터셉터 객체 생성 -->	
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*.do"/>
+            <mvc:exclude-mapping path=""/>
+            <bean class="com.project.boardproject.common.LoggerInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
 	<!-- Annotation 활성화 -->	
 	<mvc:annotation-driven></mvc:annotation-driven> 
 </beans>
