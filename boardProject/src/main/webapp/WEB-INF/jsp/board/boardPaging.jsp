@@ -33,6 +33,6 @@
                 
 <script>
 	function fn_paging(curPage) {
-		location.href = "/kwboardInq.do?curPage=" + curPage;
+		location.href = "/boardList.do?curPage=" + curPage + "&srchKeyword=${BoardVO.srchKeyword}&srchtrg=${BoardVO.srchtrg}";
 	}
 </script>

@@ -33,6 +33,11 @@ public class BoardVO implements Serializable{
 	
 	private String name;						//이름?
 	
+	private String srchKeyword;			//[검색]검색어
+	private String srchtrg;					//[검색]검색대상
+	
+	private String scrYn;						//비밀글여부
+	private String scrPw;						//비밀글패스워드
 	
 	public int getIdx() {
 		return idx;
@@ -121,13 +126,44 @@ public class BoardVO implements Serializable{
 		this.pageSize = pageSize;
 	}
 	
+	public String getSrchKeyword() {
+		return srchKeyword;
+	}
+	public void setSrchKeyword(String srchKeyword) {
+		this.srchKeyword = srchKeyword;
+	}
+	
+	
+	public String getSrchtrg() {
+		return srchtrg;
+	}
+	public void setSrchtrg(String srchtrg) {
+		this.srchtrg = srchtrg;
+	}
+	public String getScrYn() {
+		return scrYn;
+	}
+	public void setScrYn(String scrYn) {
+		this.scrYn = scrYn;
+	}
+	public String getScrPw() {
+		return scrPw;
+	}
+	public void setScrPw(String scrPw) {
+		this.scrPw = scrPw;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [idx=" + idx + ", boardId=" + boardId + ", title=" + title + ", contents=" + contents
 				+ ", delYn=" + delYn + ", atchYn=" + atchYn + ", readCnt=" + readCnt + ", rgtId=" + rgtId + ", rgtDtm="
 				+ rgtDtm + ", updId=" + updId + ", updDtm=" + updDtm + ", startIndex=" + startIndex + ", pageSize="
-				+ pageSize + ", name=" + name + "]";
+				+ pageSize + ", name=" + name + ", srchKeyword=" + srchKeyword + ", srchtrg=" + srchtrg + ", scrYn="
+				+ scrYn + ", scrPw=" + scrPw + "]";
 	}
+
+	
+	
+	
 	
 
 	

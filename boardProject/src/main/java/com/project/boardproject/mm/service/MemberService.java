@@ -15,4 +15,6 @@ public interface MemberService {
 	public MemberVO getMember(String userId);
 	
 	public int memberDelete(String userId);
+
+	public void naverRgtUsr(MemberVO vo);
 }

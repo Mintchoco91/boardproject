@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
+<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<div class="layer_fixed">
+
 <script type="text/javascript">
 	function memberSave(){
 		var userId =document.getElementById("userId").value;
@@ -22,12 +22,6 @@
 	}
 </script>
 
-<head>
-<meta charset="UTF-8">
-<title>pjsMemberRegister</title>
-</head>
-<body>
-	<jsp:include page="../header.jsp"></jsp:include>
 	<br/>
 	<br/>
 	<form:form name="register" action="register.do" method="post" modelAttribute="memberVO" onKeyPress="if(event.keyCode==13){memberSave();}">
@@ -63,5 +57,5 @@
 		</table>
 	</form:form>
 
-</body>
-</html>
+</div>
+<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>

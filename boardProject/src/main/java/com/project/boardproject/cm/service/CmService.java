@@ -9,39 +9,50 @@ import org.springframework.stereotype.Service;
  * 파일명 : CmService.java
  * 용도    : 
  * 작성자 : mintchoco91
- * 변경일 : 2019/07/26
+ * 변경일 : 2019/09/14
  */
 
 
 
 @Service
 public interface CmService {
-	public List<BoardVO> kwboardInq(BoardVO boardVO);
-
-	public void kwboardWrite(BoardVO boardVO);
 	
-	public String kwboardDelete(String[] idxArray);
+/*	//내용 : 게시판 조회
+	public List<BoardVO> boardInq(BoardVO boardVO);
 
-	public BoardVO kwboardDetail(BoardVO boardVO);
+	//내용 : 게시판 글쓰기
+	public void boardWrite(BoardVO boardVO);
+	
+	//내용 : 게시판 글삭제
+	public String boardDelete(String[] idxArray);
 
-	public Integer kwboardModify(BoardVO boardVO);
+	//내용 : 게시판 상세조회
+	public BoardVO boardDetail(BoardVO boardVO);
 
-	public Integer kwboardInqCnt(BoardVO boardVO);
+	//내용 : 게시판 수정
+	public Integer boardModify(BoardVO boardVO);
+
+	//내용 : 게시판 총 글수 count
+	public Integer boardInqCnt(BoardVO boardVO);*/
 	
 	
-	public String sampleData();
+	public void boardInsert(BoardVO boardVO);
 
-	public void chboardInsert(BoardVO boardVO);
+	public List<BoardVO> boardGetList(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList(BoardVO boardVO);
+	public int boardgetBoardCnt(BoardVO boardVO);
 
-	public int chboardgetBoardCnt(BoardVO boardVO);
+	public void boardDelete(BoardVO vo);
 
-	public void chboardDelete(BoardVO vo);
+	public int boardUpdateReadCnt(int idx);
 
-	public int chboardUpdateReadCnt(int idx);
+	public BoardVO boardDetail(BoardVO boardVO);
 
-	public BoardVO chboardDetail(BoardVO boardVO);
+	public BoardVO boardSchboard(Map<String, String> schMap);
+
+	public void boardUpdBoard(BoardVO boardVO);
+
+	public int boardScrPwChkConfirm(BoardVO vo);
 
 
 

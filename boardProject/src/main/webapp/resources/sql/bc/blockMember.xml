@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.boardproject.bc.service.impl.BlockMemberDAO">
+ 
+	<select id="loginCheck" parameterType="BlockMemberVO" resultType="int">
+		SELECT count(*) FROM blockMember WHERE userid=#{userId} AND pw=#{pw}
+	</select>
+	
+	<insert id="insertBlockMember" parameterType="BlockMemberVO">
+		INSERT INTO blockMember ( userId, pw, ip, publicKey) 
+		VALUES (#{userId}, #{pw}, #{ip}, #{publicKey})
+	</insert>
+	
+	<select id="getMemberPublicKey" parameterType="String" resultType="String">
+		SELECT publicKey FROM blockMember WHERE userId=#{userId}
+	</select>
+	
+	<select id="getIP" resultType="HashMap">
+		SELECT * FROM blockMember
+	</select>
+</mapper>

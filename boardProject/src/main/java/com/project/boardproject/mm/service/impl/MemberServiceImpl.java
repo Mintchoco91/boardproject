@@ -58,4 +58,9 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.deleteMember(userId);
 		return result;
 	}
+
+	@Override
+	public void naverRgtUsr(MemberVO vo) {
+			memberDAO.naverRgtUsr_001(vo);
+	}
 }

@@ -13,7 +13,7 @@ import com.project.boardproject.cm.service.CmService;
  * 파일명 : CmServiceimpl.java
  * 용도    : 
  * 작성자 : mintchoco91
- * 변경일 : 2019/07/30
+ * 변경일 : 2019/09/14
  */
 
 @Service
@@ -21,86 +21,106 @@ public class CmServiceimpl implements CmService {
 	
 	@Autowired
 	private CmDAO cmDAO;	
-	
+
+/*	//내용 : 게시판 조회
 	@Override
-	public String sampleData() {
-		String sampleResult = "";
-		//sampleResult = cmDAO.tempsql_001();
-		return sampleResult;
+	public List<BoardVO> boardInq(BoardVO boardVO) {
+		return cmDAO.boardInq_001(boardVO);
 	}
 
+	//내용 : 게시판 글쓰기
 	@Override
-	public void chboardInsert(BoardVO boardVO) {
-		System.out.println(boardVO.toString());
-			cmDAO.chboardInsert_001(boardVO);
-			
-	}
-	@Override
-	public List<BoardVO> kwboardInq(BoardVO boardVO) {
-		return cmDAO.kwboardInq_001(boardVO);
+	public void boardWrite(BoardVO boardVO) {
+		cmDAO.boardWrite_001(boardVO);
 	}
 
+	//내용 : 게시판 총 글수 count
 	@Override
-	public void kwboardWrite(BoardVO boardVO) {
-		cmDAO.kwboardWrite_001(boardVO);
+	public Integer boardInqCnt(BoardVO boardVO) {
+		return cmDAO.boardInqCnt_001(boardVO);
 	}
 
+	//내용 : 게시판 글 삭제
 	@Override
-	public Integer kwboardInqCnt(BoardVO boardVO) {
-		return cmDAO.kwboardInqCnt_001(boardVO);
-	}
-
-	@Override
-	public String kwboardDelete(String[] idxArray) {
-		String[] convIdxArray = idxArray[0].split(",");
+	public String boardDelete(String[] idxArray) {
 		Integer resultval = 0;
 		String result = "error";
 		
 		BoardVO boardVO = new BoardVO();
-		for(int i=0; i<convIdxArray.length ; i++) {
-			boardVO.setIdx(Integer.parseInt(convIdxArray[i]));
-			resultval = resultval + cmDAO.kwboardDelete_001(boardVO);
+		for(int i=0; i<idxArray.length ; i++) {
+			boardVO.setIdx(Integer.parseInt(idxArray[i]));
+			resultval = resultval + cmDAO.boardDelete_001(boardVO);
 		}
 		
-		if(resultval == convIdxArray.length) {
+		if(resultval == idxArray.length) {
 			result = "success";
 		}
 		return result;
 	}
 	
+	//내용 : 게시판 글 상세조회
 	@Override
-	public BoardVO kwboardDetail(BoardVO boardVO) {
-		return cmDAO.kwboardDetail_001(boardVO);
+	public BoardVO boardDetail(BoardVO boardVO) {
+		cmDAO.boardUpdateReadCnt_001(boardVO.getIdx());
+		return cmDAO.boardDetail_001(boardVO);
 	}
-
+*/
+	/*//내용 : 게시판 글 수정
 	@Override
-	public Integer kwboardModify(BoardVO boardVO) {
+	public Integer boardModify(BoardVO boardVO) {
 		Integer resultval = 0;
-		resultval = cmDAO.kwboardModify_001(boardVO);
+		resultval = cmDAO.boardModify_001(boardVO);
 		return resultval;
 	}
-	
-	public List<BoardVO> chboardGetList(BoardVO boardVO) {
-		return cmDAO.chboardGetList_001(boardVO);
+	*/
+	@Override
+	public void boardInsert(BoardVO boardVO) {
+		System.out.println(boardVO.toString());
+			cmDAO.boardInsert_001(boardVO);
+			
 	}
 	
+	public List<BoardVO> boardGetList(BoardVO boardVO) {
+		return cmDAO.boardGetList_001(boardVO);
+	}
+	
 	@Override
-	public int chboardgetBoardCnt(BoardVO boardVO) {
-		return cmDAO.chboardgetBoardCnt_001(boardVO);
+	public int boardgetBoardCnt(BoardVO boardVO) {
+		return cmDAO.boardgetBoardCnt_001(boardVO);
 	}
 
 	@Override
-	public void chboardDelete(BoardVO vo) {
-		 cmDAO.chboardDelete_001(vo);
+	public void boardDelete(BoardVO vo) {
+		 cmDAO.boardDelete_001(vo);
 	}
 
 	@Override
-	public int chboardUpdateReadCnt(int idx) {
-		return cmDAO.chboardUpdateReadCnt_001(idx);
+	public int boardUpdateReadCnt(int idx) {
+		return cmDAO.boardUpdateReadCnt_001(idx);
 	}
 
 	@Override
-	public BoardVO chboardDetail(BoardVO boardVO) {
-		return cmDAO.chboardDetail_001(boardVO);
+	public BoardVO boardDetail(BoardVO boardVO) {
+		return cmDAO.boardDetail_001(boardVO);
+	}
+
+	@Override
+	public BoardVO boardSchboard(Map<String, String> schMap) {
+		return cmDAO.boardSchBoard_001(schMap);
+	}
+
+	@Override
+	public void boardUpdBoard(BoardVO boardVO) {
+		if(boardVO.getScrYn() == null || boardVO.getScrPw() == null || boardVO.getScrPw().trim().equals("")) {
+			boardVO.setScrYn("N");
+		}
+		cmDAO.boardUpdBoard_001(boardVO);
+	}
+
+	@Override
+	public int boardScrPwChkConfirm(BoardVO vo) {
+		int result;
+		result =cmDAO.boardScrPwChkConfirm_001(vo);
+		return result;
 	}
 }
