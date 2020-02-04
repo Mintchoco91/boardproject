@@ -46,4 +46,5 @@ public interface CmService {
 	
 	public void replyDelete(ReplyVO replyVO); //댓글 삭제
 
+	public void visitInfoInsert(VisitInfoVO visitInfoVO); //댓글 수정
 }

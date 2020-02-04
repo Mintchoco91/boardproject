@@ -11,6 +11,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
 import com.project.boardproject.cm.service.ReplyVO;
+import com.project.boardproject.cm.service.VisitInfoVO;
 
 /*
  * 파일명 : CmServiceimpl.java
@@ -114,4 +115,8 @@ public class CmServiceimpl implements CmService {
 		cmDAO.replyDelete(replyVO);
 	}
 
+	@Override
+	public void visitInfoInsert(VisitInfoVO visitInfoVO) {
+		cmDAO.visitInfoInsert(visitInfoVO);
+	}
 }
