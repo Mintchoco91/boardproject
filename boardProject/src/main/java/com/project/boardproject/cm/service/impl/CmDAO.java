@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.ReplyVO;
+import com.project.boardproject.cm.service.VisitInfoVO;
 
 /*
  * 파일명 : CmDAO.java
@@ -48,5 +49,8 @@ public interface CmDAO  {
 	public void replyDelete(ReplyVO replyVO); //댓글 삭제
 	
 	public boolean volumeCheck(); //디비사용량 체크
+	
+	public void visitInfoInsert(VisitInfoVO visitInfoVO); //디비사용량 체크
+
 	
 }

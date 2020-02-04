@@ -79,7 +79,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/*.do"/>
             <mvc:exclude-mapping path=""/>
-            <bean class="com.project.boardproject.common.LoggerInterceptor" />
+            <bean class="com.project.boardproject.cm.LoggerInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
     

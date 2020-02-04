@@ -192,4 +192,10 @@
     ]]>
 	</select>
 	
+	<insert id="visitInfoInsert" parameterType="VisitInfoVO">
+		INSERT INTO visit_info (ip, url, rgtId, rgtDtm)
+		VALUES (#{ip}, #{url}, #{rgtId}, DATE_FORMAT(now(),'%Y%m%d%H%i%s'))
+	</insert>
+	
+	
 </mapper>
