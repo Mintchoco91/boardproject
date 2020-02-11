@@ -27,8 +27,8 @@
 		UPDATE blockboard SET coinValue=coinValue+#{coinValue} WHERE idx=#{idx}
 	</update>
 
-	<select id="getList" resultMap="BlockBoardVOList">
-		SELECT * FROM blockboard
+	<select id="getList" resultMap="BlockBoardVOList" parameterType="String">
+		SELECT * FROM blockboard WHERE timestamp > #{start}
 	</select>
 	
 	<select id="getTimestamp" parameterType="int" resultType="String">

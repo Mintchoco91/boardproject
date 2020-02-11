@@ -30,7 +30,7 @@ function sendCoin(){
 		</tr>
 		<tr>
 			<td>privateKey</td>
-			<td><input type="password" name="prviateKeyString" id="privateKeyString"></td>
+			<td><input type="password" name="privateKeyString" id="privateKeyString"></td>
 		</tr>
 	</table>
 	<br/>

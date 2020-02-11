@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.boardproject.bc.service.impl.BlockBardDAO">
+<mapper namespace="com.project.boardproject.bc.service.impl.BlockBoardDAO">
 	<resultMap id="BlockBoardVOList" type="BlockBoardVO">
 	 	<result property="idx" column="idx"/>
 	 	<result property="registerId" column="registerId"/>
@@ -9,10 +9,10 @@
 	 	<result property="coinValue" column="coinValue"/>
 	 	<result property="timestamp" column="timestamp"/>
 	 </resultMap>
-	 
-	<insert id="insertBlockBoard" parameterType="BlockBoardVO">
+	
+	<insert id="insertBlockBoard" parameterType="String">
 		INSERT INTO blockboard(registerId, upVote, downVote, coinValue, timestamp)
-		VALUES(#{registerId}, #{upVote}, #{downVote}, #{coinValue}, #{timestamp})
+		VALUES(#{registerId}, 0, 0, 0.0, DATE_FORMAT(now(),'%Y%m%d%H%i%s'))
 	</insert>
 	
 	<update id="updateUpVote" parameterType="int">
@@ -24,11 +24,15 @@
 	</update>
 	
 	<update id="updateCoinValue" parameterType="BlockBoardVO">
-		UPDATE blockboard SET coinValue=#{coinValue} WHERE idx=#{idx}
+		UPDATE blockboard SET coinValue=coinValue+#{coinValue} WHERE idx=#{idx}
 	</update>
 
-	<select id="getList" resultMap="BlockBoardVOList">
-		SELECT * FROM blockboard
+	<select id="getList" resultMap="BlockBoardVOList" parameterType="String">
+		SELECT * FROM blockboard WHERE timestamp > #{start}
 	</select>
 	
+	<select id="getTimestamp" parameterType="int" resultType="String">
+		SELECT timestamp FROM blockboard WHERE idx=#{idx}
+	</select>
+
 </mapper>

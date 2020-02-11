@@ -39,11 +39,11 @@ public class BlockBoardService {
 			String timestamp= form.format(nowTime);
 			String voTimestamp= dao.getTimestamp(idx);
 			float addCoinValue = 0;
-			int timeInt = Integer.parseInt(timestamp);
-			int voTimeInt = Integer.parseInt(voTimestamp);
-			if(timeInt-voTimeInt < 500) {
+			long timeInt = Long.parseLong(timestamp);
+			long voTimeInt = Long.parseLong(voTimestamp);
+			if(timeInt-voTimeInt < Configuration.BOARD_REWARD_TIME_DIF2) {
 				addCoinValue = Configuration.BOARD_REWARD1;
-			}else if(timeInt-voTimeInt <1000) {
+			}else if(timeInt-voTimeInt < Configuration.BOARD_REWARD_TIME_DIF) {
 				addCoinValue = Configuration.BOARD_REWARD2;
 			}
 			BlockBoardVO addVO = new BlockBoardVO(idx, addCoinValue);
@@ -65,10 +65,10 @@ public class BlockBoardService {
 		return result;
 	}
 	
-	public List<BlockBoardVO> getList() {
+	public List<BlockBoardVO> getList(String start) {
 		List<BlockBoardVO> list = new ArrayList<>();
 		try{
-			list = dao.getList();
+			list = dao.getList(start);
 		} catch(Exception e) {
 			return new ArrayList<BlockBoardVO>();
 		}

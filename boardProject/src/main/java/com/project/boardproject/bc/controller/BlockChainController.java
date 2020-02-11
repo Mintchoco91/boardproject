@@ -98,23 +98,12 @@ public class BlockChainController {
 	public String sendCoin(String receiver, float amount, String privateKeyString, HttpSession session) {
 		Transaction newTransaction = null;
 		try {
-			Decoder decoder = Base64.getDecoder();
-			byte[] decodedPrivateKey=decoder.decode(privateKeyString);
-			//로그인된 아이디와 일치하는 publicKey 가져와야함
-			String publicKeyString = blockMemberService.getPublicKey((String)session.getAttribute("userId"));
-			byte[] decodedPublicKey=decoder.decode(publicKeyString);
-			PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(decodedPrivateKey);
-			PKCS8EncodedKeySpec publicKeySpec = new PKCS8EncodedKeySpec(decodedPublicKey);
-			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-			PrivateKey privateKey = keyFactory.generatePrivate(privateKeySpec);
-			PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
-			newTransaction = Transaction.newTransaction((String)session.getAttribute("userId"), privateKey, publicKey, receiver, amount);
+			String publicKeyString = blockMemberService.getPublicKey((String)session.getAttribute("userid"));
+			PrivateKey privateKey = BlockChainUtils.convertStringtoPrivateKey(privateKeyString);
+			newTransaction = Transaction.newTransaction((String)session.getAttribute("userid"), privateKey, publicKeyString, receiver, amount);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//Transaction newTransaction = wallet.createTransaction(recipient, amount, transactionPool);
-		//1. make Transaction
 		transactionPool.updateOrAddTransaction(newTransaction);
 		p2pServer.broadcastTransaction(newTransaction);
 		return "blockchain/blockTest";
@@ -123,8 +112,8 @@ public class BlockChainController {
 	@RequestMapping("blockBoard")
 	public String blockBoard(Model model) {
 		List<BlockBoardVO> blockBoardList = new ArrayList<>();
-		blockBoardList = boardService.getList();
-		model.addAttribute("blockBoardList", blockBoardList);
+		blockBoardList = boardService.getList("0");
+		model.addAttribute("blockBoardList",blockBoardList);
 		return "blockchain/blockBoard";
 	}
 	
@@ -174,10 +163,11 @@ public class BlockChainController {
 		this.blockChain=BlockChain.initBlockChainFromJSON(Configuration.Path.filepath);
 		this.transactionPool = new TransactionPool();
 		this.p2pServer = new P2pServer(8888, blockChain, transactionPool);
+		p2pServer.init();
 		String minerKeyString = blockMemberService.getPublicKey(userId);
 		PublicKey minerKey= BlockChainUtils.convertStringtoPublicKey(minerKeyString);
 		 
-		this.miner = new Miner(blockChain, transactionPool, p2pServer, minerKey, userId);
+		this.miner = new Miner(blockChain, transactionPool, p2pServer, minerKey, userId, boardService);
 		return "blockchain/blockTest";
 	}
 	

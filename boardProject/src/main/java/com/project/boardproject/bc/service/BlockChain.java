@@ -47,10 +47,10 @@ public class BlockChain {
 		Map<String, TransactionOutput> allUTXOs = new HashMap<>();
 		BlockChain blockchain = BlockChain.initBlockChainFromJSON(Configuration.Path.filepath);
 		List<Block> chain = blockchain.getChain();
-		
 		Map<String, TransactionOutput> spentTXOs = new HashMap<>();
 		for(Block block : chain) {
 			for(Transaction transaction : block.getTransactions()) {
+				if(transaction.getInputs()==null) continue;
 				for(TransactionInput txInput : transaction.getInputs()) {
 					spentTXOs.put(txInput.getTransactionOutputId(), txInput.getUTXO());
 				}
@@ -69,6 +69,7 @@ public class BlockChain {
 				UTXOs.put(txOutput.getId(), txOutput);
 			}
 		}
+		
 		return UTXOs;
 	}
 	
@@ -112,4 +113,5 @@ public class BlockChain {
 		}
 		return block;
 	}
+	
 }

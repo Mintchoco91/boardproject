@@ -25,9 +25,11 @@ public class PersistentUtils {
 		try {
 			readChain = new ObjectMapper().readValue(new File(filePath), BlockChain.class);
 		} catch(FileNotFoundException e) {
+			System.out.println("blockchain.json 파일이 존재하지 않습니다.");
 			List<Block> newChain = new LinkedList<>();
 			newChain.add(Block.genesis());
 			readChain = new BlockChain(newChain);
+			System.out.println("newChain(genesis) 생성 완료");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

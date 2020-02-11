@@ -19,6 +19,6 @@ public interface BlockBoardDAO {
 	
 	public void updateCoinValue(BlockBoardVO vo);
 	
-	public List<BlockBoardVO> getList();
+	public List<BlockBoardVO> getList(String start);
 	
 }
