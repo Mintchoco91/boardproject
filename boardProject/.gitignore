@@ -5,7 +5,7 @@ local.properties
 .idea/**/gradle.xml
 .idea/**/libraries
 
-# CMake
+# CMake/
 cmake-build-debug/
 
 # Mongo Explorer plugin:
