@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" 
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -126,7 +126,7 @@ font-weight: bold;
 	<div id="navibar">
 		<div id="navilogi">
 			<a href="../index.do">
-				<img id="studylogo" src="${pageContext.request.contextPath}/resources/images/studylogo.png" style="height:60px;border:2px; margin: 20px;">
+				<img id="studylogo" src="/resources/images/studylogo.png" style="height:60px;border:2px; margin: 20px;">
 			</a>
 		</div>
 		<div id="navicategory">

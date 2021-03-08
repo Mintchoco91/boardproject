@@ -1,6 +1,9 @@
 
 package com.project.boardproject.cm.web;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +14,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.boardproject.cm.service.BoardVO;
 import com.project.boardproject.cm.service.CmService;
 import com.project.boardproject.cm.web.Pagination;
-import com.project.boardproject.mm.service.MemberVO;
+import com.project.boardproject.um.service.UsrAcntVO;
 
 /*
  * 파일명 : customController.java
@@ -46,7 +53,7 @@ public class CmController {
 
 	// 내용 : index조회
 	@RequestMapping("index")
-	public String index(Model model, MemberVO memberVO) {
+	public String index(Model model, UsrAcntVO usrAcntVO) {
 		return "index";
 	}
 
@@ -154,8 +161,7 @@ public class CmController {
 	@RequestMapping(value = "boardList.do")
 	public String boardList(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
-
-		System.out.println("!!!!");
+		logger.info("boardList START!!!");
 		int listCnt = cmservice.boardgetBoardCnt(boardVO);
 		Pagination pagination = new Pagination(listCnt, curPage);
 
@@ -165,21 +171,69 @@ public class CmController {
 		List<BoardVO> boardList = new ArrayList<>();
 
 		boardList = cmservice.boardGetList(boardVO);
-		// List<BoardVO> boardList = new ArrayList<>();
 
 		for (int i = 0; i < boardList.size(); i++) {
 			String year = boardList.get(i).getRgtDtm().substring(0, 4);
 			String month = boardList.get(i).getRgtDtm().substring(4, 6);
 			String date = boardList.get(i).getRgtDtm().substring(6, 8);
-			boardList.get(i).setRgtDtm(year + "년" + month + "월" + date + "일");
+			boardList.get(i).setRgtDtm(year + "-" + month + "-" + date);
 		}
-		System.out.println(boardList.toString() + "ㅋㅋㅋ");
 		// boardList =cmservice.boardGetList(boardVO);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("srchKeyword", boardVO.getSrchKeyword());
 		model.addAttribute("srchtrg", boardVO.getSrchtrg());
+		logger.info("boardList END!!!");
 		return "board/boardList";
+	}
+	
+	@RequestMapping(value="boardExcelDown")
+	public String boardExcelDown(@ModelAttribute("BoardVO") BoardVO boardVO, Model model,@RequestParam(defaultValue = "1") int curPage) throws Exception {
+		logger.info("boardExcelDown START!!!");
+		int listCnt = cmservice.boardgetBoardCnt(boardVO);
+		logger.debug(listCnt  + "게시물의 수");
+		Pagination pagination = new Pagination(listCnt, curPage);
+		boardVO.setStartIndex(pagination.getStartIndex());
+		boardVO.setPageSize(pagination.getPageSize());
+
+		List<BoardVO> boardList = null;
+		
+		boardList = cmservice.boardGetList(boardVO);
+		HSSFWorkbook workbook = new HSSFWorkbook(); //워크북
+		HSSFSheet sheet = workbook.createSheet(); //워크시트
+		HSSFRow row = sheet.createRow(0);				//행 생성
+		HSSFCell cell;														//셀 생성
+		
+		cell = row.createCell(0);
+		cell.setCellValue("제목");
+		
+		cell= row.createCell(1);
+		cell.setCellValue("내용");
+		BoardVO vo = new BoardVO();
+		for(int i=0; i<boardList.size(); i++) {
+			vo= boardList.get(i);
+			System.out.println(vo.getTitle());
+			row = sheet.createRow(i++);
+			
+			cell= row.createCell(0);
+			cell.setCellValue(vo.getTitle());
+			
+			cell= row.createCell(1);
+			cell.setCellValue(vo.getContents());
+		}
+		
+		FileOutputStream fos = null;
+		try {
+		fos= new FileOutputStream(new File("C:/excel/text.xls"));
+		workbook.write(fos);
+		}catch(FileNotFoundException e) {
+			e.getMessage();
+			logger.debug("파일을 찾을수 없습니다.");
+		}finally {
+		
+		}
+		logger.info("boardExcelDown END!!!");
+		return "redirect:boardList.do";
 	}
 
 	@RequestMapping(value = "boardRegister", method = RequestMethod.GET)
@@ -234,10 +288,13 @@ public class CmController {
 
 	@RequestMapping(value = "boardUpdBoard")
 	public String boardUpdBoard(@ModelAttribute(value = "BoardVO") BoardVO boardVO, Model model) throws Exception {
+		System.out.println(boardVO.toString());
 		cmservice.boardUpdBoard(boardVO);
 		model.addAttribute("BoardVO", boardVO);
 		model.addAttribute("idx", boardVO.getIdx());
-		return "redirect:Detail.do";
+		String url="redirect:Detail.do";
+		
+		return "redirect:Detail.do?flag='T'";
 	}
 
 	@RequestMapping(value = "Detail")

@@ -60,6 +60,11 @@ function fn_Delete() {
 	
 }
 
+function fn_excel() {
+	var form = document.frm;
+	form.action="boardExcelDown.do";
+	form.submit();
+}
 function ajaxCall(method, url, request) {
 	var returnData = new Object;
 	$.ajax({
@@ -221,7 +226,7 @@ function fn_search() {
 	
 	<form:form commandName="BoardVO" id="frm" name="frm"> 
 	<table width="700px" class="listTable" id="" name=""  summary="게시물입니다" border="1" cellspacing="0" cellpadding="5" align="center">
-	<input type="hidden" id="idx" name="idx" value=""/>
+	<!-- <input type="hidden" id="idx" name="idx" value=""/> -->
 	<thead>
 	
 	</thead>
@@ -259,7 +264,8 @@ function fn_search() {
 			<td  colspan="7" align="right">
 			<input type="button" class="button" value="등록" onclick="fn_movePage('boardRegister.do');">
 			<input type="button" class="button" value="삭제" onclick="fn_Delete();">
-			</td>
+			<input type="button" class="button" value="엑셀출력" onclick="fn_excel();"/>
+ 			</td>
 		</tr>
 	</tbody>
 	</table>

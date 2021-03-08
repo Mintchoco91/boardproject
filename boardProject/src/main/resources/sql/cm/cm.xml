@@ -141,7 +141,7 @@
 		) 
 		</insert>
 
-	<update id="chbaordUpdBoard_001" parameterType="BoardVO">
+	<update id="boardUpdBoard_001" parameterType="BoardVO">
 		UPDATE /*boardUpdBoard_001*/
 		board SET
 		 TITLE = #{title}
