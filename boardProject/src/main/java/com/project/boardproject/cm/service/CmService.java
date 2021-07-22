@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CmService {
 	
-	//내용 : 게시판 조회
+/*	//내용 : 게시판 조회
 	public List<BoardVO> boardInq(BoardVO boardVO);
 
 	//내용 : 게시판 글쓰기
@@ -33,20 +33,26 @@ public interface CmService {
 	public Integer boardModify(BoardVO boardVO);
 
 	//내용 : 게시판 총 글수 count
-	public Integer boardInqCnt(BoardVO boardVO);
+	public Integer boardInqCnt(BoardVO boardVO);*/
 	
 	
-	public void chboardInsert(BoardVO boardVO);
+	public void boardInsert(BoardVO boardVO);
 
-	public List<BoardVO> chboardGetList(BoardVO boardVO);
+	public List<BoardVO> boardGetList(BoardVO boardVO);
 
-	public int chboardgetBoardCnt(BoardVO boardVO);
+	public int boardgetBoardCnt(BoardVO boardVO);
 
-	public void chboardDelete(BoardVO vo);
+	public void boardDelete(BoardVO vo);
 
-	public int chboardUpdateReadCnt(int idx);
+	public int boardUpdateReadCnt(int idx);
 
-	public BoardVO chboardDetail(BoardVO boardVO);
+	public BoardVO boardDetail(BoardVO boardVO);
+
+	public BoardVO boardSchboard(Map<String, String> schMap);
+
+	public void boardUpdBoard(BoardVO boardVO);
+
+	public int boardScrPwChkConfirm(BoardVO vo);
 
 
 

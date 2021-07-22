@@ -22,7 +22,7 @@ public class CmServiceimpl implements CmService {
 	@Autowired
 	private CmDAO cmDAO;	
 
-	//내용 : 게시판 조회
+/*	//내용 : 게시판 조회
 	@Override
 	public List<BoardVO> boardInq(BoardVO boardVO) {
 		return cmDAO.boardInq_001(boardVO);
@@ -64,43 +64,61 @@ public class CmServiceimpl implements CmService {
 		cmDAO.boardUpdateReadCnt_001(boardVO.getIdx());
 		return cmDAO.boardDetail_001(boardVO);
 	}
-
-	//내용 : 게시판 글 수정
+*/
+	/*//내용 : 게시판 글 수정
 	@Override
 	public Integer boardModify(BoardVO boardVO) {
 		Integer resultval = 0;
 		resultval = cmDAO.boardModify_001(boardVO);
 		return resultval;
 	}
-	
+	*/
 	@Override
-	public void chboardInsert(BoardVO boardVO) {
+	public void boardInsert(BoardVO boardVO) {
 		System.out.println(boardVO.toString());
-			cmDAO.chboardInsert_001(boardVO);
+			cmDAO.boardInsert_001(boardVO);
 			
 	}
 	
-	public List<BoardVO> chboardGetList(BoardVO boardVO) {
-		return cmDAO.chboardGetList_001(boardVO);
+	public List<BoardVO> boardGetList(BoardVO boardVO) {
+		return cmDAO.boardGetList_001(boardVO);
 	}
 	
 	@Override
-	public int chboardgetBoardCnt(BoardVO boardVO) {
-		return cmDAO.chboardgetBoardCnt_001(boardVO);
+	public int boardgetBoardCnt(BoardVO boardVO) {
+		return cmDAO.boardgetBoardCnt_001(boardVO);
 	}
 
 	@Override
-	public void chboardDelete(BoardVO vo) {
-		 cmDAO.chboardDelete_001(vo);
+	public void boardDelete(BoardVO vo) {
+		 cmDAO.boardDelete_001(vo);
 	}
 
 	@Override
-	public int chboardUpdateReadCnt(int idx) {
-		return cmDAO.chboardUpdateReadCnt_001(idx);
+	public int boardUpdateReadCnt(int idx) {
+		return cmDAO.boardUpdateReadCnt_001(idx);
 	}
 
 	@Override
-	public BoardVO chboardDetail(BoardVO boardVO) {
-		return cmDAO.chboardDetail_001(boardVO);
+	public BoardVO boardDetail(BoardVO boardVO) {
+		return cmDAO.boardDetail_001(boardVO);
+	}
+
+	@Override
+	public BoardVO boardSchboard(Map<String, String> schMap) {
+		return cmDAO.boardSchBoard_001(schMap);
+	}
+
+	@Override
+	public void boardUpdBoard(BoardVO boardVO) {
+		cmDAO.boardUpdBoard_001(boardVO);
+		
+	}
+
+	@Override
+	public int boardScrPwChkConfirm(BoardVO vo) {
+		int result;
+		result =cmDAO.boardScrPwChkConfirm_001(vo);
+		return result;
 	}
 }

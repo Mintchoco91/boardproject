@@ -17,7 +17,7 @@
 	 	<result property="updDtm" column="updDtm"/>
 	 </resultMap>
 
-	<select id="boardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
+	<!-- <select id="boardInq_001" resultMap="BoardVOarr" parameterType="BoardVO">
 		SELECT 
 			idx
 			,boardId
@@ -100,17 +100,17 @@
 		,rgtId = #{rgtId}
 		WHERE idx = #{idx}
 	</update>	
-	<!-- 끝 -->
+	끝
 	
 	<update id="boardUpdateReadCnt_001" parameterType="int">
 		UPDATE /*boardUpdateReadCnt_001 */
 		board
 		SET READCNT = READCNT+1
 		WHERE IDX=#{idx}
-	</update>
+	</update> -->
 	
-	<insert id="chboardInsert_001" parameterType="BoardVO">
-		INSERT INTO /* chboardInsert*/
+	<insert id="boardInsert_001" parameterType="BoardVO">
+		INSERT INTO /* boardInsert*/
 		board (
 		boardId
 		, title
@@ -119,7 +119,12 @@
 		, atchYn
 		, readCnt
 		, rgtId
-		, rgtDtm) 
+		, rgtDtm
+		<if test="scrYn !=null">
+		, scrYn
+		, scrPw
+		</if>
+		) 
 		values (
 		#{boardId}
 		, #{title}
@@ -128,38 +133,85 @@
 		, 'N'
 		, 0
 		, #{rgtId}
-		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')) 
+		, DATE_FORMAT(now(),'%Y%m%d%H%i%s')
+			<if test="scrYn !=null">
+		, #{scrYn}
+		, #{scrPw}
+		</if>
+		) 
 		</insert>
-	 
-	<select id="chboardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
-	<![CDATA[
-				SELECT * FROM board ORDER BY IDX DESC
+
+	<update id="boardUpdBoard_001" parameterType="BoardVO">
+		UPDATE /*boardUpdBoard_001*/
+		board SET
+		 TITLE = #{title}
+		, CONTENTS = #{contents}
+		, RGTID = #{rgtId}
+		, UPDID= #{rgtId}
+		, UPDDTM = DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+		<if test="scrYn !=null">
+		, scrYn = #{scrYn}
+		, scrPw = #{scrPw}
+		</if>
+		
+		WHERE IDX = #{idx}
+	</update>
+	
+	<select id="boardGetList_001" parameterType="BoardVO" resultMap="BoardVOarr" >
+		SELECT * FROM board 
+		<if test="srchKeyword != null">
+			<where>
+			<if test='srchtrg == "title"'>
+		title 
+		</if>
+		<if test='srchtrg == "contents"'>
+		contents 
+		</if>
+			<![CDATA[
+			  LIKE CONCAT('%',#{srchKeyword},'%')
+			]]>
+	 </where>
+	 </if>
+			 ORDER BY IDX DESC
 		LIMIT #{startIndex},#{pageSize}
-		]]>
 	</select>
 	
-	<select id="chboardgetBoardCnt_001" parameterType="BoardVO" resultType="int">
-		SELECT /*chboardgetBoardCnt_001*/
+	<select id="boardgetBoardCnt_001" parameterType="BoardVO" resultType="int">
+		SELECT /*boardgetBoardCnt_001*/
 		COUNT(*) 
 		FROM board
+		<if test="srchKeyword != null">
+			<where>
+		<if test='srchtrg == "title"'>
+		title 
+		</if>
+		<if test='srchtrg == "contents"'>
+		contents 
+		</if>
+			<![CDATA[
+			  LIKE CONCAT('%',#{srchKeyword},'%')
+			]]>
+			 </where>
+		</if>
 	</select>
 	
-	<delete id="chboardDelete_001"  parameterType="BoardVO">
-		DELETE   /* chboardDelete_001*/
+	
+	<delete id="boardDelete_001"  parameterType="BoardVO">
+		DELETE   /* boardDelete_001*/
 		FROM board
 		WHERE IDX=#{idx}
 	
 	</delete>
 	
-	<insert id="chboardUpdateReadCnt_001" parameterType="int">
-		UPDATE /*chboardUpdateReadCnt_001 */
+	<insert id="boardUpdateReadCnt_001" parameterType="int">
+		UPDATE /*boardUpdateReadCnt_001 */
 		board
 		SET READCNT = READCNT+1
 		WHERE IDX=#{idx}
 	
 	</insert>
-	<select id="chboardDetail_001" parameterType="BoardVO" resultMap="BoardVOarr">
-			SELECT 
+	<select id="boardDetail_001" parameterType="BoardVO" resultMap="BoardVOarr">
+			SELECT /* boardDetail_001*/
 			IDX
 			,BOARDID
 			,TITLE
@@ -171,8 +223,32 @@
 			,RGTDTM
 			,UPDID
 			,UPDDTM
+			,SCRYN
+			,SCRPW
 		FROM board
 		WHERE IDX= #{idx}
 	</select>
 	
+	<select id="boardScrPwChkConfirm_001" parameterType="BoardVO" resultType="int">
+	 SELECT /* boardScrPwChkConfirm_001 */
+	 COUNT(*)
+	 FROM BOARD
+	 WHERE IDX= #{idx}
+	 and SCRPW= #{scrPw}
+	
+	</select>
+<!-- 	<select id="boardSboard_001" parameterType="HashMap" resultMap="BoardVOarr">
+			SELECT * /*boardSboard_001*/
+			FROM board 
+			WHERE 
+			<if test="sel.equlas('title')">
+			title like CONCAT('%',#{text},'%')
+			</if>
+			<if test="sel.equals('contents')">
+			contents like CONCAT('%',#{text},'%')
+			</if>
+			ORDER BY IDX DESC
+		
+	
+	</select> -->
 </mapper>

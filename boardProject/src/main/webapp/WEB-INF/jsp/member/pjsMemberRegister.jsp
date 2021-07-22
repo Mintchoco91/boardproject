@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jsp/cm/header.jsp" %>
-<div class="layer_fixed">
-
+<%@ page language="java"     pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/cm/common.jsp" %>
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css"/>
 <script type="text/javascript">
 	function memberSave(){
 		var userId =document.getElementById("userId").value;
@@ -20,9 +18,15 @@
 		} 
 	}
 </script>
+<body>
 
-	<br/>
-	<br/>
+<%@include file="/WEB-INF/jsp/header.jsp" %>
+
+<div class="wrapper">
+	<!-- header -->
+	<div class="header">
+	
+	</div>
 	<form:form name="register" action="register.do" method="post" modelAttribute="memberVO" onKeyPress="if(event.keyCode==13){memberSave();}">
 		<table align="center" border=1px>
 			<tr>
@@ -57,4 +61,5 @@
 	</form:form>
 
 </div>
-<%@include file="/WEB-INF/jsp/cm/footer.jsp" %>
+<%@include file="/WEB-INF/jsp/footer.jsp" %>
+</body>

@@ -32,7 +32,7 @@
       <!--  VO추가시 아래에 추가할것 ! --> 
       <typeAliases>
             <typeAlias alias="BoardVO" type="com.project.boardproject.cm.service.BoardVO"></typeAlias>
-            <typeAlias alias="MemberVO" type="com.project.boardproject.mm.service.MemberVO"></typeAlias>
+            <typeAlias alias="UsrAcntVO" type="com.project.boardproject.um.service.UsrAcntVO"></typeAlias>
             <typeAlias alias="HashMap" type="java.util.HashMap"></typeAlias>
       </typeAliases>
 
